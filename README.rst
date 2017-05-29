@@ -11,7 +11,7 @@ Links
 .. _cihai: https://cihai.git-pull.com
 .. _unihan-etl: https://unihan-etl.git-pull.com
 .. _libUnihan: http://libunihan.sourceforge.net/
-.. _API: http://cihai.readthedocs.org/en/latest/api.html
+.. _API: http://unihan-db.git-pull.com/en/latest/api.html
 .. _UNIHAN: http://www.unicode.org/charts/unihan.html
 
 .. |pypi| image:: https://img.shields.io/pypi/v/unihan-db.svg
