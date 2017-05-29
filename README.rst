@@ -1,5 +1,5 @@
 *unihan-db* - database sqlalchemy models for `UNIHAN`_. Part of the `cihai`_
-project. Powered by `unihan-db`_. See also: `libUnihan`_.
+project. Powered by `unihan-etl`_. See also: `libUnihan`_.
 
 |pypi| |docs| |build-status| |coverage| |license|
 
@@ -9,6 +9,7 @@ Links
 * `API`_
 
 .. _cihai: https://cihai.git-pull.com
+.. _unihan-etl: https://unihan-etl.git-pull.com
 .. _libUnihan: http://libunihan.sourceforge.net/
 .. _API: http://cihai.readthedocs.org/en/latest/api.html
 .. _UNIHAN: http://www.unicode.org/charts/unihan.html
