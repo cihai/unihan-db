@@ -1,0 +1,8 @@
+__title__ = 'unihan-db'
+__package_name__ = 'unihan_db'
+__description__ = 'SQLAlchemy models for UNIHAN database'
+__version__ = '0.1.0'
+__author__ = 'Tony Narlock'
+__email__ = 'cihai@git-pull.com'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2017 Tony Narlock'
