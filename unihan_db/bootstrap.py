@@ -2,12 +2,11 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from .util import merge_dict
 from sqlalchemy import Column, String, Table
-
-from unihan_etl.process import UNIHAN_MANIFEST
 from unihan_etl import process as unihan
+from unihan_etl.process import UNIHAN_MANIFEST
 
+from .util import merge_dict
 
 UNIHAN_FILES = [
     'Unihan_DictionaryLikeData.txt',
