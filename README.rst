@@ -3,6 +3,32 @@ project. Powered by `unihan-etl`_. See also: `libUnihan`_.
 
 |pypi| |docs| |build-status| |coverage| |license|
 
+There is no clear solution for normalization of UNIHAN.
+
+Approaches
+----------
+
+5nf
+"""
+
+Pros:
+
+- Most portable, it'd be possible to offer an sqlite file dump to make
+  data available a la carte
+
+Cons:
+
+- Giving each field a table of its own would comprise over 90 tables, making
+  JOIN's impossible in a single query on MySQL (limit on joins is 61).
+
+Polymorphic
+"""""""""""
+
+Tables could be branched by grouping fields into "types", just like UNIHAN
+db groups fields into files.
+
+http://docs.sqlalchemy.org/en/latest/orm/inheritance.html
+
 Links
 -----
 
