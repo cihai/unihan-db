@@ -1,0 +1,51 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "d6f9159ccda4120ad9f39797397f6b71b66de84106bd04436e9792cd97a25f1b"
+        },
+        "requires": {},
+        "sources": [
+            {
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "appdirs": {
+            "version": "==1.4.3"
+        },
+        "sqlalchemy": {
+            "version": "==1.1.10"
+        },
+        "unicodecsv": {
+            "version": "==0.14.1"
+        },
+        "unihan-etl": {
+            "version": "==0.9.1"
+        },
+        "zhon": {
+            "version": "==1.1.5"
+        }
+    },
+    "develop": {
+        "flake8": {
+            "version": "==3.3.0"
+        },
+        "isort": {
+            "version": "==4.2.5"
+        },
+        "mccabe": {
+            "version": "==0.6.1"
+        },
+        "pycodestyle": {
+            "version": "==2.3.1"
+        },
+        "pyflakes": {
+            "version": "==1.5.0"
+        },
+        "vulture": {
+            "version": "==0.14"
+        }
+    }
+}
