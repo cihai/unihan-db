@@ -23,3 +23,12 @@ joins`_.
 """
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
+
+from sqlalchemy import Base, Column, Integer, String
+
+
+class Unhn(Base):
+    __tablename__ = 'Unhn'
+    id = Column(Integer, primary_key=True)
+    ucn = Column(String)
+    char = Column(String)
