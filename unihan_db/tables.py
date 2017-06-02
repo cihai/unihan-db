@@ -30,5 +30,57 @@ from sqlalchemy import Base, Column, Integer, String
 class Unhn(Base):
     __tablename__ = 'Unhn'
     id = Column(Integer, primary_key=True)
-    ucn = Column(String)
-    char = Column(String)
+    ucn = Column(String(8))
+    char = Column(String(1))
+    __mapper_args__ = {
+        'polymorphic_identity': 'char',
+        'polymorphic_on': type
+    }
+
+
+class Unhn_DictionaryLikeData(Unhn):
+    __table__ = 'Unhn_DictionaryLikeData'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'dictionary-like',
+    }
+
+
+class Unhn_IRGSources(Unhn):
+    __table__ = 'Unhn_IRGSources'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'irg-sources',
+    }
+
+
+class Unhn_NumericValues(Unhn):
+    __table__ = 'Unhn_NumericValues'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'numeric-values',
+    }
+
+
+class Unhn_RadicalStrokeCounts(Unhn):
+    __table__ = 'Unhn_RadicalStrokeCounts'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'radical-stroke-counts',
+    }
+
+
+class Unhn_Readings(Unhn):
+    __table__ = 'Unhn_Readings'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'readings',
+    }
+
+
+class Unhn_Variants(Unhn):
+    __table__ = 'Unhn_Variants'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'variants',
+    }
