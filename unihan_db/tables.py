@@ -5,9 +5,11 @@ unihan_db table design
 
 Tables are split into general categories, similar to how UNIHAN db's files are:
 
+- Unhn_DictionaryIndices
 - Unhn_DictionaryLikeData
 - Unhn_IRGSources
 - Unhn_NumericValues
+- Unhn_OtherMappings
 - Unhn_RadicalStrokeCounts
 - Unhn_Readings
 - Unhn_Variants
@@ -38,6 +40,14 @@ class Unhn(Base):
     }
 
 
+class Unhn_DictionaryIndices(Unhn):
+    __table__ = 'Unhn_DictionaryIndices'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'indices',
+    }
+
+
 class Unhn_DictionaryLikeData(Unhn):
     __table__ = 'Unhn_DictionaryLikeData'
 
@@ -59,6 +69,14 @@ class Unhn_NumericValues(Unhn):
 
     __mapper_args__ = {
         'polymorphic_identity': 'numeric-values',
+    }
+
+
+class Unhn_OtherMappings(Unhn):
+    __table__ = 'Unhn_OtherMappings'
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'other-mappings',
     }
 
 
