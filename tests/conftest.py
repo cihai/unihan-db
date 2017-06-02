@@ -3,6 +3,8 @@ import os
 import zipfile
 
 import pytest
+from sqlalchemy import MetaData, create_engine
+from sqlalchemy.orm import sessionmaker
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
@@ -54,3 +56,20 @@ def unihan_options(zip_file, zip_path, tmpdir):
 @pytest.fixture(scope='function')
 def tmpdb_file(tmpdir):
     return tmpdir.join('test.db')
+
+
+@pytest.fixture
+def engine():
+    return create_engine('sqlite:///:memory:')
+
+
+@pytest.fixture
+def session(engine):
+    return sessionmaker(bind=engine)()
+
+
+@pytest.fixture
+def metadata(engine):
+    metadata = MetaData()
+    metadata.engine = engine
+    return metadata
