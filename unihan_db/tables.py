@@ -27,6 +27,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from sqlalchemy import Base, Column, Integer, String
+from sqlalchemy.orm import with_polymorphic
 
 
 class Unhn(Base):
@@ -102,3 +103,15 @@ class Unhn_Variants(Unhn):
     __mapper_args__ = {
         'polymorphic_identity': 'variants',
     }
+
+
+query = with_polymorphic(Unhn, [
+    Unhn_DictionaryIndices,
+    Unhn_DictionaryLikeData,
+    Unhn_IRGSources,
+    Unhn_NumericValues,
+    Unhn_OtherMappings,
+    Unhn_RadicalStrokeCounts,
+    Unhn_Readings,
+    Unhn_Variants
+])
