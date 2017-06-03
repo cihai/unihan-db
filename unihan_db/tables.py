@@ -41,7 +41,8 @@ class Unhn(Base):
     type = Column(String(24))
     __mapper_args__ = {
         'polymorphic_identity': 'char',
-        'polymorphic_on': 'type'
+        'polymorphic_on': 'type',
+        'with_polymorphic': '*'
     }
 
 
