@@ -4,7 +4,7 @@ import zipfile
 
 import pytest
 from sqlalchemy import MetaData, create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
@@ -63,9 +63,20 @@ def engine():
     return create_engine('sqlite:///:memory:')
 
 
-@pytest.fixture
-def session(engine):
-    return sessionmaker(bind=engine)()
+@pytest.fixture(scope='function')
+def session(engine, request):
+    connection = engine.connect()
+    transaction = connection.begin()
+    session_factory = sessionmaker(bind=engine)
+    session = scoped_session(session_factory)
+
+    def teardown():
+        transaction.rollback()
+        connection.close()
+        session.remove()
+
+    request.addfinalizer(teardown)
+    return session
 
 
 @pytest.fixture
