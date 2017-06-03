@@ -26,8 +26,11 @@ joins`_.
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from sqlalchemy import Base, Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import with_polymorphic
+
+Base = declarative_base()
 
 
 class Unhn(Base):
@@ -35,14 +38,18 @@ class Unhn(Base):
     id = Column(Integer, primary_key=True)
     ucn = Column(String(8))
     char = Column(String(1))
+    type = Column(String(24))
     __mapper_args__ = {
         'polymorphic_identity': 'char',
-        'polymorphic_on': type
+        'polymorphic_on': 'type'
     }
 
 
 class Unhn_DictionaryIndices(Unhn):
-    __table__ = 'Unhn_DictionaryIndices'
+    __tablename__ = 'Unhn_DictionaryIndices'
+
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
+    definition = Column(String(8))
 
     __mapper_args__ = {
         'polymorphic_identity': 'indices',
@@ -50,7 +57,8 @@ class Unhn_DictionaryIndices(Unhn):
 
 
 class Unhn_DictionaryLikeData(Unhn):
-    __table__ = 'Unhn_DictionaryLikeData'
+    __tablename__ = 'Unhn_DictionaryLikeData'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'dictionary-like',
@@ -58,7 +66,8 @@ class Unhn_DictionaryLikeData(Unhn):
 
 
 class Unhn_IRGSources(Unhn):
-    __table__ = 'Unhn_IRGSources'
+    __tablename__ = 'Unhn_IRGSources'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'irg-sources',
@@ -66,7 +75,8 @@ class Unhn_IRGSources(Unhn):
 
 
 class Unhn_NumericValues(Unhn):
-    __table__ = 'Unhn_NumericValues'
+    __tablename__ = 'Unhn_NumericValues'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'numeric-values',
@@ -74,7 +84,8 @@ class Unhn_NumericValues(Unhn):
 
 
 class Unhn_OtherMappings(Unhn):
-    __table__ = 'Unhn_OtherMappings'
+    __tablename__ = 'Unhn_OtherMappings'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'other-mappings',
@@ -82,7 +93,8 @@ class Unhn_OtherMappings(Unhn):
 
 
 class Unhn_RadicalStrokeCounts(Unhn):
-    __table__ = 'Unhn_RadicalStrokeCounts'
+    __tablename__ = 'Unhn_RadicalStrokeCounts'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'radical-stroke-counts',
@@ -90,7 +102,8 @@ class Unhn_RadicalStrokeCounts(Unhn):
 
 
 class Unhn_Readings(Unhn):
-    __table__ = 'Unhn_Readings'
+    __tablename__ = 'Unhn_Readings'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'readings',
@@ -98,7 +111,8 @@ class Unhn_Readings(Unhn):
 
 
 class Unhn_Variants(Unhn):
-    __table__ = 'Unhn_Variants'
+    __tablename__ = 'Unhn_Variants'
+    unhn_id = Column(Integer, ForeignKey('Unhn.id'))
 
     __mapper_args__ = {
         'polymorphic_identity': 'variants',
