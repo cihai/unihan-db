@@ -38,14 +38,18 @@ UNIHAN_ETL_DEFAULT_OPTIONS = {
 }
 
 
-def bootstrap_unihan(metadata, options={}):
-    """Download, extract and import unihan to database."""
+def bootstrap_data(options={}):
     options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options)
 
     p = unihan.Packager(options)
     p.download()
-    data = p.export()
+    return p.export()
+
+
+def bootstrap_unihan(metadata, options={}):
+    """Download, extract and import unihan to database."""
     table = create_unihan_table(UNIHAN_FIELDS, metadata)
+    data = bootstrap_data(options)
     metadata.create_all()
     metadata.bind.execute(table.insert(), data)
 
