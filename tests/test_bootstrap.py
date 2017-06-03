@@ -34,4 +34,4 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
 
     assert session.query(Unhn).count() == len(data)
 
-    assert session.query(Unhn).filter_by(char=u'㐀').first().ucn == 'U+3400'
+    assert session.query(Unhn).filter_by(char=u'㐀').one().ucn == 'U+3400'
