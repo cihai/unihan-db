@@ -34,10 +34,10 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
 
     assert session.query(Unhn).count() == len(data)
 
-    assert session.query(Unhn).filter_by(char=u'㐀').one().ucn == 'U+3400'
+    assert session.query(Unhn).get(u'㐀').ucn == 'U+3400'
 
     for char in data:
-        c = session.query(Unhn).filter_by(ucn=char['ucn']).one()
+        c = session.query(Unhn).get(char['char'])
 
         importer.import_char(c, char)
 

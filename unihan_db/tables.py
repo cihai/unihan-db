@@ -36,9 +36,8 @@ Base = declarative_base()
 
 class Unhn(Base):
     __tablename__ = 'Unhn'
-    id = Column(Integer, primary_key=True)
     ucn = Column(String(8))
-    char = Column(String(1))
+    char = Column(String(1), primary_key=True)
     type = Column(String(24))
 
     kDefinition = relationship("kDefinition", back_populates="char")
@@ -51,7 +50,7 @@ class Unhn(Base):
 class kDefinition(Base):
     __tablename__ = 'kDefinition'
     id = Column(Integer, primary_key=True)
-    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     definition = Column(String(128))
 
     char = relationship("Unhn")
@@ -60,7 +59,7 @@ class kDefinition(Base):
 class kCantonese(Base):
     __tablename__ = 'kCantonese'
     id = Column(Integer, primary_key=True)
-    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     definition = Column(String(128))
 
     char = relationship("Unhn")
@@ -69,7 +68,7 @@ class kCantonese(Base):
 class kMandarin(Base):
     __tablename__ = 'kMandarin'
     id = Column(Integer, primary_key=True)
-    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     hans = Column(String(10))
     hant = Column(String(10))
 
@@ -79,7 +78,7 @@ class kMandarin(Base):
 class GenericReading(Base):
     __tablename__ = 'GenericReading'
     id = Column(Integer, primary_key=True)
-    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     type = Column(String(50))
     locations = relationship("UnhnLocation")
     readings = relationship("UnhnReading")
@@ -103,7 +102,7 @@ class kHanyuPinyin(GenericReading):
 class GenericIndice(Base):
     __tablename__ = 'GenericIndice'
     id = Column(Integer, primary_key=True)
-    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     type = Column(String(50))
     locations = relationship("UnhnLocation")
 
