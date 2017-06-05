@@ -44,6 +44,7 @@ class Unhn(Base):
     kDefinition = relationship("kDefinition", back_populates="char")
     kCantonese = relationship("kCantonese", back_populates="char")
     kMandarin = relationship("kMandarin", back_populates="char")
+    kHanyuPinyin = relationship("kHanyuPinyin", back_populates="char")
 
 
 class kDefinition(Base):
@@ -72,3 +73,30 @@ class kMandarin(Base):
     hant = Column(String(10))
 
     char = relationship("Unhn")
+
+
+class kHanyuPinyin(Base):
+    __tablename__ = 'kHanyuPinyin'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    locations = relationship("UnhnLocation")
+    readings = relationship("UnhnReading")
+
+    char = relationship("Unhn")
+
+
+class UnhnLocation(Base):
+    __tablename__ = 'UnhnLocation'
+    id = Column(Integer, primary_key=True)
+    kHanyuPinyin_id = Column(Integer, ForeignKey('kHanyuPinyin.id'))
+    volume = Column(Integer)
+    page = Column(Integer)
+    character = Column(Integer)
+    virtual = Column(Integer)
+
+
+class UnhnReading(Base):
+    __tablename__ = 'UnhnReading'
+    id = Column(Integer, primary_key=True)
+    kHanyuPinyin_id = Column(Integer, ForeignKey('kHanyuPinyin.id'))
+    reading = Column(String(24))
