@@ -42,10 +42,20 @@ class Unhn(Base):
     type = Column(String(24))
 
     kDefinition = relationship("kDefinition", back_populates="char")
+    kCantonese = relationship("kCantonese", back_populates="char")
 
 
 class kDefinition(Base):
     __tablename__ = 'kDefinition'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    definition = Column(String(128))
+
+    char = relationship("Unhn")
+
+
+class kCantonese(Base):
+    __tablename__ = 'kCantonese'
     id = Column(Integer, primary_key=True)
     char_id = Column(Integer, ForeignKey('Unhn.id'))
     definition = Column(String(128))

@@ -1,7 +1,7 @@
 # -*- coding: utf8 - *-
 
 from unihan_db import bootstrap
-from unihan_db.tables import Unhn, kDefinition, Base
+from unihan_db.tables import Unhn, kDefinition, kCantonese, Base
 
 
 def test_reflect_db(tmpdb_file, unihan_options, metadata):
@@ -37,9 +37,14 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
     assert session.query(Unhn).filter_by(char=u'㐀').one().ucn == 'U+3400'
 
     for char in data:
+        c = session.query(Unhn).filter_by(ucn=char['ucn']).one()
+
         if 'kDefinition' in char:
-            c = session.query(Unhn).filter_by(ucn=char['ucn']).one()
             for defi in char['kDefinition']:
                 c.kDefinition.append(kDefinition(definition=defi))
             assert len(c.kDefinition) == len(char['kDefinition'])
+        if 'kCantonese' in char:
+            for defi in char['kCantonese']:
+                c.kCantonese.append(kCantonese(definition=defi))
+            assert len(c.kCantonese) == len(char['kCantonese'])
     session.commit()
