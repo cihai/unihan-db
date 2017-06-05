@@ -49,7 +49,8 @@ def unihan_options(zip_file, zip_path, tmpdir):
     return {
         'source': str(zip_path),
         'work_dir': str(tmpdir),
-        'zip_path': str(tmpdir.join('downloads').join('Moo.zip'))
+        'zip_path': str(tmpdir.join('downloads').join('Moo.zip')),
+        'expand': True
     }
 
 
