@@ -43,6 +43,7 @@ class Unhn(Base):
 
     kDefinition = relationship("kDefinition", back_populates="char")
     kCantonese = relationship("kCantonese", back_populates="char")
+    kMandarin = relationship("kMandarin", back_populates="char")
 
 
 class kDefinition(Base):
@@ -59,5 +60,15 @@ class kCantonese(Base):
     id = Column(Integer, primary_key=True)
     char_id = Column(Integer, ForeignKey('Unhn.id'))
     definition = Column(String(128))
+
+    char = relationship("Unhn")
+
+
+class kMandarin(Base):
+    __tablename__ = 'kMandarin'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    hans = Column(String(10))
+    hant = Column(String(10))
 
     char = relationship("Unhn")

@@ -1,7 +1,7 @@
 # -*- coding: utf8 - *-
 
 from unihan_db import bootstrap
-from unihan_db.tables import Unhn, kDefinition, kCantonese, Base
+from unihan_db.tables import Unhn, kDefinition, kCantonese, kMandarin, Base
 
 
 def test_reflect_db(tmpdb_file, unihan_options, metadata):
@@ -47,4 +47,11 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
             for defi in char['kCantonese']:
                 c.kCantonese.append(kCantonese(definition=defi))
             assert len(c.kCantonese) == len(char['kCantonese'])
+        if 'kMandarin' in char:
+            defi = char['kMandarin']
+            c.kMandarin.append(kMandarin(
+                hans=defi['zh-Hans'],
+                hant=defi['zh-Hant'],
+            ))
+
     session.commit()
