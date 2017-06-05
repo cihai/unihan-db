@@ -41,4 +41,5 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
             c = session.query(Unhn).filter_by(ucn=char['ucn']).one()
             for defi in char['kDefinition']:
                 c.kDefinition.append(kDefinition(definition=defi))
+            assert len(c.kDefinition) == len(char['kDefinition'])
     session.commit()
