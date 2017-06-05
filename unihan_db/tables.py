@@ -28,7 +28,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 
 Base = declarative_base()
@@ -40,11 +40,11 @@ class Unhn(Base):
     char = Column(String(1), primary_key=True)
     type = Column(String(24))
 
-    kDefinition = relationship("kDefinition", back_populates="char")
-    kCantonese = relationship("kCantonese", back_populates="char")
-    kMandarin = relationship("kMandarin", back_populates="char")
-    kHanyuPinyin = relationship("kHanyuPinyin", back_populates="char")
-    kHanYu = relationship("kHanYu", back_populates="char")
+    kDefinition = relationship("kDefinition", backref=backref("char"))
+    kCantonese = relationship("kCantonese", backref=backref("char"))
+    kMandarin = relationship("kMandarin", backref=backref("char"))
+    kHanyuPinyin = relationship("kHanyuPinyin", backref=backref("char"))
+    kHanYu = relationship("kHanYu", backref=backref("char"))
 
 
 class kDefinition(Base):
@@ -53,16 +53,12 @@ class kDefinition(Base):
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     definition = Column(String(128))
 
-    char = relationship("Unhn")
-
 
 class kCantonese(Base):
     __tablename__ = 'kCantonese'
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     definition = Column(String(128))
-
-    char = relationship("Unhn")
 
 
 class kMandarin(Base):
@@ -71,8 +67,6 @@ class kMandarin(Base):
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     hans = Column(String(10))
     hant = Column(String(10))
-
-    char = relationship("Unhn")
 
 
 class GenericReading(Base):
@@ -83,7 +77,6 @@ class GenericReading(Base):
     locations = relationship("UnhnLocation")
     readings = relationship("UnhnReading")
 
-    char = relationship("Unhn")
     __mapper_args__ = {
         'polymorphic_identity': 'generic_reading',
         'polymorphic_on': type
@@ -106,7 +99,6 @@ class GenericIndice(Base):
     type = Column(String(50))
     locations = relationship("UnhnLocation")
 
-    char = relationship("Unhn")
     __mapper_args__ = {
         'polymorphic_identity': 'generic_indice',
         'polymorphic_on': type
