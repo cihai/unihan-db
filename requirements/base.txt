@@ -1,2 +1,2 @@
 sqlalchemy==1.1.10
-unihan-etl==0.9.3
+unihan-etl==0.9.4
