@@ -40,9 +40,9 @@ def import_char(c, char):
         for defi in char['kHanYu']:
             k = kHanYu()
             k.locations.append(UnhnLocation(
-                volume=loc['volume'],
-                page=loc['page'],
-                character=loc['character'],
-                virtual=loc['virtual'],
+                volume=defi['volume'],
+                page=defi['page'],
+                character=defi['character'],
+                virtual=defi['virtual'],
             ))
             c.kHanYu.append(k)

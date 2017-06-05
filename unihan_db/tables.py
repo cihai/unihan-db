@@ -45,6 +45,7 @@ class Unhn(Base):
     kCantonese = relationship("kCantonese", back_populates="char")
     kMandarin = relationship("kMandarin", back_populates="char")
     kHanyuPinyin = relationship("kHanyuPinyin", back_populates="char")
+    kHanYu = relationship("kHanYu", back_populates="char")
 
 
 class kDefinition(Base):

@@ -9,6 +9,7 @@ from unihan_etl.process import UNIHAN_MANIFEST
 from .util import merge_dict
 
 UNIHAN_FILES = [
+    'Unihan_DictionaryIndices.txt',
     'Unihan_DictionaryLikeData.txt',
     'Unihan_IRGSources.txt',
     'Unihan_NumericValues.txt',
@@ -20,7 +21,7 @@ UNIHAN_FIELDS = [
     'kAccountingNumeric', 'kCangjie', 'kCantonese', 'kCheungBauer',
     'kCihaiT', 'kCompatibilityVariant', 'kDefinition', 'kFenn',
     'kFourCornerCode', 'kFrequency', 'kGradeLevel', 'kHDZRadBreak',
-    'kHKGlyph', 'kHangul', 'kHanyuPinlu', 'kHanyuPinyin',
+    'kHKGlyph', 'kHangul', 'kHanyuPinlu', 'kHanYu', 'kHanyuPinyin',
     'kJapaneseKun', 'kJapaneseOn', 'kKorean', 'kMandarin',
     'kOtherNumeric', 'kPhonetic', 'kPrimaryNumeric',
     'kRSAdobe_Japan1_6', 'kRSJapanese', 'kRSKanWa', 'kRSKangXi',
