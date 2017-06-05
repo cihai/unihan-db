@@ -2,7 +2,8 @@
 
 from unihan_db import bootstrap
 from unihan_db.tables import (Base, Unhn, UnhnLocation, UnhnReading,
-                              kCantonese, kDefinition, kHanyuPinyin, kMandarin)
+                              kCantonese, kDefinition, kHanYu, kHanyuPinyin,
+                              kMandarin)
 
 
 def test_reflect_db(tmpdb_file, unihan_options, metadata):
@@ -68,5 +69,16 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
                 for reading in defi['readings']:
                     k.readings.append(UnhnReading(reading=reading))
                 c.kHanyuPinyin.append(k)
+
+        if 'kHanYu' in char:
+            for defi in char['kHanYu']:
+                k = kHanYu()
+                k.locations.append(UnhnLocation(
+                    volume=loc['volume'],
+                    page=loc['page'],
+                    character=loc['character'],
+                    virtual=loc['virtual'],
+                ))
+                c.kHanYu.append(k)
 
     session.commit()

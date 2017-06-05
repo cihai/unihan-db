@@ -99,10 +99,34 @@ class kHanyuPinyin(GenericReading):
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
 
 
+class GenericIndice(Base):
+    __tablename__ = 'GenericIndice'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(Integer, ForeignKey('Unhn.id'))
+    type = Column(String(50))
+    locations = relationship("UnhnLocation")
+
+    char = relationship("Unhn")
+    __mapper_args__ = {
+        'polymorphic_identity': 'generic_indice',
+        'polymorphic_on': type
+    }
+
+
+class kHanYu(GenericIndice):
+    __tablename__ = 'kHanYu'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kHanYu',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
 class UnhnLocation(Base):
     __tablename__ = 'UnhnLocation'
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
+    generic_indice_id = Column(Integer, ForeignKey('GenericIndice.id'))
     volume = Column(Integer)
     page = Column(Integer)
     character = Column(Integer)
