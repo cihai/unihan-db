@@ -8,3 +8,7 @@ API
 
 .. automodule:: unihan_db.bootstrap
     :members:
+
+.. automodule:: unihan_db.tables
+    :members:
+    :undoc-members:
