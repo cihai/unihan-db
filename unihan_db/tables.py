@@ -50,4 +50,4 @@ class kDefinition(Base):
     char_id = Column(Integer, ForeignKey('Unhn.id'))
     definition = Column(String(128))
 
-    char = relationship("Unhn", back_populates="kDefinition")
+    char = relationship("Unhn")
