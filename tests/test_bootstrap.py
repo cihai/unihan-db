@@ -1,9 +1,7 @@
 # -*- coding: utf8 - *-
 
-from unihan_db import bootstrap
-from unihan_db.tables import (Base, Unhn, UnhnLocation, UnhnReading,
-                              kCantonese, kDefinition, kHanYu, kHanyuPinyin,
-                              kMandarin)
+from unihan_db import bootstrap, importer
+from unihan_db.tables import (Base, Unhn)
 
 
 def test_reflect_db(tmpdb_file, unihan_options, metadata):
@@ -41,44 +39,6 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
     for char in data:
         c = session.query(Unhn).filter_by(ucn=char['ucn']).one()
 
-        if 'kDefinition' in char:
-            for defi in char['kDefinition']:
-                c.kDefinition.append(kDefinition(definition=defi))
-            assert len(c.kDefinition) == len(char['kDefinition'])
-        if 'kCantonese' in char:
-            for defi in char['kCantonese']:
-                c.kCantonese.append(kCantonese(definition=defi))
-            assert len(c.kCantonese) == len(char['kCantonese'])
-        if 'kMandarin' in char:
-            defi = char['kMandarin']
-            c.kMandarin.append(kMandarin(
-                hans=defi['zh-Hans'],
-                hant=defi['zh-Hant'],
-            ))
-
-        if 'kHanyuPinyin' in char:
-            for defi in char['kHanyuPinyin']:
-                k = kHanyuPinyin()
-                for loc in defi['locations']:
-                    k.locations.append(UnhnLocation(
-                        volume=loc['volume'],
-                        page=loc['page'],
-                        character=loc['character'],
-                        virtual=loc['virtual'],
-                    ))
-                for reading in defi['readings']:
-                    k.readings.append(UnhnReading(reading=reading))
-                c.kHanyuPinyin.append(k)
-
-        if 'kHanYu' in char:
-            for defi in char['kHanYu']:
-                k = kHanYu()
-                k.locations.append(UnhnLocation(
-                    volume=loc['volume'],
-                    page=loc['page'],
-                    character=loc['character'],
-                    virtual=loc['virtual'],
-                ))
-                c.kHanYu.append(k)
+        importer.import_char(c, char)
 
     session.commit()
