@@ -75,20 +75,34 @@ class kMandarin(Base):
     char = relationship("Unhn")
 
 
-class kHanyuPinyin(Base):
-    __tablename__ = 'kHanyuPinyin'
+class GenericReading(Base):
+    __tablename__ = 'GenericReading'
     id = Column(Integer, primary_key=True)
     char_id = Column(Integer, ForeignKey('Unhn.id'))
+    type = Column(String(50))
     locations = relationship("UnhnLocation")
     readings = relationship("UnhnReading")
 
     char = relationship("Unhn")
+    __mapper_args__ = {
+        'polymorphic_identity': 'generic_reading',
+        'polymorphic_on': type
+    }
+
+
+class kHanyuPinyin(GenericReading):
+    __tablename__ = 'kHanyuPinyin'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kHanyuPinyin',
+    }
+
+    id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
 
 
 class UnhnLocation(Base):
     __tablename__ = 'UnhnLocation'
     id = Column(Integer, primary_key=True)
-    kHanyuPinyin_id = Column(Integer, ForeignKey('kHanyuPinyin.id'))
+    generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
     volume = Column(Integer)
     page = Column(Integer)
     character = Column(Integer)
@@ -98,5 +112,5 @@ class UnhnLocation(Base):
 class UnhnReading(Base):
     __tablename__ = 'UnhnReading'
     id = Column(Integer, primary_key=True)
-    kHanyuPinyin_id = Column(Integer, ForeignKey('kHanyuPinyin.id'))
+    generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
     reading = Column(String(24))
