@@ -36,8 +36,8 @@ Base = declarative_base()
 
 class Unhn(Base):
     __tablename__ = 'Unhn'
-    ucn = Column(String(8))
-    char = Column(String(1), primary_key=True)
+    char = Column(String(1), primary_key=True, index=True, unique=True)
+    ucn = Column(String(8), index=True, unique=True)
     type = Column(String(24))
 
     kDefinition = relationship("kDefinition", backref=backref("char"))
@@ -51,7 +51,7 @@ class kDefinition(Base):
     __tablename__ = 'kDefinition'
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey('Unhn.char'))
-    definition = Column(String(128))
+    definition = Column(String(296))
 
 
 class kCantonese(Base):

@@ -10,17 +10,19 @@ def import_char(c, char):
     if 'kDefinition' in char:
         for defi in char['kDefinition']:
             c.kDefinition.append(kDefinition(definition=defi))
-        assert len(c.kDefinition) == len(char['kDefinition'])
     if 'kCantonese' in char:
         for defi in char['kCantonese']:
             c.kCantonese.append(kCantonese(definition=defi))
-        assert len(c.kCantonese) == len(char['kCantonese'])
     if 'kMandarin' in char:
         defi = char['kMandarin']
-        c.kMandarin.append(kMandarin(
-            hans=defi['zh-Hans'],
-            hant=defi['zh-Hant'],
-        ))
+        try:
+            c.kMandarin.append(kMandarin(
+                hans=defi['zh-Hans'],
+                hant=defi['zh-Hant'],
+            ))
+        except Exception:
+            import sys
+            sys.exit(char)
 
     if 'kHanyuPinyin' in char:
         for defi in char['kHanyuPinyin']:

@@ -2,10 +2,13 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from sqlalchemy import Column, String, Table
+from sqlalchemy import Column, String, Table, create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 from unihan_etl import process as unihan
 from unihan_etl.process import UNIHAN_MANIFEST
 
+from . import importer
+from .tables import Base, Unhn
 from .util import merge_dict
 
 UNIHAN_FILES = [
@@ -35,7 +38,7 @@ UNIHAN_ETL_DEFAULT_OPTIONS = {
     'input_files': UNIHAN_FILES,
     'fields': UNIHAN_FIELDS,
     'format': 'python',
-    'expand': False
+    'expand': True
 }
 
 
@@ -47,12 +50,30 @@ def bootstrap_data(options={}):
     return p.export()
 
 
-def bootstrap_unihan(metadata, options={}):
+def bootstrap_unihan(session, options={}):
     """Download, extract and import unihan to database."""
-    table = create_unihan_table(UNIHAN_FIELDS, metadata)
     data = bootstrap_data(options)
-    metadata.create_all()
-    metadata.bind.execute(table.insert(), data)
+    print('bootstrap Unhn table')
+    session.bulk_insert_mappings(Unhn, data)
+    session.commit()
+    print('bootstrap Unhn table finished')
+    count = 0
+    for char in data:
+        c = session.query(Unhn).get(char['char'])
+        importer.import_char(c, char)
+        count += 1
+        print("imported %s: complete %s" % (char['char'], count))
+    session.commit()
+
+
+def get_session(engine_url='sqlite:///:memory:'):
+    engine = create_engine(engine_url)
+    Base.metadata.bind = engine
+    Base.metadata.create_all()
+    session_factory = sessionmaker(bind=engine)
+    session = scoped_session(session_factory)
+
+    return session
 
 
 TABLE_NAME = 'Unihan'

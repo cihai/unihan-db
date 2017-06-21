@@ -4,7 +4,7 @@ import zipfile
 
 import pytest
 from sqlalchemy import MetaData, create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 from unihan_db.bootstrap import UNIHAN_FILES
 

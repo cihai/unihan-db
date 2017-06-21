@@ -27,18 +27,6 @@ def test_import_unihan_raw(zip_file, session, engine, unihan_options):
     Base.metadata.bind = engine
     Base.metadata.create_all()
 
-    data = bootstrap.bootstrap_data(unihan_options)
-
-    session.bulk_insert_mappings(Unhn, data)
-    session.commit()
-
-    assert session.query(Unhn).count() == len(data)
-
-    assert session.query(Unhn).get(u'㐀').ucn == 'U+3400'
-
-    for char in data:
-        c = session.query(Unhn).get(char['char'])
-
-        importer.import_char(c, char)
+    bootstrap.bootstrap_unihan(session, unihan_options)
 
     session.commit()
