@@ -44,6 +44,35 @@ UNIHAN_ETL_DEFAULT_OPTIONS = {
 }
 
 
+TABLE_NAME = 'Unihan'
+
+
+def flatten_datasets(d):
+    return sorted({c for cs in d.values() for c in cs})
+
+
+DEFAULT_COLUMNS = ['ucn', 'char']
+try:
+    DEFAULT_FIELDS = [
+        f for t, f in UNIHAN_MANIFEST.items() if t in ['Unihan']]
+except:
+    DEFAULT_FIELDS = [f for t, f in UNIHAN_MANIFEST.items()]
+
+
+def is_bootstrapped(metadata):
+    """Return True if cihai is correctly bootstrapped."""
+    fields = UNIHAN_FIELDS + DEFAULT_COLUMNS
+    if TABLE_NAME in metadata.tables.keys():
+        table = metadata.tables[TABLE_NAME]
+
+        if set(fields) == set(c.name for c in table.columns):
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
 def bootstrap_data(options={}):
     options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options)
 
@@ -110,35 +139,6 @@ def get_session(engine_url='sqlite:///:memory:'):
     session = scoped_session(session_factory)
 
     return session
-
-
-TABLE_NAME = 'Unihan'
-
-
-def flatten_datasets(d):
-    return sorted({c for cs in d.values() for c in cs})
-
-
-DEFAULT_COLUMNS = ['ucn', 'char']
-try:
-    DEFAULT_FIELDS = [
-        f for t, f in UNIHAN_MANIFEST.items() if t in ['Unihan']]
-except:
-    DEFAULT_FIELDS = [f for t, f in UNIHAN_MANIFEST.items()]
-
-
-def is_bootstrapped(metadata):
-    """Return True if cihai is correctly bootstrapped."""
-    fields = UNIHAN_FIELDS + DEFAULT_COLUMNS
-    if TABLE_NAME in metadata.tables.keys():
-        table = metadata.tables[TABLE_NAME]
-
-        if set(fields) == set(c.name for c in table.columns):
-            return True
-        else:
-            return False
-    else:
-        return False
 
 
 def create_unihan_table(columns, metadata):
