@@ -26,9 +26,9 @@ joins`_.
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import backref, relationship
 
 
 Base = declarative_base()

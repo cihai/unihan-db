@@ -2,8 +2,10 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from sqlalchemy import Column, String, Table, create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from datetime import datetime
+
+from sqlalchemy import Column, String, Table, create_engine, event
+from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
 from unihan_etl import process as unihan
 from unihan_etl.process import UNIHAN_MANIFEST
 
@@ -66,8 +68,42 @@ def bootstrap_unihan(session, options={}):
     session.commit()
 
 
+def to_dict(obj, found=None):
+    def _get_key_value(c):
+        if isinstance(getattr(obj, c), datetime):
+            return (c, getattr(obj, c).isoformat())
+        else:
+            return (c, getattr(obj, c))
+
+    if found is None:
+        found = set()
+    mapper = class_mapper(obj.__class__)
+    columns = [column.key for column in mapper.columns]
+
+    result = dict(map(_get_key_value, columns))
+    for name, relation in mapper.relationships.items():
+        if relation not in found:
+            found.add(relation)
+            related_obj = getattr(obj, name)
+            if related_obj is not None:
+                if relation.uselist:
+                    result[name] = [
+                        to_dict(child, found) for child in related_obj
+                    ]
+                else:
+                    result[name] = to_dict(related_obj, found)
+    return result
+
+
+def add_to_dict(b):
+    b.to_dict = to_dict
+    return b
+
+
 def get_session(engine_url='sqlite:///:memory:'):
     engine = create_engine(engine_url)
+
+    event.listen(mapper, 'after_configured', add_to_dict(Base))
     Base.metadata.bind = engine
     Base.metadata.create_all()
     session_factory = sessionmaker(bind=engine)
