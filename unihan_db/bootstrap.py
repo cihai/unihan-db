@@ -7,7 +7,6 @@ from datetime import datetime
 from sqlalchemy import Column, String, Table, create_engine, event
 from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
 from unihan_etl import process as unihan
-from unihan_etl.process import UNIHAN_MANIFEST
 
 from . import importer
 from .tables import Base, Unhn
@@ -47,21 +46,12 @@ UNIHAN_ETL_DEFAULT_OPTIONS = {
 TABLE_NAME = 'Unihan'
 
 
-def flatten_datasets(d):
-    return sorted({c for cs in d.values() for c in cs})
-
-
-DEFAULT_COLUMNS = ['ucn', 'char']
-try:
-    DEFAULT_FIELDS = [
-        f for t, f in UNIHAN_MANIFEST.items() if t in ['Unihan']]
-except:
-    DEFAULT_FIELDS = [f for t, f in UNIHAN_MANIFEST.items()]
+DEFAULT_FIELDS = ['ucn', 'char']
 
 
 def is_bootstrapped(metadata):
     """Return True if cihai is correctly bootstrapped."""
-    fields = UNIHAN_FIELDS + DEFAULT_COLUMNS
+    fields = UNIHAN_FIELDS + DEFAULT_FIELDS
     if TABLE_NAME in metadata.tables.keys():
         table = metadata.tables[TABLE_NAME]
 
