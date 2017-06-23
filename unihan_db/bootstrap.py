@@ -4,7 +4,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from datetime import datetime
 
-from sqlalchemy import Column, String, Table, create_engine, event
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
 from unihan_etl import process as unihan
 
@@ -129,30 +129,3 @@ def get_session(engine_url='sqlite:///:memory:'):
     session = scoped_session(session_factory)
 
     return session
-
-
-def create_unihan_table(columns, metadata):
-    """Create table and return  :class:`sqlalchemy.Table`.
-
-    :param columns: columns for table, i.e. ['kDefinition', 'kCantonese']
-    :type columns: list
-    :param metadata: Instance of sqlalchemy metadata
-    :type metadata: :class:`sqlalchemy.schema.MetaData`
-    :returns: Newly created table with columns and index.
-    :rtype: :class:`sqlalchemy.schema.Table`
-
-    """
-
-    if TABLE_NAME not in metadata.tables:
-        table = Table(TABLE_NAME, metadata)
-
-        table.append_column(Column('char', String(12), primary_key=True))
-        table.append_column(Column('ucn', String(12), primary_key=True))
-
-        for column_name in columns:
-            col = Column(column_name, String(256), nullable=True)
-            table.append_column(col)
-
-        return table
-    else:
-        return Table(TABLE_NAME, metadata)
