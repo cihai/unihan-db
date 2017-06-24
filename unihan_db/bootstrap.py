@@ -2,6 +2,7 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
+import logging
 from datetime import datetime
 
 from sqlalchemy import create_engine, event
@@ -11,6 +12,29 @@ from unihan_etl import process as unihan
 from . import dirs, importer
 from .tables import Base, Unhn
 from .util import merge_dict
+
+
+log = logging.getLogger(__name__)
+
+
+def setup_logger(logger=None, level='INFO'):
+    """Setup logging for CLI use.
+
+    :param logger: instance of logger
+    :type logger: :py:class:`Logger`
+
+    """
+    if not logger:
+        logger = logging.getLogger()
+    if not logger.handlers:
+        channel = logging.StreamHandler()
+
+        logger.setLevel(level)
+        logger.addHandler(channel)
+
+
+setup_logger()
+
 
 UNIHAN_FILES = [
     'Unihan_DictionaryIndices.txt',
@@ -75,15 +99,18 @@ def bootstrap_unihan(session, options={}):
     """Download, extract and import unihan to database."""
     if session.query(Unhn).count() == 0:
         data = bootstrap_data(options)
-        print('bootstrap Unhn table')
-        session.bulk_insert_mappings(Unhn, data)
-        print('bootstrap Unhn table finished')
+        log.info('bootstrap Unhn table')
+        log.info('bootstrap Unhn table finished')
         count = 0
+        items = []
         for char in data:
-            c = session.query(Unhn).get(char['char'])
+            c = Unhn(char=char['char'], ucn=char['ucn'])
             importer.import_char(c, char)
+            items.append(c)
+
             count += 1
-            print("imported %s: complete %s" % (char['char'], count))
+            log.debug("imported %s: complete %s" % (char['char'], count))
+        session.add_all(items)
         session.commit()
 
 
