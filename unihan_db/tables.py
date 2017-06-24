@@ -38,7 +38,6 @@ class Unhn(Base):
     __tablename__ = 'Unhn'
     char = Column(String(1), primary_key=True, index=True, unique=True)
     ucn = Column(String(8), index=True, unique=True)
-    type = Column(String(24))
 
     kDefinition = relationship("kDefinition")
     kCantonese = relationship("kCantonese")
