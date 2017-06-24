@@ -4,6 +4,6 @@ from appdirs import AppDirs
 
 #: XDG App directory locations
 dirs = AppDirs(
-    "unihan-db",  # appname
+    "unihan_db",  # appname
     "cihai team"  # app author
 )

@@ -125,7 +125,7 @@ if not os.path.exists(dirs.user_data_dir):
     os.makedirs(dirs.user_data_dir)
 
 
-def get_session(engine_url='sqlite:///{user_data_dir}/cihai.db'):
+def get_session(engine_url='sqlite:///{user_data_dir}/unihan_db.db'):
     engine_url = engine_url.format(**{
         'user_data_dir': dirs.user_data_dir,
     })
