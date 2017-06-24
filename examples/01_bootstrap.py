@@ -3,8 +3,9 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
+import random
+
 from sqlalchemy.orm import joinedload
-from sqlalchemy.sql.expression import func
 
 from unihan_db import bootstrap
 from unihan_db.tables import Unhn
@@ -18,8 +19,16 @@ session = bootstrap.get_session()
 
 bootstrap.bootstrap_unihan(session)
 
-random_row = session.query(Unhn).options(joinedload('kDefinition')).filter(
-    Unhn.kDefinition != None  # noqa
-).order_by(func.random()).first()
+row_count = session.query(Unhn).count()
+
+
+def random_row():
+    return random.randrange(row_count)
+
+
+print(random_row())
+random_row = session.query(Unhn).options(joinedload('kDefinition')).offset(
+    random_row()
+).limit(1).first()
 
 print(random_row.to_dict())
