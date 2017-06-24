@@ -28,7 +28,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from sqlalchemy import Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import backref, relationship
+from sqlalchemy.orm import relationship
 
 
 Base = declarative_base()
@@ -40,11 +40,11 @@ class Unhn(Base):
     ucn = Column(String(8), index=True, unique=True)
     type = Column(String(24))
 
-    kDefinition = relationship("kDefinition", backref=backref("char"))
-    kCantonese = relationship("kCantonese", backref=backref("char"))
-    kMandarin = relationship("kMandarin", backref=backref("char"))
-    kHanyuPinyin = relationship("kHanyuPinyin", backref=backref("char"))
-    kHanYu = relationship("kHanYu", backref=backref("char"))
+    kDefinition = relationship("kDefinition")
+    kCantonese = relationship("kCantonese")
+    kMandarin = relationship("kMandarin")
+    kHanyuPinyin = relationship("kHanyuPinyin")
+    kHanYu = relationship("kHanYu")
 
 
 class kDefinition(Base):
