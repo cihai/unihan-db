@@ -3,6 +3,8 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
+import pprint
+
 from sqlalchemy.sql.expression import func
 
 from unihan_db import bootstrap
@@ -21,4 +23,6 @@ random_row = session.query(Unhn).order_by(
     func.random()
 ).limit(1).first()
 
-print(random_row.to_dict())
+pp = pprint.PrettyPrinter(indent=0)
+
+pp.pprint(random_row.to_dict())
