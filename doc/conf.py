@@ -68,7 +68,7 @@ html_theme_options = {
     'github_type': 'star',
     'github_banner': True,
     'projects': alagitpull.projects,
-    'project_name': about['__title__'],
+    'project_name': 'db',
 }
 
 html_theme_path = ['_themes']
