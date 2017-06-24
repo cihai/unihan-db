@@ -2,7 +2,6 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-import os
 from datetime import datetime
 
 from sqlalchemy import create_engine, event
@@ -119,10 +118,6 @@ def to_dict(obj, found=None):
 def add_to_dict(b):
     b.to_dict = to_dict
     return b
-
-
-if not os.path.exists(dirs.user_data_dir):
-    os.makedirs(dirs.user_data_dir)
 
 
 def get_session(engine_url='sqlite:///{user_data_dir}/unihan_db.db'):
