@@ -1,2 +1,3 @@
 sqlalchemy==1.1.11
+appdirs==1.4.3
 unihan-etl==0.9.4
