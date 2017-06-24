@@ -2,13 +2,14 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
+import os
 from datetime import datetime
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
 from unihan_etl import process as unihan
 
-from . import importer
+from . import dirs, importer
 from .tables import Base, Unhn
 from .util import merge_dict
 
@@ -73,18 +74,19 @@ def bootstrap_data(options={}):
 
 def bootstrap_unihan(session, options={}):
     """Download, extract and import unihan to database."""
-    data = bootstrap_data(options)
-    print('bootstrap Unhn table')
-    session.bulk_insert_mappings(Unhn, data)
-    session.commit()
-    print('bootstrap Unhn table finished')
-    count = 0
-    for char in data:
-        c = session.query(Unhn).get(char['char'])
-        importer.import_char(c, char)
-        count += 1
-        print("imported %s: complete %s" % (char['char'], count))
-    session.commit()
+    if session.query(Unhn).count() == 0:
+        data = bootstrap_data(options)
+        print('bootstrap Unhn table')
+        session.bulk_insert_mappings(Unhn, data)
+        session.commit()
+        print('bootstrap Unhn table finished')
+        count = 0
+        for char in data:
+            c = session.query(Unhn).get(char['char'])
+            importer.import_char(c, char)
+            count += 1
+            print("imported %s: complete %s" % (char['char'], count))
+        session.commit()
 
 
 def to_dict(obj, found=None):
@@ -119,7 +121,14 @@ def add_to_dict(b):
     return b
 
 
-def get_session(engine_url='sqlite:///:memory:'):
+if not os.path.exists(dirs.user_data_dir):
+    os.makedirs(dirs.user_data_dir)
+
+
+def get_session(engine_url='sqlite:///{user_data_dir}/cihai.db'):
+    engine_url = engine_url.format(**{
+        'user_data_dir': dirs.user_data_dir,
+    })
     engine = create_engine(engine_url)
 
     event.listen(mapper, 'after_configured', add_to_dict(Base))
