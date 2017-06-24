@@ -77,7 +77,6 @@ def bootstrap_unihan(session, options={}):
         data = bootstrap_data(options)
         print('bootstrap Unhn table')
         session.bulk_insert_mappings(Unhn, data)
-        session.commit()
         print('bootstrap Unhn table finished')
         count = 0
         for char in data:
