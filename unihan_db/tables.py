@@ -46,6 +46,7 @@ class Unhn(Base):
     kIRGHanyuDaZidian = relationship("kIRGHanyuDaZidian")
     kHanyuPinyin = relationship("kHanyuPinyin")
     kXHC1983 = relationship("kXHC1983")
+    kCheungBauer = relationship("kCheungBauer")
     kHanYu = relationship("kHanYu")
 
 
@@ -110,6 +111,18 @@ class kXHC1983(GenericReading):
 
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
     locations = relationship("UnhnLocationkXHC1983")
+
+
+class kCheungBauer(GenericReading):
+    __tablename__ = 'kCheungBauer'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kCheungBauer',
+    }
+
+    id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
+    radical = Column(Integer)
+    strokes = Column(Integer)
+    cangjie = Column(String, nullable=True)
 
 
 class GenericIndice(Base):

@@ -3,9 +3,9 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
-                              kCantonese, kDefinition, kHanYu, kHanyuPinyin,
-                              kIRGHanyuDaZidian, kMandarin, kTotalStrokes,
-                              kXHC1983)
+                              kCantonese, kCheungBauer, kDefinition, kHanYu,
+                              kHanyuPinyin, kIRGHanyuDaZidian, kMandarin,
+                              kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -77,3 +77,15 @@ def import_char(c, char):
                 ))
             k.readings.append(UnhnReading(reading=defi['reading']))
             c.kXHC1983.append(k)
+
+    if 'kCheungBauer' in char:
+        for defi in char['kCheungBauer']:
+            k = kCheungBauer(
+                radical=defi['radical'],
+                strokes=defi['strokes'],
+                cangjie=defi['cangjie'],
+            )
+
+            for reading in defi['readings']:
+                k.readings.append(UnhnReading(reading=reading))
+            c.kCheungBauer.append(k)
