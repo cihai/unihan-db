@@ -3,7 +3,8 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnReading, kCantonese,
-                              kDefinition, kHanYu, kHanyuPinyin, kMandarin)
+                              kDefinition, kHanYu, kHanyuPinyin, kMandarin,
+                              kTotalStrokes)
 
 
 def import_char(c, char):
@@ -16,6 +17,13 @@ def import_char(c, char):
     if 'kMandarin' in char:
         defi = char['kMandarin']
         c.kMandarin.append(kMandarin(
+            hans=defi['zh-Hans'],
+            hant=defi['zh-Hant'],
+        ))
+
+    if 'kTotalStrokes' in char:
+        defi = char['kTotalStrokes']
+        c.kTotalStrokes.append(kTotalStrokes(
             hans=defi['zh-Hans'],
             hant=defi['zh-Hant'],
         ))

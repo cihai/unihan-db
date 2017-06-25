@@ -42,6 +42,7 @@ class Unhn(Base):
     kDefinition = relationship("kDefinition")
     kCantonese = relationship("kCantonese")
     kMandarin = relationship("kMandarin")
+    kTotalStrokes = relationship("kTotalStrokes")
     kHanyuPinyin = relationship("kHanyuPinyin")
     kHanYu = relationship("kHanYu")
 
@@ -66,6 +67,14 @@ class kMandarin(Base):
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     hans = Column(String(10))
     hant = Column(String(10))
+
+
+class kTotalStrokes(Base):
+    __tablename__ = 'kTotalStrokes'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    hans = Column(Integer())
+    hant = Column(Integer())
 
 
 class GenericReading(Base):
