@@ -15,14 +15,10 @@ def import_char(c, char):
             c.kCantonese.append(kCantonese(definition=defi))
     if 'kMandarin' in char:
         defi = char['kMandarin']
-        try:
-            c.kMandarin.append(kMandarin(
-                hans=defi['zh-Hans'],
-                hant=defi['zh-Hant'],
-            ))
-        except Exception:
-            import sys
-            sys.exit(char)
+        c.kMandarin.append(kMandarin(
+            hans=defi['zh-Hans'],
+            hant=defi['zh-Hant'],
+        ))
 
     if 'kHanyuPinyin' in char:
         for defi in char['kHanyuPinyin']:
