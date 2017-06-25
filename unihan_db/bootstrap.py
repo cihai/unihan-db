@@ -147,6 +147,17 @@ def add_to_dict(b):
 
 
 def get_session(engine_url='sqlite:///{user_data_dir}/unihan_db.db'):
+    """Return new SQLAlchemy session object from engine string.
+
+    *engine_url* accepts a string template variable for ``{user_data_dir}``,
+    which is replaced to the XDG data directory for the user running the script
+    process. This variable is only useful for SQLite, where file paths are
+    used for the engine_url.
+
+    :param engine_url: SQLAlchemy engine string
+    :type engine_url: string
+    """
+
     engine_url = engine_url.format(**{
         'user_data_dir': dirs.user_data_dir,
     })
