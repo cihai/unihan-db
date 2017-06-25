@@ -97,6 +97,5 @@ texinfo_documents = [
 
 intersphinx_mapping = {
     'python': ('http://docs.python.org/', None),
-    'sphinx': ('http://sphinx.readthedocs.org/en/latest/', None),
     'sqlalchemy': ('http://docs.sqlalchemy.org/en/latest/', None),
 }
