@@ -43,6 +43,7 @@ class Unhn(Base):
     kCantonese = relationship("kCantonese")
     kMandarin = relationship("kMandarin")
     kTotalStrokes = relationship("kTotalStrokes")
+    kIRGHanyuDaZidian = relationship("kIRGHanyuDaZidian")
     kHanyuPinyin = relationship("kHanyuPinyin")
     kHanYu = relationship("kHanYu")
 
@@ -117,6 +118,15 @@ class kHanYu(GenericIndice):
     __tablename__ = 'kHanYu'
     __mapper_args__ = {
         'polymorphic_identity': 'kHanYu',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kIRGHanyuDaZidian(GenericIndice):
+    __tablename__ = 'kIRGHanyuDaZidian'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRGHanyuDaZidian',
     }
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)

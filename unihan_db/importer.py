@@ -4,7 +4,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from unihan_db.tables import (UnhnLocation, UnhnReading, kCantonese,
                               kDefinition, kHanYu, kHanyuPinyin, kMandarin,
-                              kTotalStrokes)
+                              kTotalStrokes, kIRGHanyuDaZidian)
 
 
 def import_char(c, char):
@@ -52,3 +52,14 @@ def import_char(c, char):
                 virtual=defi['virtual'],
             ))
             c.kHanYu.append(k)
+
+    if 'kIRGHanyuDaZidian' in char:
+        for defi in char['kIRGHanyuDaZidian']:
+            k = kIRGHanyuDaZidian()
+            k.locations.append(UnhnLocation(
+                volume=defi['volume'],
+                page=defi['page'],
+                character=defi['character'],
+                virtual=defi['virtual'],
+            ))
+            c.kIRGHanyuDaZidian.append(k)
