@@ -115,6 +115,18 @@ def bootstrap_unihan(session, options={}):
 
 
 def to_dict(obj, found=None):
+    """Return dictionary of an SQLAlchemy Query result.
+
+    Supports recursive relationships.
+
+    :param obj: SQLAlchemy Query result
+    :type obj: :class:`sqlalchemy.orm.query.Query` result object
+    :param found: recursive parameter
+    :type found: :class:`python:set`
+    :returns: dictionary of results
+    :rtype: :class:`python:dict`
+    """
+
     def _get_key_value(c):
         if isinstance(getattr(obj, c), datetime):
             return (c, getattr(obj, c).isoformat())
@@ -142,6 +154,11 @@ def to_dict(obj, found=None):
 
 
 def add_to_dict(b):
+    """Add :func:`.to_dict` method to SQLAlchemy Base object.
+
+    :param b: SQLAlchemy Base class
+    :type b: :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
+    """
     b.to_dict = to_dict
     return b
 
