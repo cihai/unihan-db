@@ -26,7 +26,7 @@ joins`_.
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 
@@ -45,6 +45,7 @@ class Unhn(Base):
     kTotalStrokes = relationship("kTotalStrokes")
     kIRGHanyuDaZidian = relationship("kIRGHanyuDaZidian")
     kHanyuPinyin = relationship("kHanyuPinyin")
+    kXHC1983 = relationship("kXHC1983")
     kHanYu = relationship("kHanYu")
 
 
@@ -101,6 +102,16 @@ class kHanyuPinyin(GenericReading):
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
 
 
+class kXHC1983(GenericReading):
+    __tablename__ = 'kXHC1983'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kXHC1983',
+    }
+
+    id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
+    locations = relationship("UnhnLocationkXHC1983")
+
+
 class GenericIndice(Base):
     __tablename__ = 'GenericIndice'
     id = Column(Integer, primary_key=True)
@@ -141,6 +152,17 @@ class UnhnLocation(Base):
     page = Column(Integer)
     character = Column(Integer)
     virtual = Column(Integer)
+
+
+class UnhnLocationkXHC1983(Base):
+    __tablename__ = 'UnhnLocationkXHC1983'
+    id = Column(Integer, primary_key=True)
+    generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
+    generic_indice_id = Column(Integer, ForeignKey('GenericIndice.id'))
+    page = Column(Integer)
+    character = Column(Integer)
+    entry = Column(Integer)
+    substituted = Column(Boolean)
 
 
 class UnhnReading(Base):

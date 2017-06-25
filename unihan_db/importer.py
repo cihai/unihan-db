@@ -2,9 +2,10 @@
 from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
-from unihan_db.tables import (UnhnLocation, UnhnReading, kCantonese,
-                              kDefinition, kHanYu, kHanyuPinyin, kMandarin,
-                              kTotalStrokes, kIRGHanyuDaZidian)
+from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
+                              kCantonese, kDefinition, kHanYu, kHanyuPinyin,
+                              kIRGHanyuDaZidian, kMandarin, kTotalStrokes,
+                              kXHC1983)
 
 
 def import_char(c, char):
@@ -63,3 +64,16 @@ def import_char(c, char):
                 virtual=defi['virtual'],
             ))
             c.kIRGHanyuDaZidian.append(k)
+
+    if 'kXHC1983' in char:
+        for defi in char['kXHC1983']:
+            k = kXHC1983()
+            for loc in defi['locations']:
+                k.locations.append(UnhnLocationkXHC1983(
+                    page=loc['page'],
+                    character=loc['character'],
+                    entry=loc['entry'],
+                    substituted=loc['substituted'],
+                ))
+            k.readings.append(UnhnReading(reading=defi['reading']))
+            c.kXHC1983.append(k)
