@@ -47,6 +47,7 @@ class Unhn(Base):
     kHanyuPinyin = relationship("kHanyuPinyin")
     kXHC1983 = relationship("kXHC1983")
     kCheungBauer = relationship("kCheungBauer")
+    kRSAdobe_Japan1_6 = relationship("kRSAdobe_Japan1_6")
     kHanYu = relationship("kHanYu")
 
 
@@ -92,6 +93,31 @@ class GenericReading(Base):
         'polymorphic_identity': 'generic_reading',
         'polymorphic_on': type
     }
+
+
+class GenericRadicalStrokes(Base):
+    __tablename__ = 'GenericRadicalStrokes'
+
+    id = Column(Integer, primary_key=True)
+    radical = Column(Integer)
+    strokes = Column(Integer)
+    type = Column(String(50))
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'generic_radical_strokes',
+        'polymorphic_on': type
+    }
+
+
+class kRSAdobe_Japan1_6(Base):
+    __tablename__ = 'kRSAdobe_Japan1_6'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    type = Column(String(1))
+    cid = Column(Integer)
+    radical = Column(Integer)
+    strokes = Column(Integer)
+    strokes_residue = Column(Integer)
 
 
 class kHanyuPinyin(GenericReading):

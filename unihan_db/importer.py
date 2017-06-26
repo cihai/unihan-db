@@ -5,7 +5,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kDefinition, kHanYu,
                               kHanyuPinyin, kIRGHanyuDaZidian, kMandarin,
-                              kTotalStrokes, kXHC1983)
+                              kTotalStrokes, kXHC1983, kRSAdobe_Japan1_6)
 
 
 def import_char(c, char):
@@ -89,3 +89,13 @@ def import_char(c, char):
             for reading in defi['readings']:
                 k.readings.append(UnhnReading(reading=reading))
             c.kCheungBauer.append(k)
+
+    if 'kRSAdobe_Japan1_6' in char:
+        for defi in char['kRSAdobe_Japan1_6']:
+            c.kRSAdobe_Japan1_6.append(kRSAdobe_Japan1_6(
+                type=defi['type'],
+                cid=defi['cid'],
+                radical=defi['radical'],
+                strokes=defi['strokes'],
+                strokes_residue=defi['strokes-residue'],
+            ))
