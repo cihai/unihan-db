@@ -4,10 +4,11 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
-                              kDefinition, kFenn, kHanYu, kHanyuPinyin,
-                              kIICore, kIICoreSource, kIRGDaeJaweon,
-                              kIRGHanyuDaZidian, kIRGKangXi, kMandarin,
-                              kRSAdobe_Japan1_6, kTotalStrokes, kXHC1983)
+                              kDefinition, kFenn, kHanYu, kHanyuPinlu,
+                              kHanyuPinyin, kIICore, kIICoreSource,
+                              kIRGDaeJaweon, kIRGHanyuDaZidian, kIRGKangXi,
+                              kMandarin, kRSAdobe_Japan1_6, kTotalStrokes,
+                              kXHC1983)
 
 
 def import_char(c, char):
@@ -152,6 +153,13 @@ def import_char(c, char):
     if 'kFenn' in char:
         for d in char['kFenn']:
             c.kFenn.append(kFenn(
+                phonetic=d['phonetic'],
+                frequency=d['frequency']
+            ))
+
+    if 'kHanyuPinlu' in char:
+        for d in char['kHanyuPinlu']:
+            c.kHanyuPinlu.append(kHanyuPinlu(
                 phonetic=d['phonetic'],
                 frequency=d['frequency']
             ))
