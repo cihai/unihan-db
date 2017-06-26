@@ -49,6 +49,7 @@ class Unhn(Base):
     kCheungBauer = relationship("kCheungBauer")
     kRSAdobe_Japan1_6 = relationship("kRSAdobe_Japan1_6")
     kCihaiT = relationship("kCihaiT")
+    kIICore = relationship("kIICore")
     kHanYu = relationship("kHanYu")
 
 
@@ -201,6 +202,21 @@ class kCihaiT(Base):
     page = Column(Integer)
     row = Column(Integer)
     character = Column(Integer)
+
+
+class kIICoreSource(Base):
+    __tablename__ = 'kIICoreSource'
+    id = Column(Integer, primary_key=True)
+    source_id = Column(Integer, ForeignKey('kIICore.id'))
+    source = Column(String(1))
+
+
+class kIICore(Base):
+    __tablename__ = 'kIICore'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    priority = Column(String(1))
+    sources = relationship('kIICoreSource')
 
 
 class UnhnLocationkXHC1983(Base):

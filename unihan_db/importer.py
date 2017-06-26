@@ -4,9 +4,9 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDefinition,
-                              kHanYu, kHanyuPinyin, kIRGHanyuDaZidian,
-                              kMandarin, kRSAdobe_Japan1_6, kTotalStrokes,
-                              kXHC1983)
+                              kHanYu, kHanyuPinyin, kIICore, kIICoreSource,
+                              kIRGHanyuDaZidian, kMandarin, kRSAdobe_Japan1_6,
+                              kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -108,3 +108,12 @@ def import_char(c, char):
                 row=defi['row'],
                 character=defi['character'],
             ))
+
+    if 'kIICore' in char:
+        for defi in char['kIICore']:
+            k = kIICore(priority=defi['priority'])
+            for s in defi['sources']:
+                k.sources.append(kIICoreSource(
+                    source=s
+                ))
+            c.kIICore.append(k)
