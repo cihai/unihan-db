@@ -8,6 +8,7 @@ Here you can find the recent changes to the project.
 - :support:`-` Support for more fields
 - :support:`-` Support for appdirs (XDG directory specification)
 - :support:`-` Zero-config sqlite default
+- :support:`-` Bump unihan-etl to 0.9.5
 
 - :release:`0.1.0 <2017-05-29>`
 - :support:`-` Initial commit
