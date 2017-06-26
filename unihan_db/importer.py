@@ -5,10 +5,10 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
                               kDefinition, kFenn, kHanYu, kHanyuPinlu,
-                              kHanyuPinyin, kIICore, kIICoreSource,
-                              kIRGDaeJaweon, kIRGHanyuDaZidian, kIRGKangXi,
-                              kMandarin, kRSAdobe_Japan1_6, kTotalStrokes,
-                              kXHC1983)
+                              kHanyuPinyin, kHDZRadBreak, kIICore,
+                              kIICoreSource, kIRGDaeJaweon, kIRGHanyuDaZidian,
+                              kIRGKangXi, kMandarin, kRSAdobe_Japan1_6,
+                              kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -163,3 +163,17 @@ def import_char(c, char):
                 phonetic=d['phonetic'],
                 frequency=d['frequency']
             ))
+
+    if 'kHDZRadBreak' in char:
+        d = char['kHDZRadBreak']
+        k = kHDZRadBreak(
+            radical=d['radical'],
+            ucn=d['ucn']
+        )
+        k.locations.append(UnhnLocation(
+            volume=d['location']['volume'],
+            page=d['location']['page'],
+            character=d['location']['character'],
+            virtual=d['location']['virtual'],
+        ))
+        c.kHDZRadBreak.append(k)

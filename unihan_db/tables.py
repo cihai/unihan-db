@@ -56,6 +56,7 @@ class Unhn(Base):
     kDaeJaweon = relationship("kDaeJaweon")
     kFenn = relationship("kFenn")
     kHanyuPinlu = relationship("kHanyuPinlu")
+    kHDZRadBreak = relationship("kHDZRadBreak")
 
 
 class kDefinition(Base):
@@ -283,3 +284,14 @@ class kHanyuPinlu(Base):
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     phonetic = Column(String(10))
     frequency = Column(String(10))
+
+
+class kHDZRadBreak(GenericIndice):
+    __tablename__ = 'kHDZRadBreak'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kHDZRadBreak',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+    radical = Column(String(10))
+    ucn = Column(String(10))
