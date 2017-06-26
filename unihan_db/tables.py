@@ -44,6 +44,8 @@ class Unhn(Base):
     kMandarin = relationship("kMandarin")
     kTotalStrokes = relationship("kTotalStrokes")
     kIRGHanyuDaZidian = relationship("kIRGHanyuDaZidian")
+    kIRGDaeJaweon = relationship("kIRGDaeJaweon")
+    kIRGKangXi = relationship("kIRGKangXi")
     kHanyuPinyin = relationship("kHanyuPinyin")
     kXHC1983 = relationship("kXHC1983")
     kCheungBauer = relationship("kCheungBauer")
@@ -242,6 +244,24 @@ class kDaeJaweon(GenericIndice):
     __tablename__ = 'kDaeJaweon'
     __mapper_args__ = {
         'polymorphic_identity': 'kDaeJaweon',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kIRGKangXi(GenericIndice):
+    __tablename__ = 'kIRGKangXi'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRGKangXi',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kIRGDaeJaweon(GenericIndice):
+    __tablename__ = 'kIRGDaeJaweon'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRGDaeJaweon',
     }
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)

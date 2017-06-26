@@ -5,8 +5,9 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
                               kDefinition, kHanYu, kHanyuPinyin, kIICore,
-                              kIICoreSource, kIRGHanyuDaZidian, kMandarin,
-                              kRSAdobe_Japan1_6, kTotalStrokes, kXHC1983)
+                              kIICoreSource, kIRGDaeJaweon, kIRGHanyuDaZidian,
+                              kIRGKangXi, kMandarin, kRSAdobe_Japan1_6,
+                              kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -127,3 +128,23 @@ def import_char(c, char):
             virtual=d['virtual'],
         ))
         c.kDaeJaweon.append(k)
+
+    if 'kIRGKangXi' in char:
+        k = kIRGKangXi()
+        for d in char['kIRGKangXi']:
+            k.locations.append(UnhnLocation(
+                page=d['page'],
+                character=d['character'],
+                virtual=d['virtual'],
+            ))
+        c.kIRGKangXi.append(k)
+
+    if 'kIRGDaeJaweon' in char:
+        k = kIRGDaeJaweon()
+        for d in char['kIRGDaeJaweon']:
+            k.locations.append(UnhnLocation(
+                page=d['page'],
+                character=d['character'],
+                virtual=d['virtual'],
+            ))
+        c.kIRGDaeJaweon.append(k)
