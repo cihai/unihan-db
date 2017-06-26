@@ -11,108 +11,108 @@ from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
 
 def import_char(c, char):
     if 'kDefinition' in char:
-        for defi in char['kDefinition']:
-            c.kDefinition.append(kDefinition(definition=defi))
+        for d in char['kDefinition']:
+            c.kDefinition.append(kDefinition(definition=d))
     if 'kCantonese' in char:
-        for defi in char['kCantonese']:
-            c.kCantonese.append(kCantonese(definition=defi))
+        for d in char['kCantonese']:
+            c.kCantonese.append(kCantonese(definition=d))
     if 'kMandarin' in char:
-        defi = char['kMandarin']
+        d = char['kMandarin']
         c.kMandarin.append(kMandarin(
-            hans=defi['zh-Hans'],
-            hant=defi['zh-Hant'],
+            hans=d['zh-Hans'],
+            hant=d['zh-Hant'],
         ))
 
     if 'kTotalStrokes' in char:
-        defi = char['kTotalStrokes']
+        d = char['kTotalStrokes']
         c.kTotalStrokes.append(kTotalStrokes(
-            hans=defi['zh-Hans'],
-            hant=defi['zh-Hant'],
+            hans=d['zh-Hans'],
+            hant=d['zh-Hant'],
         ))
 
     if 'kHanyuPinyin' in char:
-        for defi in char['kHanyuPinyin']:
+        for d in char['kHanyuPinyin']:
             k = kHanyuPinyin()
-            for loc in defi['locations']:
+            for loc in d['locations']:
                 k.locations.append(UnhnLocation(
                     volume=loc['volume'],
                     page=loc['page'],
                     character=loc['character'],
                     virtual=loc['virtual'],
                 ))
-            for reading in defi['readings']:
+            for reading in d['readings']:
                 k.readings.append(UnhnReading(reading=reading))
             c.kHanyuPinyin.append(k)
 
     if 'kHanYu' in char:
-        for defi in char['kHanYu']:
+        for d in char['kHanYu']:
             k = kHanYu()
             k.locations.append(UnhnLocation(
-                volume=defi['volume'],
-                page=defi['page'],
-                character=defi['character'],
-                virtual=defi['virtual'],
+                volume=d['volume'],
+                page=d['page'],
+                character=d['character'],
+                virtual=d['virtual'],
             ))
             c.kHanYu.append(k)
 
     if 'kIRGHanyuDaZidian' in char:
-        for defi in char['kIRGHanyuDaZidian']:
+        for d in char['kIRGHanyuDaZidian']:
             k = kIRGHanyuDaZidian()
             k.locations.append(UnhnLocation(
-                volume=defi['volume'],
-                page=defi['page'],
-                character=defi['character'],
-                virtual=defi['virtual'],
+                volume=d['volume'],
+                page=d['page'],
+                character=d['character'],
+                virtual=d['virtual'],
             ))
             c.kIRGHanyuDaZidian.append(k)
 
     if 'kXHC1983' in char:
-        for defi in char['kXHC1983']:
+        for d in char['kXHC1983']:
             k = kXHC1983()
-            for loc in defi['locations']:
+            for loc in d['locations']:
                 k.locations.append(UnhnLocationkXHC1983(
                     page=loc['page'],
                     character=loc['character'],
                     entry=loc['entry'],
                     substituted=loc['substituted'],
                 ))
-            k.readings.append(UnhnReading(reading=defi['reading']))
+            k.readings.append(UnhnReading(reading=d['reading']))
             c.kXHC1983.append(k)
 
     if 'kCheungBauer' in char:
-        for defi in char['kCheungBauer']:
+        for d in char['kCheungBauer']:
             k = kCheungBauer(
-                radical=defi['radical'],
-                strokes=defi['strokes'],
-                cangjie=defi['cangjie'],
+                radical=d['radical'],
+                strokes=d['strokes'],
+                cangjie=d['cangjie'],
             )
 
-            for reading in defi['readings']:
+            for reading in d['readings']:
                 k.readings.append(UnhnReading(reading=reading))
             c.kCheungBauer.append(k)
 
     if 'kRSAdobe_Japan1_6' in char:
-        for defi in char['kRSAdobe_Japan1_6']:
+        for d in char['kRSAdobe_Japan1_6']:
             c.kRSAdobe_Japan1_6.append(kRSAdobe_Japan1_6(
-                type=defi['type'],
-                cid=defi['cid'],
-                radical=defi['radical'],
-                strokes=defi['strokes'],
-                strokes_residue=defi['strokes-residue'],
+                type=d['type'],
+                cid=d['cid'],
+                radical=d['radical'],
+                strokes=d['strokes'],
+                strokes_residue=d['strokes-residue'],
             ))
 
     if 'kCihaiT' in char:
-        for defi in char['kCihaiT']:
+        for d in char['kCihaiT']:
             c.kCihaiT.append(kCihaiT(
-                page=defi['page'],
-                row=defi['row'],
-                character=defi['character'],
+                page=d['page'],
+                row=d['row'],
+                character=d['character'],
             ))
 
     if 'kIICore' in char:
-        for defi in char['kIICore']:
-            k = kIICore(priority=defi['priority'])
-            for s in defi['sources']:
+        for d in char['kIICore']:
+            k = kIICore(priority=d['priority'])
+            for s in d['sources']:
                 k.sources.append(kIICoreSource(
                     source=s
                 ))
