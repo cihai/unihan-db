@@ -56,7 +56,7 @@ UNIHAN_FIELDS = [
     'kRSKorean', 'kRSUnicode', 'kSemanticVariant',
     'kSimplifiedVariant', 'kSpecializedSemanticVariant', 'kTang',
     'kTotalStrokes', 'kTraditionalVariant', 'kVietnamese', 'kXHC1983',
-    'kZVariant'
+    'kZVariant', 'kIICore',
 ]
 
 UNIHAN_ETL_DEFAULT_OPTIONS = {
