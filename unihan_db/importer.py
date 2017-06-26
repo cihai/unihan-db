@@ -8,7 +8,8 @@ from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kHanyuPinyin, kHDZRadBreak, kIICore,
                               kIICoreSource, kIRGDaeJaweon, kIRGHanyuDaZidian,
                               kIRGKangXi, kMandarin, kRSAdobe_Japan1_6,
-                              kTotalStrokes, kXHC1983)
+                              kRSJapanese, kRSKangXi, kRSKanWa, kRSKorean,
+                              kRSUnicode, kSBGY, kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -177,3 +178,30 @@ def import_char(c, char):
             virtual=d['location']['virtual'],
         ))
         c.kHDZRadBreak.append(k)
+
+    if 'kSBGY' in char:
+        for d in char['kSBGY']:
+            k = kSBGY()
+            k.locations.append(UnhnLocation(
+                page=d['page'],
+                character=d['character'],
+            ))
+            c.kSBGY.append(k)
+
+    rs_fields = [  # radical-stroke fields, since they're the same structure
+        ('kRSUnicode', kRSUnicode, c.kRSUnicode,),
+        ('kRSJapanese', kRSJapanese, c.kRSJapanese,),
+        ('kRSKangXi', kRSKangXi, c.kRSKangXi,),
+        ('kRSKanWa', kRSKanWa, c.kRSKanWa,),
+        ('kRSKorean', kRSKorean, c.kRSKorean,),
+    ]
+
+    for f, model, column in rs_fields:
+        if f in char:
+            for d in char[f]:
+                k = model(
+                    radical=d['radical'],
+                    strokes=d['strokes'],
+                    simplified=d['simplified']
+                )
+                column.append(k)

@@ -57,6 +57,12 @@ class Unhn(Base):
     kFenn = relationship("kFenn")
     kHanyuPinlu = relationship("kHanyuPinlu")
     kHDZRadBreak = relationship("kHDZRadBreak")
+    kSBGY = relationship("kSBGY")
+    kRSUnicode = relationship("kRSUnicode")
+    kRSJapanese = relationship("kRSJapanese")
+    kRSKangXi = relationship("kRSKangXi")
+    kRSKanWa = relationship("kRSKanWa")
+    kRSKorean = relationship("kRSKorean")
 
 
 class kDefinition(Base):
@@ -107,14 +113,66 @@ class GenericRadicalStrokes(Base):
     __tablename__ = 'GenericRadicalStrokes'
 
     id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
     radical = Column(Integer)
     strokes = Column(Integer)
+    simplified = Column(Boolean, nullable=True)
     type = Column(String(50))
 
     __mapper_args__ = {
         'polymorphic_identity': 'generic_radical_strokes',
         'polymorphic_on': type
     }
+
+
+class kRSUnicode(GenericRadicalStrokes):
+    __tablename__ = 'kRSUnicode'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kRSUnicode',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
+    )
+
+
+class kRSJapanese(GenericRadicalStrokes):
+    __tablename__ = 'kRSJapanese'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kRSJapanese',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
+    )
+
+
+class kRSKangXi(GenericRadicalStrokes):
+    __tablename__ = 'kRSKangXi'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kRSKangXi',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
+    )
+
+
+class kRSKanWa(GenericRadicalStrokes):
+    __tablename__ = 'kRSKanWa'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kRSKanWa',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
+    )
+
+
+class kRSKorean(GenericRadicalStrokes):
+    __tablename__ = 'kRSKorean'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kRSKorean',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
+    )
 
 
 class kRSAdobe_Japan1_6(Base):
@@ -198,7 +256,7 @@ class UnhnLocation(Base):
     volume = Column(Integer, nullable=True)
     page = Column(Integer)
     character = Column(Integer)
-    virtual = Column(Integer)
+    virtual = Column(Integer, nullable=True)
 
 
 class kCihaiT(Base):
@@ -295,3 +353,12 @@ class kHDZRadBreak(GenericIndice):
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
     radical = Column(String(10))
     ucn = Column(String(10))
+
+
+class kSBGY(GenericIndice):
+    __tablename__ = 'kSBGY'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kSBGY',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
