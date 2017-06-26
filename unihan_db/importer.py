@@ -3,9 +3,10 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
-                              kCantonese, kCheungBauer, kDefinition, kHanYu,
-                              kHanyuPinyin, kIRGHanyuDaZidian, kMandarin,
-                              kTotalStrokes, kXHC1983, kRSAdobe_Japan1_6)
+                              kCantonese, kCheungBauer, kCihaiT, kDefinition,
+                              kHanYu, kHanyuPinyin, kIRGHanyuDaZidian,
+                              kMandarin, kRSAdobe_Japan1_6, kTotalStrokes,
+                              kXHC1983)
 
 
 def import_char(c, char):
@@ -98,4 +99,12 @@ def import_char(c, char):
                 radical=defi['radical'],
                 strokes=defi['strokes'],
                 strokes_residue=defi['strokes-residue'],
+            ))
+
+    if 'kCihaiT' in char:
+        for defi in char['kCihaiT']:
+            c.kCihaiT.append(kCihaiT(
+                page=defi['page'],
+                row=defi['row'],
+                character=defi['character'],
             ))

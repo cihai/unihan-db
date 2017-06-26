@@ -48,6 +48,7 @@ class Unhn(Base):
     kXHC1983 = relationship("kXHC1983")
     kCheungBauer = relationship("kCheungBauer")
     kRSAdobe_Japan1_6 = relationship("kRSAdobe_Japan1_6")
+    kCihaiT = relationship("kCihaiT")
     kHanYu = relationship("kHanYu")
 
 
@@ -191,6 +192,15 @@ class UnhnLocation(Base):
     page = Column(Integer)
     character = Column(Integer)
     virtual = Column(Integer)
+
+
+class kCihaiT(Base):
+    __tablename__ = 'UnhnLocationkCihaiT'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    page = Column(Integer)
+    row = Column(Integer)
+    character = Column(Integer)
 
 
 class UnhnLocationkXHC1983(Base):
