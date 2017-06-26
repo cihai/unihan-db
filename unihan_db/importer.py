@@ -3,10 +3,10 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
-                              kCantonese, kCheungBauer, kCihaiT, kDefinition,
-                              kHanYu, kHanyuPinyin, kIICore, kIICoreSource,
-                              kIRGHanyuDaZidian, kMandarin, kRSAdobe_Japan1_6,
-                              kTotalStrokes, kXHC1983)
+                              kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
+                              kDefinition, kHanYu, kHanyuPinyin, kIICore,
+                              kIICoreSource, kIRGHanyuDaZidian, kMandarin,
+                              kRSAdobe_Japan1_6, kTotalStrokes, kXHC1983)
 
 
 def import_char(c, char):
@@ -45,15 +45,15 @@ def import_char(c, char):
             c.kHanyuPinyin.append(k)
 
     if 'kHanYu' in char:
+        k = kHanYu()
         for d in char['kHanYu']:
-            k = kHanYu()
             k.locations.append(UnhnLocation(
                 volume=d['volume'],
                 page=d['page'],
                 character=d['character'],
                 virtual=d['virtual'],
             ))
-            c.kHanYu.append(k)
+        c.kHanYu.append(k)
 
     if 'kIRGHanyuDaZidian' in char:
         for d in char['kIRGHanyuDaZidian']:
@@ -117,3 +117,13 @@ def import_char(c, char):
                     source=s
                 ))
             c.kIICore.append(k)
+
+    if 'kDaeJaweon' in char:
+        k = kDaeJaweon()
+        d = char['kDaeJaweon']
+        k.locations.append(UnhnLocation(
+            page=d['page'],
+            character=d['character'],
+            virtual=d['virtual'],
+        ))
+        c.kDaeJaweon.append(k)

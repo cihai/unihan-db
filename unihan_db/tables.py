@@ -51,6 +51,7 @@ class Unhn(Base):
     kCihaiT = relationship("kCihaiT")
     kIICore = relationship("kIICore")
     kHanYu = relationship("kHanYu")
+    kDaeJaweon = relationship("kDaeJaweon")
 
 
 class kDefinition(Base):
@@ -235,3 +236,12 @@ class UnhnReading(Base):
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
     reading = Column(String(24))
+
+
+class kDaeJaweon(GenericIndice):
+    __tablename__ = 'kDaeJaweon'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kDaeJaweon',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
