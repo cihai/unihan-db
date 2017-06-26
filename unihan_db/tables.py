@@ -54,6 +54,7 @@ class Unhn(Base):
     kIICore = relationship("kIICore")
     kHanYu = relationship("kHanYu")
     kDaeJaweon = relationship("kDaeJaweon")
+    kFenn = relationship("kFenn")
 
 
 class kDefinition(Base):
@@ -265,3 +266,11 @@ class kIRGDaeJaweon(GenericIndice):
     }
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kFenn(Base):
+    __tablename__ = 'kFenn'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    phonetic = Column(String(10))
+    frequency = Column(String(10))
