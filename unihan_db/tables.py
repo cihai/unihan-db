@@ -189,7 +189,7 @@ class UnhnLocation(Base):
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey('GenericReading.id'))
     generic_indice_id = Column(Integer, ForeignKey('GenericIndice.id'))
-    volume = Column(Integer)
+    volume = Column(Integer, nullable=True)
     page = Column(Integer)
     character = Column(Integer)
     virtual = Column(Integer)
