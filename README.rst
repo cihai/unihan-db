@@ -11,7 +11,9 @@ into `get_session`_.
 .. _get_session: http://unihan-db.git-pull.com/en/latest/api.html#unihan_db.bootstrap.get_session
 .. _XDG data directory: https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
 
-Example usage::
+Example usage:
+
+.. code-block:: python
 
    #!/usr/bin/env python
    # -*- coding: utf8 - *-
@@ -40,7 +42,9 @@ Run::
 
    $ ./examples/01_bootstrap.py
 
-Output::
+Output:
+
+.. code-block:: python
 
    {'char': '鎷',
    'kCantonese': [{'char_id': '鎷', 'definition': 'maa5', 'id': 24035}],
