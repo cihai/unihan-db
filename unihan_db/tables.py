@@ -63,6 +63,120 @@ class Unhn(Base):
     kRSKangXi = relationship("kRSKangXi")
     kRSKanWa = relationship("kRSKanWa")
     kRSKorean = relationship("kRSKorean")
+    kIRG_GSource = relationship("kIRG_GSource")
+    kIRG_HSource = relationship("kIRG_HSource")
+    kIRG_JSource = relationship("kIRG_JSource")
+    kIRG_KPSource = relationship("kIRG_KPSource")
+    kIRG_KSource = relationship("kIRG_KSource")
+    kIRG_MSource = relationship("kIRG_MSource")
+    kIRG_TSource = relationship("kIRG_TSource")
+    kIRG_USource = relationship("kIRG_USource")
+    kIRG_VSource = relationship("kIRG_VSource")
+
+
+class GenericIRG(Base):
+    __tablename__ = 'GenericIRG'
+
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    source = Column(Integer)
+    location = Column(String(10), nullable=True)
+    type = Column(String(50))
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'generic_irg',
+        'polymorphic_on': type
+    }
+
+
+class kIRG_GSource(GenericIRG):
+    __tablename__ = 'kIRG_GSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_GSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_HSource(GenericIRG):
+    __tablename__ = 'kIRG_HSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_HSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_JSource(GenericIRG):
+    __tablename__ = 'kIRG_JSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_JSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_KPSource(GenericIRG):
+    __tablename__ = 'kIRG_KPSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_KPSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_KSource(GenericIRG):
+    __tablename__ = 'kIRG_KSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_KSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_MSource(GenericIRG):
+    __tablename__ = 'kIRG_MSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_MSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_TSource(GenericIRG):
+    __tablename__ = 'kIRG_TSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_TSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_USource(GenericIRG):
+    __tablename__ = 'kIRG_USource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_USource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
+
+
+class kIRG_VSource(GenericIRG):
+    __tablename__ = 'kIRG_VSource'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kIRG_VSource',
+    }
+    id = Column(
+        Integer, ForeignKey('GenericIRG.id'), primary_key=True
+    )
 
 
 class kDefinition(Base):

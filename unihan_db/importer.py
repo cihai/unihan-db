@@ -6,7 +6,10 @@ from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
                               kDefinition, kFenn, kHanYu, kHanyuPinlu,
                               kHanyuPinyin, kHDZRadBreak, kIICore,
-                              kIICoreSource, kIRGDaeJaweon, kIRGHanyuDaZidian,
+                              kIICoreSource, kIRG_GSource, kIRG_HSource,
+                              kIRG_JSource, kIRG_KPSource, kIRG_KSource,
+                              kIRG_MSource, kIRG_TSource, kIRG_USource,
+                              kIRG_VSource, kIRGDaeJaweon, kIRGHanyuDaZidian,
                               kIRGKangXi, kMandarin, kRSAdobe_Japan1_6,
                               kRSJapanese, kRSKangXi, kRSKanWa, kRSKorean,
                               kRSUnicode, kSBGY, kTotalStrokes, kXHC1983)
@@ -205,3 +208,24 @@ def import_char(c, char):
                     simplified=d['simplified']
                 )
                 column.append(k)
+
+    irg_fields = [  # IRG, since they're the same structure
+        ('kIRG_GSource', kIRG_GSource, c.kIRG_GSource,),
+        ('kIRG_HSource', kIRG_HSource, c.kIRG_HSource,),
+        ('kIRG_JSource', kIRG_JSource, c.kIRG_JSource,),
+        ('kIRG_KPSource', kIRG_KPSource, c.kIRG_KPSource,),
+        ('kIRG_KSource', kIRG_KSource, c.kIRG_KSource,),
+        ('kIRG_MSource', kIRG_MSource, c.kIRG_MSource,),
+        ('kIRG_TSource', kIRG_TSource, c.kIRG_TSource,),
+        ('kIRG_USource', kIRG_USource, c.kIRG_USource,),
+        ('kIRG_VSource', kIRG_VSource, c.kIRG_VSource,),
+    ]
+
+    for f, model, column in irg_fields:
+        if f in char:
+            d = char[f]
+            k = model(
+                source=d['source'],
+                location=d['location'],
+            )
+            column.append(k)

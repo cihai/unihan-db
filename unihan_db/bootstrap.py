@@ -57,6 +57,9 @@ UNIHAN_FIELDS = [
     'kSimplifiedVariant', 'kSpecializedSemanticVariant', 'kTang',
     'kTotalStrokes', 'kTraditionalVariant', 'kVietnamese', 'kXHC1983',
     'kZVariant', 'kIICore', 'kDaeJaweon', 'kIRGDaeJaweon', 'kIRGKangXi',
+    'kIRG_GSource', 'kIRG_HSource', 'kIRG_JSource', 'kIRG_KPSource',
+    'kIRG_KSource', 'kIRG_MSource', 'kIRG_TSource','kIRG_USource',
+    'kIRG_VSource',
 ]
 
 UNIHAN_ETL_DEFAULT_OPTIONS = {
