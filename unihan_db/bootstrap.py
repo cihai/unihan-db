@@ -3,6 +3,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 import logging
+import sys
 from datetime import datetime
 
 from sqlalchemy import create_engine, event
@@ -12,7 +13,6 @@ from unihan_etl import process as unihan
 from . import dirs, importer
 from .tables import Base, Unhn
 from .util import merge_dict
-
 
 log = logging.getLogger(__name__)
 
@@ -105,16 +105,25 @@ def bootstrap_unihan(session, options={}):
         log.info('bootstrap Unhn table')
         log.info('bootstrap Unhn table finished')
         count = 0
+        total_count = len(data)
         items = []
+
         for char in data:
             c = Unhn(char=char['char'], ucn=char['ucn'])
             importer.import_char(c, char)
             items.append(c)
 
-            count += 1
-            log.debug("imported %s: complete %s" % (char['char'], count))
+            if log.isEnabledFor(logging.INFO):
+                count += 1
+                sys.stdout.write("\rProcessing %s (%d of %d)" % (
+                    char['char'], count, total_count
+                ))
+                sys.stdout.flush()
+
+        log.info('Adding rows to database, this could take a minute.')
         session.add_all(items)
         session.commit()
+        log.info('Done adding rows.')
 
 
 def to_dict(obj, found=None):
