@@ -72,6 +72,7 @@ class Unhn(Base):
     kIRG_TSource = relationship("kIRG_TSource")
     kIRG_USource = relationship("kIRG_USource")
     kIRG_VSource = relationship("kIRG_VSource")
+    kGSR = relationship("kGSR")
 
 
 class GenericIRG(Base):
@@ -456,6 +457,15 @@ class kHanyuPinlu(Base):
     char_id = Column(String(1), ForeignKey('Unhn.char'))
     phonetic = Column(String(10))
     frequency = Column(String(10))
+
+
+class kGSR(Base):
+    __tablename__ = 'kGSR'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    set = Column(Integer)
+    letter = Column(String(1))
+    apostrophe = Column(Boolean)
 
 
 class kHDZRadBreak(GenericIndice):

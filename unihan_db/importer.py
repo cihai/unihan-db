@@ -4,7 +4,7 @@ from __future__ import (absolute_import, print_function, unicode_literals,
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
                               kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
-                              kDefinition, kFenn, kHanYu, kHanyuPinlu,
+                              kDefinition, kFenn, kGSR, kHanYu, kHanyuPinlu,
                               kHanyuPinyin, kHDZRadBreak, kIICore,
                               kIICoreSource, kIRG_GSource, kIRG_HSource,
                               kIRG_JSource, kIRG_KPSource, kIRG_KSource,
@@ -229,3 +229,12 @@ def import_char(c, char):
                 location=d['location'],
             )
             column.append(k)
+
+    if 'kGSR' in char:
+        for d in char['kGSR']:
+            k = kGSR(
+                set=d['set'],
+                letter=d['letter'],
+                apostrophe=d['apostrophe']
+            )
+            c.kGSR.append(k)
