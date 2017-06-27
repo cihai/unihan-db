@@ -122,6 +122,8 @@ def bootstrap_unihan(session, options={}):
 
         log.info('Adding rows to database, this could take a minute.')
         session.add_all(items)
+        # This takes a bit of time and doesn't provide progress, but it's by
+        # far the fastest way to insert as of SQLAlchemy 1.11.
         session.commit()
         log.info('Done adding rows.')
 
