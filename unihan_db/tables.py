@@ -73,6 +73,8 @@ class Unhn(Base):
     kIRG_USource = relationship("kIRG_USource")
     kIRG_VSource = relationship("kIRG_VSource")
     kGSR = relationship("kGSR")
+    kFennIndex = relationship("kFennIndex")
+    kCheungBauerIndex = relationship("kCheungBauerIndex")
 
 
 class GenericIRG(Base):
@@ -483,6 +485,24 @@ class kSBGY(GenericIndice):
     __tablename__ = 'kSBGY'
     __mapper_args__ = {
         'polymorphic_identity': 'kSBGY',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kCheungBauerIndex(GenericIndice):
+    __tablename__ = 'kCheungBauerIndex'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kCheungBauerIndex',
+    }
+
+    id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
+
+
+class kFennIndex(GenericIndice):
+    __tablename__ = 'kFennIndex'
+    __mapper_args__ = {
+        'polymorphic_identity': 'kFennIndex',
     }
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)

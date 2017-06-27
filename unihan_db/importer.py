@@ -3,8 +3,9 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
-                              kCantonese, kCheungBauer, kCihaiT, kDaeJaweon,
-                              kDefinition, kFenn, kGSR, kHanYu, kHanyuPinlu,
+                              kCantonese, kCheungBauer, kCheungBauerIndex,
+                              kCihaiT, kDaeJaweon, kDefinition, kFenn,
+                              kFennIndex, kGSR, kHanYu, kHanyuPinlu,
                               kHanyuPinyin, kHDZRadBreak, kIICore,
                               kIICoreSource, kIRG_GSource, kIRG_HSource,
                               kIRG_JSource, kIRG_KPSource, kIRG_KSource,
@@ -238,3 +239,21 @@ def import_char(c, char):
                 apostrophe=d['apostrophe']
             )
             c.kGSR.append(k)
+
+    if 'kCheungBauerIndex' in char:
+        d = char['kCheungBauerIndex']
+        k = kCheungBauerIndex()
+        k.locations.append(UnhnLocation(
+            page=d['location']['page'],
+            character=d['location']['character'],
+        ))
+        c.kCheungBauerIndex.append(k)
+
+    if 'kFennIndex' in char:
+        d = char['kFennIndex']
+        k = kFennIndex()
+        k.locations.append(UnhnLocation(
+            page=d['location']['page'],
+            character=d['location']['character'],
+        ))
+        c.kFennIndex.append(k)
