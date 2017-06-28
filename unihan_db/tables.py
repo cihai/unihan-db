@@ -75,6 +75,14 @@ class Unhn(Base):
     kGSR = relationship("kGSR")
     kFennIndex = relationship("kFennIndex")
     kCheungBauerIndex = relationship("kCheungBauerIndex")
+    kCCCII = relationship("kCCCII")
+
+
+class kCCCII(Base):
+    __tablename__ = 'kCCCII'
+    id = Column(Integer, primary_key=True)
+    char_id = Column(String(1), ForeignKey('Unhn.char'))
+    hex = Column(String(6))
 
 
 class GenericIRG(Base):

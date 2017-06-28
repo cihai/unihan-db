@@ -3,10 +3,10 @@ from __future__ import (absolute_import, print_function, unicode_literals,
                         with_statement)
 
 from unihan_db.tables import (UnhnLocation, UnhnLocationkXHC1983, UnhnReading,
-                              kCantonese, kCheungBauer, kCheungBauerIndex,
-                              kCihaiT, kDaeJaweon, kDefinition, kFenn,
-                              kFennIndex, kGSR, kHanYu, kHanyuPinlu,
-                              kHanyuPinyin, kHDZRadBreak, kIICore,
+                              kCantonese, kCCCII, kCheungBauer,
+                              kCheungBauerIndex, kCihaiT, kDaeJaweon,
+                              kDefinition, kFenn, kFennIndex, kGSR, kHanYu,
+                              kHanyuPinlu, kHanyuPinyin, kHDZRadBreak, kIICore,
                               kIICoreSource, kIRG_GSource, kIRG_HSource,
                               kIRG_JSource, kIRG_KPSource, kIRG_KSource,
                               kIRG_MSource, kIRG_TSource, kIRG_USource,
@@ -23,6 +23,9 @@ def import_char(c, char):
     if 'kCantonese' in char:
         for d in char['kCantonese']:
             c.kCantonese.append(kCantonese(definition=d))
+    if 'kCCCII' in char:
+        for d in char['kCCCII']:
+            c.kCCCII.append(kCCCII(hex=d))
     if 'kMandarin' in char:
         d = char['kMandarin']
         c.kMandarin.append(kMandarin(
