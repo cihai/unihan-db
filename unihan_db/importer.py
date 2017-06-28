@@ -30,14 +30,14 @@ def import_char(c, char):
         d = char['kMandarin']
         c.kMandarin.append(kMandarin(
             hans=d['zh-Hans'],
-            hant=d['zh-Hant'],
+            hant=d['zh-Hant']
         ))
 
     if 'kTotalStrokes' in char:
         d = char['kTotalStrokes']
         c.kTotalStrokes.append(kTotalStrokes(
             hans=d['zh-Hans'],
-            hant=d['zh-Hant'],
+            hant=d['zh-Hant']
         ))
 
     if 'kHanyuPinyin' in char:
@@ -48,7 +48,7 @@ def import_char(c, char):
                     volume=loc['volume'],
                     page=loc['page'],
                     character=loc['character'],
-                    virtual=loc['virtual'],
+                    virtual=loc['virtual']
                 ))
             for reading in d['readings']:
                 k.readings.append(UnhnReading(reading=reading))
@@ -61,7 +61,7 @@ def import_char(c, char):
                 volume=d['volume'],
                 page=d['page'],
                 character=d['character'],
-                virtual=d['virtual'],
+                virtual=d['virtual']
             ))
         c.kHanYu.append(k)
 
@@ -72,7 +72,7 @@ def import_char(c, char):
                 volume=d['volume'],
                 page=d['page'],
                 character=d['character'],
-                virtual=d['virtual'],
+                virtual=d['virtual']
             ))
             c.kIRGHanyuDaZidian.append(k)
 
@@ -84,7 +84,7 @@ def import_char(c, char):
                     page=loc['page'],
                     character=loc['character'],
                     entry=loc['entry'],
-                    substituted=loc['substituted'],
+                    substituted=loc['substituted']
                 ))
             k.readings.append(UnhnReading(reading=d['reading']))
             c.kXHC1983.append(k)
@@ -94,7 +94,7 @@ def import_char(c, char):
             k = kCheungBauer(
                 radical=d['radical'],
                 strokes=d['strokes'],
-                cangjie=d['cangjie'],
+                cangjie=d['cangjie']
             )
 
             for reading in d['readings']:
@@ -108,7 +108,7 @@ def import_char(c, char):
                 cid=d['cid'],
                 radical=d['radical'],
                 strokes=d['strokes'],
-                strokes_residue=d['strokes-residue'],
+                strokes_residue=d['strokes-residue']
             ))
 
     if 'kCihaiT' in char:
@@ -116,7 +116,7 @@ def import_char(c, char):
             c.kCihaiT.append(kCihaiT(
                 page=d['page'],
                 row=d['row'],
-                character=d['character'],
+                character=d['character']
             ))
 
     if 'kIICore' in char:
@@ -134,7 +134,7 @@ def import_char(c, char):
         k.locations.append(UnhnLocation(
             page=d['page'],
             character=d['character'],
-            virtual=d['virtual'],
+            virtual=d['virtual']
         ))
         c.kDaeJaweon.append(k)
 
@@ -144,7 +144,7 @@ def import_char(c, char):
             k.locations.append(UnhnLocation(
                 page=d['page'],
                 character=d['character'],
-                virtual=d['virtual'],
+                virtual=d['virtual']
             ))
         c.kIRGKangXi.append(k)
 
@@ -154,7 +154,7 @@ def import_char(c, char):
             k.locations.append(UnhnLocation(
                 page=d['page'],
                 character=d['character'],
-                virtual=d['virtual'],
+                virtual=d['virtual']
             ))
         c.kIRGDaeJaweon.append(k)
 
@@ -182,7 +182,7 @@ def import_char(c, char):
             volume=d['location']['volume'],
             page=d['location']['page'],
             character=d['location']['character'],
-            virtual=d['location']['virtual'],
+            virtual=d['location']['virtual']
         ))
         c.kHDZRadBreak.append(k)
 
@@ -191,17 +191,17 @@ def import_char(c, char):
             k = kSBGY()
             k.locations.append(UnhnLocation(
                 page=d['page'],
-                character=d['character'],
+                character=d['character']
             ))
             c.kSBGY.append(k)
 
-    rs_fields = [  # radical-stroke fields, since they're the same structure
+    rs_fields = (  # radical-stroke fields, since they're the same structure
         ('kRSUnicode', kRSUnicode, c.kRSUnicode,),
         ('kRSJapanese', kRSJapanese, c.kRSJapanese,),
         ('kRSKangXi', kRSKangXi, c.kRSKangXi,),
         ('kRSKanWa', kRSKanWa, c.kRSKanWa,),
         ('kRSKorean', kRSKorean, c.kRSKorean,),
-    ]
+    )
 
     for f, model, column in rs_fields:
         if f in char:
@@ -213,7 +213,7 @@ def import_char(c, char):
                 )
                 column.append(k)
 
-    irg_fields = [  # IRG, since they're the same structure
+    irg_fields = (  # IRG, since they're the same structure
         ('kIRG_GSource', kIRG_GSource, c.kIRG_GSource,),
         ('kIRG_HSource', kIRG_HSource, c.kIRG_HSource,),
         ('kIRG_JSource', kIRG_JSource, c.kIRG_JSource,),
@@ -223,14 +223,14 @@ def import_char(c, char):
         ('kIRG_TSource', kIRG_TSource, c.kIRG_TSource,),
         ('kIRG_USource', kIRG_USource, c.kIRG_USource,),
         ('kIRG_VSource', kIRG_VSource, c.kIRG_VSource,),
-    ]
+    )
 
     for f, model, column in irg_fields:
         if f in char:
             d = char[f]
             k = model(
                 source=d['source'],
-                location=d['location'],
+                location=d['location']
             )
             column.append(k)
 
@@ -248,7 +248,7 @@ def import_char(c, char):
         k = kCheungBauerIndex()
         k.locations.append(UnhnLocation(
             page=d['location']['page'],
-            character=d['location']['character'],
+            character=d['location']['character']
         ))
         c.kCheungBauerIndex.append(k)
 
@@ -257,6 +257,6 @@ def import_char(c, char):
         k = kFennIndex()
         k.locations.append(UnhnLocation(
             page=d['location']['page'],
-            character=d['location']['character'],
+            character=d['location']['character']
         ))
         c.kFennIndex.append(k)
