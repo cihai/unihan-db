@@ -42,7 +42,8 @@ UNIHAN_FILES = [
     'Unihan_IRGSources.txt',
     'Unihan_NumericValues.txt',
     'Unihan_RadicalStrokeCounts.txt',
-    'Unihan_Readings.txt', 'Unihan_Variants.txt'
+    'Unihan_Readings.txt', 'Unihan_Variants.txt',
+    'Unihan_OtherMappings.txt',
 ]
 
 UNIHAN_FIELDS = [
@@ -59,7 +60,7 @@ UNIHAN_FIELDS = [
     'kZVariant', 'kIICore', 'kDaeJaweon', 'kIRGDaeJaweon', 'kIRGKangXi',
     'kIRG_GSource', 'kIRG_HSource', 'kIRG_JSource', 'kIRG_KPSource',
     'kIRG_KSource', 'kIRG_MSource', 'kIRG_TSource', 'kIRG_USource',
-    'kIRG_VSource', 'kGSR',
+    'kIRG_VSource', 'kGSR', 'kCCCII',
 ]
 
 UNIHAN_ETL_DEFAULT_OPTIONS = {
