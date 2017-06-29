@@ -36,7 +36,7 @@ def setup_logger(logger=None, level='INFO'):
 setup_logger()
 
 
-UNIHAN_FILES = [
+UNIHAN_FILES = (
     'Unihan_DictionaryIndices.txt',
     'Unihan_DictionaryLikeData.txt',
     'Unihan_IRGSources.txt',
@@ -44,7 +44,7 @@ UNIHAN_FILES = [
     'Unihan_RadicalStrokeCounts.txt',
     'Unihan_Readings.txt', 'Unihan_Variants.txt',
     'Unihan_OtherMappings.txt',
-]
+)
 
 UNIHAN_FIELDS = [
     'kAccountingNumeric', 'kCangjie', 'kCantonese', 'kCheungBauer',
