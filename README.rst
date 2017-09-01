@@ -3,7 +3,7 @@ project. Powered by `unihan-etl`_. See also: `libUnihan`_.
 
 |pypi| |docs| |build-status| |coverage| |license|
 
-By default, unihan-db creates an SQLite database in an `XDG data directory`_.
+By default, unihan-db creates a SQLite database in an `XDG data directory`_.
 You can specify a custom database destination by passing a database url
 into `get_session`_.
 
