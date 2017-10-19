@@ -45,3 +45,7 @@ doc/_build
 
 # visual studio code
 .vscode/
+
+# cache files (python)
+.eggs/
+.cache/
