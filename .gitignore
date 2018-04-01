@@ -49,3 +49,4 @@ doc/_build
 # cache files (python)
 .eggs/
 .cache/
+.pytest_cache/
