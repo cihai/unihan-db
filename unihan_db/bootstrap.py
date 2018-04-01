@@ -18,11 +18,15 @@ log = logging.getLogger(__name__)
 
 
 def setup_logger(logger=None, level='INFO'):
-    """Setup logging for CLI use.
+    """
+    Setup logging for CLI use.
 
-    :param logger: instance of logger
-    :type logger: :py:class:`Logger`
-
+    Parameters
+    ----------
+    logger : :py:class:`logging.Logger`
+        instance of logger
+    level : str
+        logging level, e.g. 'INFO'
     """
     if not logger:
         logger = logging.getLogger()
@@ -130,16 +134,22 @@ def bootstrap_unihan(session, options={}):
 
 
 def to_dict(obj, found=None):
-    """Return dictionary of an SQLAlchemy Query result.
+    """
+    Return dictionary of an SQLAlchemy Query result.
 
     Supports recursive relationships.
 
-    :param obj: SQLAlchemy Query result
-    :type obj: :class:`sqlalchemy.orm.query.Query` result object
-    :param found: recursive parameter
-    :type found: :class:`python:set`
-    :returns: dictionary of results
-    :rtype: :class:`python:dict`
+    Parameters
+    ----------
+    obj : :class:`sqlalchemy.orm.query.Query` result object
+        SQLAlchemy Query result
+    found : :class:`python:set`
+        recursive parameters
+
+    Returns
+    -------
+    dict :
+        dictionary representation of a SQLAlchemy query
     """
 
     def _get_key_value(c):
@@ -169,25 +179,31 @@ def to_dict(obj, found=None):
 
 
 def add_to_dict(b):
-    """Add :func:`.to_dict` method to SQLAlchemy Base object.
+    """
+    Add :func:`.to_dict` method to SQLAlchemy Base object.
 
-    :param b: SQLAlchemy Base class
-    :type b: :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
+    Parameters
+    ----------
+    b : :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
+        SQLAlchemy Base class
     """
     b.to_dict = to_dict
     return b
 
 
 def get_session(engine_url='sqlite:///{user_data_dir}/unihan_db.db'):
-    """Return new SQLAlchemy session object from engine string.
+    """
+    Return new SQLAlchemy session object from engine string.
 
     *engine_url* accepts a string template variable for ``{user_data_dir}``,
     which is replaced to the XDG data directory for the user running the script
     process. This variable is only useful for SQLite, where file paths are
     used for the engine_url.
 
-    :param engine_url: SQLAlchemy engine string
-    :type engine_url: string
+    Parameters
+    ----------
+    engine_url : str
+        SQLAlchemy engine string
     """
 
     engine_url = engine_url.format(**{
