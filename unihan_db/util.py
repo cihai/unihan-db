@@ -1,6 +1,5 @@
 # -*- coding: utf8 - *-
-from __future__ import (absolute_import, print_function, unicode_literals,
-                        with_statement)
+from __future__ import absolute_import, unicode_literals
 
 import collections
 

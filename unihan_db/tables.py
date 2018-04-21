@@ -23,13 +23,11 @@ joins`_.
 .. _polymorphic joins: https://en.wikipedia.org/wiki/Polymorphic_association
 
 """
-from __future__ import (absolute_import, print_function, unicode_literals,
-                        with_statement)
+from __future__ import absolute_import, unicode_literals
 
-from sqlalchemy import Column, ForeignKey, Integer, String, Boolean
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-
 
 Base = declarative_base()
 

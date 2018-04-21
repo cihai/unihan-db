@@ -3,6 +3,7 @@ import os
 import zipfile
 
 import pytest
+
 from sqlalchemy import MetaData, create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 

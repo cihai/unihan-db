@@ -1,6 +1,5 @@
 # -*- coding: utf8 - *-
-from __future__ import (absolute_import, print_function, unicode_literals,
-                        with_statement)
+from __future__ import absolute_import, unicode_literals
 
 import logging
 import sys
@@ -8,6 +7,7 @@ from datetime import datetime
 
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
+
 from unihan_etl import process as unihan
 
 from . import dirs, importer
