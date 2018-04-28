@@ -1,22 +1,20 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
-pytest = "==3.5.0"
+pytest = "==3.5.1"
 isort = "==4.3.4"
 "flake8" = "==3.5.0"
 vulture = "==0.26"
-alagitpull = "==0.0.19"
-releases = "==1.4.1"
-Sphinx = "==1.7.2"
+alagitpull = "==0.0.20"
+releases = "==1.4.2"
+Sphinx = "==1.7.4"
 sphinxcontrib-napoleon = "==0.6.1"
-
+appdirs = "==1.4.3"
+unihan-etl = "==0.9.5"
+SQLAlchemy = "==1.2.7"
 
 [packages]
-
 "e1839a8" = {path = ".", editable = true}
