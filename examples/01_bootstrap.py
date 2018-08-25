@@ -13,9 +13,7 @@ session = bootstrap.get_session()
 
 bootstrap.bootstrap_unihan(session)
 
-random_row = session.query(Unhn).order_by(
-    func.random()
-).limit(1).first()
+random_row = session.query(Unhn).order_by(func.random()).limit(1).first()
 
 pp = pprint.PrettyPrinter(indent=0)
 
