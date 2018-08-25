@@ -92,100 +92,61 @@ class GenericIRG(Base):
     location = Column(String(10), nullable=True)
     type = Column(String(50))
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'generic_irg',
-        'polymorphic_on': type
-    }
+    __mapper_args__ = {'polymorphic_identity': 'generic_irg', 'polymorphic_on': type}
 
 
 class kIRG_GSource(GenericIRG):
     __tablename__ = 'kIRG_GSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_GSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_GSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_HSource(GenericIRG):
     __tablename__ = 'kIRG_HSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_HSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_HSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_JSource(GenericIRG):
     __tablename__ = 'kIRG_JSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_JSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_JSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_KPSource(GenericIRG):
     __tablename__ = 'kIRG_KPSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_KPSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_KPSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_KSource(GenericIRG):
     __tablename__ = 'kIRG_KSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_KSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_KSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_MSource(GenericIRG):
     __tablename__ = 'kIRG_MSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_MSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_MSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_TSource(GenericIRG):
     __tablename__ = 'kIRG_TSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_TSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_TSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_USource(GenericIRG):
     __tablename__ = 'kIRG_USource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_USource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_USource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kIRG_VSource(GenericIRG):
     __tablename__ = 'kIRG_VSource'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRG_VSource',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericIRG.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kIRG_VSource'}
+    id = Column(Integer, ForeignKey('GenericIRG.id'), primary_key=True)
 
 
 class kDefinition(Base):
@@ -228,7 +189,7 @@ class GenericReading(Base):
 
     __mapper_args__ = {
         'polymorphic_identity': 'generic_reading',
-        'polymorphic_on': type
+        'polymorphic_on': type,
     }
 
 
@@ -244,58 +205,38 @@ class GenericRadicalStrokes(Base):
 
     __mapper_args__ = {
         'polymorphic_identity': 'generic_radical_strokes',
-        'polymorphic_on': type
+        'polymorphic_on': type,
     }
 
 
 class kRSUnicode(GenericRadicalStrokes):
     __tablename__ = 'kRSUnicode'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kRSUnicode',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kRSUnicode'}
+    id = Column(Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True)
 
 
 class kRSJapanese(GenericRadicalStrokes):
     __tablename__ = 'kRSJapanese'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kRSJapanese',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kRSJapanese'}
+    id = Column(Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True)
 
 
 class kRSKangXi(GenericRadicalStrokes):
     __tablename__ = 'kRSKangXi'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kRSKangXi',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kRSKangXi'}
+    id = Column(Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True)
 
 
 class kRSKanWa(GenericRadicalStrokes):
     __tablename__ = 'kRSKanWa'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kRSKanWa',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kRSKanWa'}
+    id = Column(Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True)
 
 
 class kRSKorean(GenericRadicalStrokes):
     __tablename__ = 'kRSKorean'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kRSKorean',
-    }
-    id = Column(
-        Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True
-    )
+    __mapper_args__ = {'polymorphic_identity': 'kRSKorean'}
+    id = Column(Integer, ForeignKey('GenericRadicalStrokes.id'), primary_key=True)
 
 
 class kRSAdobe_Japan1_6(Base):
@@ -311,18 +252,14 @@ class kRSAdobe_Japan1_6(Base):
 
 class kHanyuPinyin(GenericReading):
     __tablename__ = 'kHanyuPinyin'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kHanyuPinyin',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kHanyuPinyin'}
 
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
 
 
 class kXHC1983(GenericReading):
     __tablename__ = 'kXHC1983'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kXHC1983',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kXHC1983'}
 
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
     locations = relationship("UnhnLocationkXHC1983")
@@ -330,9 +267,7 @@ class kXHC1983(GenericReading):
 
 class kCheungBauer(GenericReading):
     __tablename__ = 'kCheungBauer'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kCheungBauer',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kCheungBauer'}
 
     id = Column(Integer, ForeignKey('GenericReading.id'), primary_key=True)
     radical = Column(Integer)
@@ -347,26 +282,19 @@ class GenericIndice(Base):
     type = Column(String(50))
     locations = relationship("UnhnLocation")
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'generic_indice',
-        'polymorphic_on': type
-    }
+    __mapper_args__ = {'polymorphic_identity': 'generic_indice', 'polymorphic_on': type}
 
 
 class kHanYu(GenericIndice):
     __tablename__ = 'kHanYu'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kHanYu',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kHanYu'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
 
 class kIRGHanyuDaZidian(GenericIndice):
     __tablename__ = 'kIRGHanyuDaZidian'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRGHanyuDaZidian',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kIRGHanyuDaZidian'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
@@ -426,27 +354,21 @@ class UnhnReading(Base):
 
 class kDaeJaweon(GenericIndice):
     __tablename__ = 'kDaeJaweon'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kDaeJaweon',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kDaeJaweon'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
 
 class kIRGKangXi(GenericIndice):
     __tablename__ = 'kIRGKangXi'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRGKangXi',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kIRGKangXi'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
 
 class kIRGDaeJaweon(GenericIndice):
     __tablename__ = 'kIRGDaeJaweon'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kIRGDaeJaweon',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kIRGDaeJaweon'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
@@ -478,9 +400,7 @@ class kGSR(Base):
 
 class kHDZRadBreak(GenericIndice):
     __tablename__ = 'kHDZRadBreak'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kHDZRadBreak',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kHDZRadBreak'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
     radical = Column(String(10))
@@ -489,26 +409,20 @@ class kHDZRadBreak(GenericIndice):
 
 class kSBGY(GenericIndice):
     __tablename__ = 'kSBGY'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kSBGY',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kSBGY'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
 
 class kCheungBauerIndex(GenericIndice):
     __tablename__ = 'kCheungBauerIndex'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kCheungBauerIndex',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kCheungBauerIndex'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
 
 
 class kFennIndex(GenericIndice):
     __tablename__ = 'kFennIndex'
-    __mapper_args__ = {
-        'polymorphic_identity': 'kFennIndex',
-    }
+    __mapper_args__ = {'polymorphic_identity': 'kFennIndex'}
 
     id = Column(Integer, ForeignKey('GenericIndice.id'), primary_key=True)
