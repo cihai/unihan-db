@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcihai%2Funihan-db.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcihai%2Funihan-db?ref=badge_shield)
+
 *unihan-db* - database `SQLAlchemy`_ models for `UNIHAN`_. Part of the `cihai`_
 project. Powered by `unihan-etl`_. See also: `libUnihan`_.
 
@@ -100,3 +102,6 @@ Output:
     :alt: Documentation Status
     :scale: 100%
     :target: https://readthedocs.org/projects/unihan-db/
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcihai%2Funihan-db.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcihai%2Funihan-db?ref=badge_large)
