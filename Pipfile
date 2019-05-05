@@ -19,4 +19,4 @@ unihan-etl = "==0.10.0"
 SQLAlchemy = "==1.2.11"
 
 [requires]
-python_version = "2.7"
+python_version = "3"
