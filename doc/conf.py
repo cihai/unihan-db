@@ -22,7 +22,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinxcontrib.napoleon',
+    'sphinx.ext.napolean',
     'alagitpull',
 ]
 
