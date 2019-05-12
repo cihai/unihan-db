@@ -9,7 +9,8 @@ Sphinx = ">=2.0.0"
 isort = "*"
 flake8 = "*"
 pytest = "*"
-unihan-db = {editable = true,path = "."}
+unihan-db = {path = ".",editable = true}
+sphinx-issues = "*"
 
 [packages]
 appdirs = "*"
