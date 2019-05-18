@@ -4,19 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [dev-packages]
-alagitpull = "==0.0.22"
-releases = "==1.6.1"
-sphinxcontrib-napoleon = "==0.7"
-Sphinx = "==2.0.1"
-isort = "==4.3.18"
-flake8 = "==3.7.7"
-pytest = "==4.4.1"
-unihan-db = {editable = true,path = "."}
+alagitpull = "*"
+Sphinx = ">=2.0.0"
+isort = "*"
+flake8 = "*"
+pytest = "*"
+unihan-db = {path = ".",editable = true}
+sphinx-issues = "*"
 
 [packages]
-appdirs = "==1.4.3"
+appdirs = "*"
 unihan-etl = "==0.10.1"
-SQLAlchemy = "==1.3.3"
+SQLAlchemy = "*"
 
 [requires]
 python_version = "3"
