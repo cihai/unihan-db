@@ -10,6 +10,8 @@ Here you can find the recent changes to the project.
 - Zero-config sqlite default
 - Bump unihan-etl to 0.9.5
 - Add ``project_urls`` to setup.py
+- Use ``collections`` import that's compatible with python 2 and 3
+- Loosen version constraints
 
 0.1.0 <2017-05-29>
 ------------------
