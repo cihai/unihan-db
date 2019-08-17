@@ -9,6 +9,7 @@ Here you can find the recent changes to the project.
 - Support for appdirs (XDG directory specification)
 - Zero-config sqlite default
 - Bump unihan-etl to 0.9.5
+- Add ``project_urls`` to setup.py
 
 0.1.0 <2017-05-29>
 ------------------
