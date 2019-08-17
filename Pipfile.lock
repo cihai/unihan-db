@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "4e4c0ae5e2cddbfe82bd29445f393848fd67b3ec40d5dbdbf3f340e8eccc3209"
+            "sha256": "64da11fd0f9444622620e516e834b40d476963ad43010dac1cb6050b77c69d44"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,10 +39,10 @@
         },
         "unihan-etl": {
             "hashes": [
-                "sha256:ed8278379756c1f3b5e8d902a4c2b43788853a0e0467b8668aee8628ae593b3e"
+                "sha256:e693ffb5130654e945088713638c25acf04e339e81745b3f9b030c990dbb8530"
             ],
             "index": "pypi",
-            "version": "==0.10.1"
+            "version": "==0.10.2"
         },
         "zhon": {
             "hashes": [
@@ -377,10 +377,10 @@
         },
         "unihan-etl": {
             "hashes": [
-                "sha256:ed8278379756c1f3b5e8d902a4c2b43788853a0e0467b8668aee8628ae593b3e"
+                "sha256:e693ffb5130654e945088713638c25acf04e339e81745b3f9b030c990dbb8530"
             ],
             "index": "pypi",
-            "version": "==0.10.1"
+            "version": "==0.10.2"
         },
         "urllib3": {
             "hashes": [
