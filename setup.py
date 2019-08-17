@@ -42,8 +42,13 @@ class PyTest(TestCommand):
 setup(
     name=about['__title__'],
     version=about['__version__'],
-    url='https://unihan-db.git-pull.com',
-    download_url='https://pypi.python.org/pypi/unihan-db',
+    url=about['__github__'],
+    download_url=about['__pypi__'],
+    project_urls={
+        'Documentation': about['__docs__'],
+        'Code': about['__github__'],
+        'Issue tracker': about['__tracker__'],
+    },
     license=about['__license__'],
     author=about['__author__'],
     author_email=about['__email__'],
