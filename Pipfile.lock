@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "64da11fd0f9444622620e516e834b40d476963ad43010dac1cb6050b77c69d44"
+            "sha256": "6ac42bbc3b622f5c56af062a487e4977271c1264f10373d7fa1465bea20967da"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,10 +39,10 @@
         },
         "unihan-etl": {
             "hashes": [
-                "sha256:e693ffb5130654e945088713638c25acf04e339e81745b3f9b030c990dbb8530"
+                "sha256:1f2451616002659141c10e62beedc6ad6d1afb5224a380d52ac09214b56b19ad"
             ],
             "index": "pypi",
-            "version": "==0.10.2"
+            "version": "==0.10.3"
         },
         "zhon": {
             "hashes": [
@@ -302,11 +302,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:22538e1bbe62b407cf5a8aabe1bb15848aa66bb79559f42f5202bbce6b757a69",
-                "sha256:f9a79e746b87921cabc3baa375199c6076d1270cee53915dbd24fdbeaaacc427"
+                "sha256:0d586b0f8c2fc3cc6559c5e8fd6124628110514fda0e5d7c82e682d749d2e845",
+                "sha256:839a3ed6f6b092bb60f492024489cc9e6991360fb9f52ed6361acd510d261069"
             ],
             "index": "pypi",
-            "version": "==2.1.2"
+            "version": "==2.2.0"
         },
         "sphinx-issues": {
             "hashes": [
@@ -377,10 +377,10 @@
         },
         "unihan-etl": {
             "hashes": [
-                "sha256:e693ffb5130654e945088713638c25acf04e339e81745b3f9b030c990dbb8530"
+                "sha256:1f2451616002659141c10e62beedc6ad6d1afb5224a380d52ac09214b56b19ad"
             ],
             "index": "pypi",
-            "version": "==0.10.2"
+            "version": "==0.10.3"
         },
         "urllib3": {
             "hashes": [
