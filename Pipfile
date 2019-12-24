@@ -11,6 +11,8 @@ flake8 = "*"
 pytest = "*"
 unihan-db = {path = ".",editable = true}
 sphinx-issues = "*"
+pytest-cov = "*"
+coverage = "*"
 
 [packages]
 appdirs = "*"
