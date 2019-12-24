@@ -6,6 +6,7 @@ python:
   - 2.7
   - 3.7
   - pypy3
+cache: pip
 before_install:
   - export PIP_USE_MIRRORS=true
   - pip install -U pip setuptools
