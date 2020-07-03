@@ -6,10 +6,14 @@ python:
   - 2.7
   - 3.7
   - pypy3
+matrix:
+  finish_fast: true
+  allow_failures:
+  - python: pypy3
 cache: pip
 install:
-  - pip install -e .
-  - pip install -r requirements/test.txt
-script: py.test --cov=unihan_db
+  - pip install poetry
+  - poetry install
+script: poetry run py.test --cov=unihan_db
 after_success:
   - bash <(curl -s https://codecov.io/bash)
