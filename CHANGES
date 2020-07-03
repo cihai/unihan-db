@@ -4,6 +4,7 @@ Changelog
 
 Here you can find the recent changes to the project.
 
+- Move from Pipfile to Poetry (https://github.com/cihai/unihan-db/pull/261)
 - Speed up importing initial data
 - Support for more fields
 - Support for appdirs (XDG directory specification)
