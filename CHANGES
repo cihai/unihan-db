@@ -14,8 +14,8 @@ Here you can find the recent changes to the project.
 - Use ``collections`` import that's compatible with python 2 and 3
 - Loosen version constraints
 
-0.1.0 <2017-05-29>
-------------------
+unihan-db 0.1.0 (2017-05-29)
+----------------------------
 - Initial commit
 
 .. vim: set filetype=rst:
