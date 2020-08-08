@@ -46,7 +46,7 @@ from unihan_db.tables import (
 )
 
 
-def import_char(c, char):
+def import_char(c, char):  # NOQA: C901
     if 'kDefinition' in char:
         for d in char['kDefinition']:
             c.kDefinition.append(kDefinition(definition=d))
