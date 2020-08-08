@@ -1,6 +1,6 @@
 # -*- coding: utf8 - *-
 
-from unihan_db import bootstrap, importer
+from unihan_db import bootstrap
 from unihan_db.tables import Base, Unhn
 
 
