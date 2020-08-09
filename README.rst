@@ -85,9 +85,13 @@ Output:
     :alt: Python Package
     :target: http://badge.fury.io/py/unihan-db
 
-.. |build-status| image:: https://img.shields.io/travis/cihai/unihan-db.svg
+.. |docs| image:: https://github.com/cihai/unihan-db/workflows/Publish%20Docs/badge.svg
+   :alt: Docs
+   :target: https://github.com/cihai/unihan-db/actions?query=workflow%3A"Publish+Docs"
+
+.. |build-status| image:: https://github.com/cihai/unihan-db/workflows/test/badge.svg
    :alt: Build Status
-   :target: https://travis-ci.org/cihai/unihan-db
+   :target: https://github.com/cihai/unihan-db/actions?query=workflow%3A"test"
 
 .. |coverage| image:: https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg
     :alt: Code Coverage
@@ -95,8 +99,3 @@ Output:
 
 .. |license| image:: https://img.shields.io/github/license/cihai/unihan-db.svg
     :alt: License 
-
-.. |docs| image:: https://readthedocs.org/projects/unihan-db/badge/?version=latest
-    :alt: Documentation Status
-    :scale: 100%
-    :target: https://readthedocs.org/projects/unihan-db/
