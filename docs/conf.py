@@ -27,11 +27,6 @@ extensions = [
     'sphinx_issues',
 ]
 
-releases_unstable_prehistory = True
-releases_document_name = ["history"]
-releases_issue_uri = "https://github.com/cihai/unihan-db/issues/%s"
-releases_release_uri = "https://github.com/cihai/unihan-db/tree/v%s"
-
 issues_github_path = about['__github__']
 
 templates_path = ['_templates']
@@ -52,7 +47,7 @@ pygments_style = 'sphinx'
 
 html_theme_path = [alagitpull.get_path()]
 html_static_path = ['_static']
-html_favicon = 'favicon.ico'
+html_extra_path = ['manifest.json']
 html_theme = 'alagitpull'
 html_sidebars = {
     '**': [
@@ -72,6 +67,12 @@ html_theme_options = {
     'github_banner': True,
     'projects': alagitpull.projects,
     'project_name': 'db',
+    'project_title': about['__title__'],
+    'project_description': about['__description__'],
+    'project_url': about['__docs__'],
+    'show_meta_manifest_tag': True,
+    'show_meta_og_tags': True,
+    'show_meta_app_icon_tags': True,
 }
 
 alagitpull_internal_hosts = ['unihan-db.git-pull.com', '0.0.0.0']

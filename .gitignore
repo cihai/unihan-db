@@ -38,7 +38,7 @@ nosetests.xml
 .env
 .env3
 
-doc/_build
+docs/_build
 
 .ropeproject
 .idea
