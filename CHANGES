@@ -4,6 +4,12 @@ Changelog
 
 Here you can find the recent changes to the project.
 
+unihan-db 0.1.0-current
+-----------------------
+- Major overhaul of docs (self-host + add icons and metadata) `#262`_
+- Move from travis to github actions `#262`_
+- Move build / publish of packaging to poetry `#263`_
+- Add README docs on publishing versions, linting, and development
 - Move from Pipfile to Poetry (https://github.com/cihai/unihan-db/pull/261)
 - Speed up importing initial data
 - Support for more fields
@@ -14,8 +20,13 @@ Here you can find the recent changes to the project.
 - Use ``collections`` import that's compatible with python 2 and 3
 - Loosen version constraints
 
-unihan-db 0.1.0 (2017-05-29)
+.. _#262: https://github.com/cihai/unihan-db/pull/262
+.. _#263: https://github.com/cihai/unihan-db/pull/263
+
+unihan-db 0.0.0 (2017-05-29)
 ----------------------------
+This had no pypi release
+
 - Initial commit
 
 .. vim: set filetype=rst:
