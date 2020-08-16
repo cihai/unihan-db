@@ -14,7 +14,7 @@ By default, unihan-db creates a SQLite database in an [XDG data
 directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
 You can specify a custom database destination by passing a database url
 into
-[get_session](http://unihan-db.git-pull.com/en/latest/api.html#unihan_db.bootstrap.get_session).
+[get_session](http://unihan-db.git-pull.com/api.html#unihan_db.bootstrap.get_session).
 
 ## Example usage
 
