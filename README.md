@@ -6,7 +6,7 @@ for [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the
 
 [![Python Package](https://img.shields.io/pypi/v/unihan-db.svg)](http://badge.fury.io/py/unihan-db)
 [![Docs](https://github.com/cihai/unihan-db/workflows/Publish%20Docs/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22Publish+Docs%22)
-[![Build Status](https://github.com/cihai/unihan-db/workflows/test/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22test%22)
+[![Build Status](https://github.com/cihai/unihan-db/workflows/tests/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22tests%22)
 [![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
 ![License](https://img.shields.io/github/license/cihai/unihan-db.svg)
 
