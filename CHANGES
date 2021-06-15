@@ -2,12 +2,16 @@
 Changelog
 =========
 
-Here you can find the recent changes to the project.
-
 current
 -------
+- Add latest updates here
+
+unihan-db 0.2.0 (2021-06-15)
+----------------------------
 - Update `black` to 21.6b0
 - Update trove classifiers to 3.9
+- :issue:`267` Drop python 2.7, 3.5. Remove unused ``__future__`` and
+  modesets.
 
 unihan-db 0.1.0 (2020-08-09)
 ----------------------------
