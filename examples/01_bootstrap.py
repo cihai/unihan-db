@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf8 - *-
-from __future__ import unicode_literals
-
 import pprint
 
 from sqlalchemy.sql.expression import func
