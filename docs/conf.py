@@ -18,6 +18,7 @@ with open("../unihan_db/__about__.py") as fp:
 
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx_autodoc_typehints',
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
     'sphinx.ext.napoleon',
