@@ -14,7 +14,6 @@ classifiers = [
   'Intended Audience :: Developers',
   'Programming Language :: Python',
   'Programming Language :: Python :: 3',
-  'Programming Language :: Python :: 3.6',
   'Programming Language :: Python :: 3.7',
   'Programming Language :: Python :: 3.8',
   'Programming Language :: Python :: 3.9',
@@ -40,7 +39,7 @@ Repository = "https://github.com/cihai/unihan-db"
 
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 appdirs = "*"
 SQLAlchemy = "*"
 unihan-etl = "~=0.13.0"
@@ -63,7 +62,7 @@ coverage = "*"
 pytest-cov = "*"
 
 ### Format ###
-black = {version="==21.9b0", python="^3.6.2"}
+black = {version="==21.9b0"}
 isort = "*"
 
 ### Lint ###
