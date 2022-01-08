@@ -29,6 +29,9 @@ readme = 'README.md'
 packages = [
     { include = "unihan_db" }
 ]
+include = [
+    { path = "tests", format = "sdist" }
+]
 
 homepage = "https://unihan-db.git-pull.com"
 
