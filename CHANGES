@@ -3,9 +3,15 @@
 ## current
 - Add latest updates here
 
-- #274: Update poetry to 1.1
-  - CI: Use poetry 1.1.7 and `install-poetry.py` installer
+#### Compatibility
+- Drop python 3.6 (#292)
+- Add python 3.10 (#292)
+
+#### Development
+- Update poetry to 1.1
+  - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
   - Relock poetry.lock at 1.1 (w/ 1.1.7's fix)
+- Add `.pre-commit-config.yaml` for CI (#292)
 
 ## unihan-db 0.3.0 (2021-06-15)
 - #269: Convert to markdown
