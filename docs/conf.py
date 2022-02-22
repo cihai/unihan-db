@@ -17,99 +17,99 @@ with open("../unihan_db/__about__.py") as fp:
 
 
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx_autodoc_typehints',
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.napoleon',
-    'alagitpull',
-    'myst_parser',
+    "sphinx.ext.autodoc",
+    "sphinx_autodoc_typehints",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx.ext.napoleon",
+    "alagitpull",
+    "myst_parser",
 ]
 
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
-source_suffix = {'.rst': 'restructuredtext', '.md': 'markdown'}
+source_suffix = {".rst": "restructuredtext", ".md": "markdown"}
 
-master_doc = 'index'
+master_doc = "index"
 
-project = about['__title__']
-copyright = about['__copyright__']
+project = about["__title__"]
+copyright = about["__copyright__"]
 
-version = '%s' % ('.'.join(about['__version__'].split('.'))[:2])
-release = '%s' % (about['__version__'])
+version = "%s" % (".".join(about["__version__"].split("."))[:2])
+release = "%s" % (about["__version__"])
 
-exclude_patterns = ['_build']
+exclude_patterns = ["_build"]
 
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 html_theme_path = [alagitpull.get_path()]
-html_static_path = ['_static']
-html_extra_path = ['manifest.json']
-html_theme = 'alagitpull'
+html_static_path = ["_static"]
+html_extra_path = ["manifest.json"]
+html_theme = "alagitpull"
 html_sidebars = {
-    '**': [
-        'about.html',
-        'navigation.html',
-        'relations.html',
-        'more.html',
-        'searchbox.html',
+    "**": [
+        "about.html",
+        "navigation.html",
+        "relations.html",
+        "more.html",
+        "searchbox.html",
     ]
 }
 
 html_theme_options = {
-    'logo': 'img/cihai.svg',
-    'github_user': 'cihai',
-    'github_repo': 'unihan-db',
-    'github_type': 'star',
-    'github_banner': True,
-    'projects': alagitpull.projects,
-    'project_name': 'db',
-    'project_title': about['__title__'],
-    'project_description': about['__description__'],
-    'project_url': about['__docs__'],
-    'show_meta_manifest_tag': True,
-    'show_meta_og_tags': True,
-    'show_meta_app_icon_tags': True,
+    "logo": "img/cihai.svg",
+    "github_user": "cihai",
+    "github_repo": "unihan-db",
+    "github_type": "star",
+    "github_banner": True,
+    "projects": alagitpull.projects,
+    "project_name": "db",
+    "project_title": about["__title__"],
+    "project_description": about["__description__"],
+    "project_url": about["__docs__"],
+    "show_meta_manifest_tag": True,
+    "show_meta_og_tags": True,
+    "show_meta_app_icon_tags": True,
 }
 
-alagitpull_internal_hosts = ['unihan-db.git-pull.com', '0.0.0.0']
+alagitpull_internal_hosts = ["unihan-db.git-pull.com", "0.0.0.0"]
 alagitpull_external_hosts_new_window = True
 
-htmlhelp_basename = '%sdoc' % about['__title__']
+htmlhelp_basename = "%sdoc" % about["__title__"]
 
 latex_documents = [
     (
-        'index',
-        '{0}.tex'.format(about['__package_name__']),
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
-        'manual',
+        "index",
+        "{0}.tex".format(about["__package_name__"]),
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
+        "manual",
     )
 ]
 
 man_pages = [
     (
-        'index',
-        about['__package_name__'],
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
+        "index",
+        about["__package_name__"],
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
         1,
     )
 ]
 
 texinfo_documents = [
     (
-        'index',
-        '{0}'.format(about['__package_name__']),
-        '{0} Documentation'.format(about['__title__']),
-        about['__author__'],
-        about['__package_name__'],
-        about['__description__'],
-        'Miscellaneous',
+        "index",
+        "{0}".format(about["__package_name__"]),
+        "{0} Documentation".format(about["__title__"]),
+        about["__author__"],
+        about["__package_name__"],
+        about["__description__"],
+        "Miscellaneous",
     )
 ]
 
 intersphinx_mapping = {
-    'python': ('http://docs.python.org/', None),
-    'sqlalchemy': ('http://docs.sqlalchemy.org/en/latest/', None),
+    "python": ("http://docs.python.org/", None),
+    "sqlalchemy": ("http://docs.sqlalchemy.org/en/latest/", None),
 }

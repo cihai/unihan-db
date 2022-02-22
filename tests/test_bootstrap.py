@@ -10,7 +10,7 @@ def test_reflect_db(tmpdb_file, unihan_options, metadata):
 
 def test_import_object(session, engine):
     Base.metadata.create_all(engine)
-    session.add(Unhn(char=u'好', ucn='U+4E09'))
+    session.add(Unhn(char="好", ucn="U+4E09"))
     session.commit()
 
     assert session.query(Unhn)
