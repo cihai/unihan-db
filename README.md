@@ -8,7 +8,7 @@ for [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the
 [![Docs](https://github.com/cihai/unihan-db/workflows/Publish%20Docs/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22Publish+Docs%22)
 [![Build Status](https://github.com/cihai/unihan-db/workflows/test/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22test%22)
 [![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
-![License](https://img.shields.io/github/license/cihai/unihan-db.svg)
+[![License](https://img.shields.io/github/license/cihai/unihan-db.svg)](https://github.com/cihai/unihan-db/blob/master/LICENSE)
 
 By default, unihan-db creates a SQLite database in an [XDG data
 directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
