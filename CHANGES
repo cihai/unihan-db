@@ -12,6 +12,11 @@
   - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
   - Relock poetry.lock at 1.1 (w/ 1.1.7's fix)
 - Add `.pre-commit-config.yaml` for CI (#292)
+- Tests: `tmpdir` -> `tmp_path`
+- Run pyupgrade @ python 3.7
+
+#### Documentation
+- Move to `furo` theme
 
 ## unihan-db 0.3.0 (2021-06-15)
 - #269: Convert to markdown
