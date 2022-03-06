@@ -1,7 +1,6 @@
-_unihan-db_ - database [SQLAlchemy](https://www.sqlalchemy.org/) models
-for [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the
-[cihai](https://cihai.git-pull.com) project. Powered by
-[unihan-etl](https://unihan-etl.git-pull.com). See also:
+_unihan-db_ - database [SQLAlchemy](https://www.sqlalchemy.org/) models for
+[UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the [cihai](https://cihai.git-pull.com)
+project. Powered by [unihan-etl](https://unihan-etl.git-pull.com). See also:
 [libUnihan](http://libunihan.sourceforge.net/).
 
 [![Python Package](https://img.shields.io/pypi/v/unihan-db.svg)](http://badge.fury.io/py/unihan-db)
@@ -10,10 +9,9 @@ for [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the
 [![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
 [![License](https://img.shields.io/github/license/cihai/unihan-db.svg)](https://github.com/cihai/unihan-db/blob/master/LICENSE)
 
-By default, unihan-db creates a SQLite database in an [XDG data
-directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
-You can specify a custom database destination by passing a database url
-into
+By default, unihan-db creates a SQLite database in an
+[XDG data directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html). You
+can specify a custom database destination by passing a database url into
 [get_session](http://unihan-db.git-pull.com/api.html#unihan_db.bootstrap.get_session).
 
 ## Example usage
@@ -93,8 +91,8 @@ Makefile commands prefixed with `watch_` will watch files and rerun.
 
 `poetry run py.test`
 
-Helpers: `make test` Rerun tests on file change: `make watch_test`
-(requires [entr(1)](http://eradman.com/entrproject/))
+Helpers: `make test` Rerun tests on file change: `make watch_test` (requires
+[entr(1)](http://eradman.com/entrproject/))
 
 ### Documentation
 
@@ -104,28 +102,24 @@ Default preview server: <http://localhost:8041>
 
 Helpers: `make build_docs`, `make serve_docs`
 
-Rebuild docs on file change: `make watch_docs` (requires
-[entr(1)](http://eradman.com/entrproject/))
+Rebuild docs on file change: `make watch_docs` (requires [entr(1)](http://eradman.com/entrproject/))
 
-Rebuild docs and run server via one terminal: `make dev_docs` (requires
-above, and a `make(1)` with `-J` support, e.g. GNU Make)
+Rebuild docs and run server via one terminal: `make dev_docs` (requires above, and a `make(1)` with
+`-J` support, e.g. GNU Make)
 
 ### Formatting / Linting
 
-The project uses [black](https://github.com/psf/black) and
-[isort](https://pypi.org/project/isort/) (one after the other) and runs
-[flake8](https://flake8.pycqa.org/) via CI. See the configuration in
+The project uses [black](https://github.com/psf/black) and [isort](https://pypi.org/project/isort/)
+(one after the other) and runs [flake8](https://flake8.pycqa.org/) via CI. See the configuration in
 <span class="title-ref">pyproject.toml</span> and \`setup.cfg\`:
 
-`make black isort`: Run `black` first, then `isort` to handle import
-nuances `make flake8`, to watch (requires `entr(1)`):
-`make watch_flake8`
+`make black isort`: Run `black` first, then `isort` to handle import nuances `make flake8`, to watch
+(requires `entr(1)`): `make watch_flake8`
 
 ### Releasing
 
-As of 0.1, [poetry](https://python-poetry.org/) handles virtualenv
-creation, package requirements, versioning, building, and publishing.
-Therefore there is no setup.py or requirements files.
+As of 0.1, [poetry](https://python-poetry.org/) handles virtualenv creation, package requirements,
+versioning, building, and publishing. Therefore there is no setup.py or requirements files.
 
 Update <span class="title-ref">\_\_version\_\_</span> in <span
 class="title-ref">\_\_about\_\_.py</span> and \`pyproject.toml\`:
