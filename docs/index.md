@@ -10,8 +10,15 @@
 
 ```{toctree}
 :maxdepth: 2
+:hidden:
 
 api
-history
+```
 
+```{toctree}
+:caption: Project
+:hidden:
+
+history
+GitHub <https://github.com/cihai/unihan-db>
 ```
