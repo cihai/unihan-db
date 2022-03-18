@@ -1,4 +1,6 @@
-_unihan-db_ - database [SQLAlchemy](https://www.sqlalchemy.org/) models for
+# unihan-db
+
+Database [SQLAlchemy](https://www.sqlalchemy.org/) models for
 [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the [cihai](https://cihai.git-pull.com)
 project. Powered by [unihan-etl](https://unihan-etl.git-pull.com). See also:
 [libUnihan](http://libunihan.sourceforge.net/).

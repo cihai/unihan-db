@@ -1,7 +1,5 @@
 (index)=
 
-# unihan-db
-
 ```{include} ../README.md
 
 ```
