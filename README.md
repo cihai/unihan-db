@@ -7,7 +7,7 @@ project. Powered by [unihan-etl](https://unihan-etl.git-pull.com). See also:
 
 [![Python Package](https://img.shields.io/pypi/v/unihan-db.svg)](https://pypi.org/project/unihan-db/)
 [![Docs](https://github.com/cihai/unihan-db/workflows/docs/badge.svg)](https://unihan-db.git-pull.com/)
-[![Build Status](https://github.com/cihai/unihan-db/workflows/test/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22test%22)
+[![Build Status](https://github.com/cihai/unihan-db/workflows/tests/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22tests%22)
 [![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
 [![License](https://img.shields.io/github/license/cihai/unihan-db.svg)](https://github.com/cihai/unihan-db/blob/master/LICENSE)
 
