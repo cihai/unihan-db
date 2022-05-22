@@ -36,7 +36,7 @@ homepage = "https://unihan-db.git-pull.com"
 "Bug Tracker" = "https://github.com/cihai/unihan-db/issues"
 Documentation = "https://unihan-db.git-pull.com"
 Repository = "https://github.com/cihai/unihan-db"
-
+"Release notes" = "https://github.com/cihai/unihan-db/blob/master/CHANGES"
 
 [tool.poetry.dependencies]
 python = "^3.7"
