@@ -1,7 +1,9 @@
 # flake8: NOQA E501
+import inspect
 import os
 import sys
 from pathlib import Path
+from posixpath import dirname, relpath
 
 import unihan_db
 
@@ -23,8 +25,10 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx.ext.napoleon",
+    "sphinx.ext.linkcode",
     "sphinx_inline_tabs",
     "sphinx_copybutton",
+    "sphinx_issues",
     "sphinxext.opengraph",
     "sphinxext.rediraffe",
     "myst_parser",
@@ -94,6 +98,9 @@ copybutton_prompt_text = (
 copybutton_prompt_is_regexp = True
 copybutton_remove_prompts = True
 
+# sphinx-issues
+issues_github_path = "cihai/unihan-db"
+
 # sphinxext-rediraffe
 rediraffe_redirects = "redirects.txt"
 rediraffe_branch = "master~1"
@@ -133,6 +140,77 @@ texinfo_documents = [
 ]
 
 intersphinx_mapping = {
-    "python": ("http://docs.python.org/", None),
+    "python": ("http://docs.python.org/3/", None),
     "sqlalchemy": ("http://docs.sqlalchemy.org/en/latest/", None),
 }
+
+
+def linkcode_resolve(domain, info):  # NOQA: C901
+    """
+    Determine the URL corresponding to Python object
+
+    Notes
+    -----
+    From https://github.com/numpy/numpy/blob/v1.15.1/doc/source/conf.py, 7c49cfa
+    on Jul 31. License BSD-3. https://github.com/numpy/numpy/blob/v1.15.1/LICENSE.txt
+    """
+    if domain != "py":
+        return None
+
+    modname = info["module"]
+    fullname = info["fullname"]
+
+    submod = sys.modules.get(modname)
+    if submod is None:
+        return None
+
+    obj = submod
+    for part in fullname.split("."):
+        try:
+            obj = getattr(obj, part)
+        except Exception:
+            return None
+
+    # strip decorators, which would resolve to the source of the decorator
+    # possibly an upstream bug in getsourcefile, bpo-1764286
+    try:
+        unwrap = inspect.unwrap
+    except AttributeError:
+        pass
+    else:
+        obj = unwrap(obj)
+
+    try:
+        fn = inspect.getsourcefile(obj)
+    except Exception:
+        fn = None
+    if not fn:
+        return None
+
+    try:
+        source, lineno = inspect.getsourcelines(obj)
+    except Exception:
+        lineno = None
+
+    if lineno:
+        linespec = "#L%d-L%d" % (lineno, lineno + len(source) - 1)
+    else:
+        linespec = ""
+
+    fn = relpath(fn, start=dirname(unihan_db.__file__))
+
+    if "dev" in about["__version__"]:
+        return "{}/blob/master/{}/{}{}".format(
+            about["__github__"],
+            about["__package_name__"],
+            fn,
+            linespec,
+        )
+    else:
+        return "{}/blob/v{}/{}/{}{}".format(
+            about["__github__"],
+            about["__version__"],
+            about["__package_name__"],
+            fn,
+            linespec,
+        )
