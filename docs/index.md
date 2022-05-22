@@ -8,6 +8,7 @@
 :maxdepth: 2
 :hidden:
 
+quickstart
 api
 ```
 
