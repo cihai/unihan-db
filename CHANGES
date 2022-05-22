@@ -1,13 +1,16 @@
 # Changelog
 
 ## current
+
 - Add latest updates here
 
 #### Compatibility
+
 - Drop python 3.6 (#292)
 - Add python 3.10 (#292)
 
 #### Development
+
 - Update poetry to 1.1
   - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
   - Relock poetry.lock at 1.1 (w/ 1.1.7's fix)
@@ -16,17 +19,18 @@
 - Run pyupgrade @ python 3.7
 
 #### Documentation
+
 - Move to `furo` theme
 
 ## unihan-db 0.3.0 (2021-06-15)
+
 - #269: Convert to markdown
 
 ## unihan-db 0.2.0 (2021-06-15)
 
-- Update {}`black` to 21.6b0
+- Update `black` to 21.6b0
 - Update trove classifiers to 3.9
-- {issue}`267` Drop python 2.7, 3.5. Remove unused `__future__` and
-  modesets.
+- {issue}`267` Drop python 2.7, 3.5. Remove unused `__future__` and modesets.
 
 ## unihan-db 0.1.0 (2020-08-09)
 
