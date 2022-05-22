@@ -1,15 +1,24 @@
 # Changelog
 
-## current
+To install the unreleased tmuxp version, see
+[developmental releases](https://unihan-db.git-pull.com/quickstart.html#developmental-releases).
 
-- Add latest updates here
+[pip](https://pip.pypa.io/en/stable/):
 
-#### Compatibility
+```console
+$ pip install --user --upgrade --pre unihan-db
+```
+
+## unihan-db 0.4.x (unreleased)
+
+- _Insert changes/features/fixes for next release here_
+
+### Compatibility
 
 - Drop python 3.6 (#292)
 - Add python 3.10 (#292)
 
-#### Development
+### Development
 
 - Update poetry to 1.1
   - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
@@ -18,7 +27,7 @@
 - Tests: `tmpdir` -> `tmp_path`
 - Run pyupgrade @ python 3.7
 
-#### Documentation
+### Documentation
 
 - Move to `furo` theme
 
