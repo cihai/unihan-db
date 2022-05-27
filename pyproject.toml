@@ -17,8 +17,9 @@ classifiers = [
   'Programming Language :: Python :: 3.10',
   'Programming Language :: Python :: Implementation :: PyPy',
   "Topic :: Database",
-  "Topic :: Utilities",
-  "Topic :: Software Development :: Internationalization"
+  "Topic :: Software Development :: Internationalization",
+  "Topic :: Software Development :: Localization",
+  "Topic :: Utilities"
 ]
 keywords = ["unihan", "sqlalchemy", "cjk", "chinese", "japanese", "sql", "database"]
 
