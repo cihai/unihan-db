@@ -50,3 +50,4 @@ docs/_build
 .eggs/
 .cache/
 .pytest_cache/
+.mypy_cache/
