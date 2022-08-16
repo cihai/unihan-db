@@ -84,6 +84,8 @@ isort = "*"
 ### Lint ###
 flake8 = "*"
 mypy = "*"
+sqlalchemy-stubs = "^0.4"
+types-appdirs = "^1.4.3"
 
 [tool.poetry.extras]
 docs = [
@@ -102,7 +104,18 @@ docs = [
 test = ["pytest", "pytest-rerunfailures", "pytest-watcher"]
 coverage = ["codecov", "coverage", "pytest-cov"]
 format = ["black", "isort"]
-lint = ["flake8", "mypy"]
+lint = ["flake8", "mypy", "sqlalchemy-stubs", "types-appdirs"]
+
+[tool.mypy]
+plugins = [
+  "sqlmypy"
+]
+
+[[tool.mypy.overrides]]
+module = [
+  "unihan_etl"
+]
+ignore_missing_imports = true
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]

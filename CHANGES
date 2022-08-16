@@ -20,12 +20,25 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Development
 
+Infrastructure updates for static type checking and doctest examples.
+
 - Update poetry to 1.1
   - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
   - Relock poetry.lock at 1.1 (w/ 1.1.7's fix)
-- Add `.pre-commit-config.yaml` for CI (#292)
 - Tests: `tmpdir` -> `tmp_path`
 - Run pyupgrade @ python 3.7
+- Initial [doctests] support added, via #297 
+
+  [doctests]: https://docs.python.org/3/library/doctest.html
+
+- Initial [mypy] validation, via #297
+
+  [mypy]: https://github.com/python/mypy
+
+- CI (tests, docs): Improve caching of python dependencies via
+  `action/setup-python`'s v3/4's new poetry caching, via #297
+
+- CI (docs): Skip if no `PUBLISH` condition triggered, via #297
 
 ### Documentation
 
