@@ -1,15 +1,9 @@
-# unihan-db
+# unihan-db &middot; [![Python Package](https://img.shields.io/pypi/v/unihan-db.svg)](https://pypi.org/project/unihan-db/) [![License](https://img.shields.io/github/license/cihai/unihan-db.svg)](https://github.com/cihai/unihan-db/blob/master/LICENSE) [![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
 
 Database [SQLAlchemy](https://www.sqlalchemy.org/) models for
 [UNIHAN](http://www.unicode.org/charts/unihan.html). Part of the [cihai](https://cihai.git-pull.com)
 project. Powered by [unihan-etl](https://unihan-etl.git-pull.com). See also:
 [libUnihan](http://libunihan.sourceforge.net/).
-
-[![Python Package](https://img.shields.io/pypi/v/unihan-db.svg)](https://pypi.org/project/unihan-db/)
-[![Docs](https://github.com/cihai/unihan-db/workflows/docs/badge.svg)](https://unihan-db.git-pull.com/)
-[![Build Status](https://github.com/cihai/unihan-db/workflows/tests/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22tests%22)
-[![Code Coverage](https://codecov.io/gh/cihai/unihan-db/branch/master/graph/badge.svg)](https://codecov.io/gh/cihai/unihan-db)
-[![License](https://img.shields.io/github/license/cihai/unihan-db.svg)](https://github.com/cihai/unihan-db/blob/master/LICENSE)
 
 By default, unihan-db creates a SQLite database in an
 [XDG data directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html). You
@@ -131,3 +125,8 @@ Update `__version__` in `__about__.py` and `pyproject.toml`:
     git push --tags
     poetry build
     poetry deploy
+
+## More information
+
+[![Docs](https://github.com/cihai/unihan-db/workflows/docs/badge.svg)](https://unihan-db.git-pull.com/)
+[![Build Status](https://github.com/cihai/unihan-db/workflows/tests/badge.svg)](https://github.com/cihai/unihan-db/actions?query=workflow%3A%22tests%22)
