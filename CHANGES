@@ -23,7 +23,6 @@ $ pip install --user --upgrade --pre unihan-db
 - Update poetry to 1.1
   - CI: Use poetry 1.1.7 and `install-poetry.py` installer (#274, #292)
   - Relock poetry.lock at 1.1 (w/ 1.1.7's fix)
-- Add `.pre-commit-config.yaml` for CI (#292)
 - Tests: `tmpdir` -> `tmp_path`
 - Run pyupgrade @ python 3.7
 
