@@ -17,5 +17,6 @@ api
 :hidden:
 
 history
+Developer guide <https://cihai.git-pull.com/contributing/>
 GitHub <https://github.com/cihai/unihan-db>
 ```
