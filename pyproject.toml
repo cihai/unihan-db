@@ -108,12 +108,12 @@ lint = ["flake8", "mypy", "sqlalchemy-stubs", "types-appdirs"]
 
 [tool.mypy]
 plugins = [
-  "sqlmypy"
+  "sqlmypy",
 ]
 
 [[tool.mypy.overrides]]
 module = [
-  "unihan_etl"
+  "unihan_etl",
 ]
 ignore_missing_imports = true
 
