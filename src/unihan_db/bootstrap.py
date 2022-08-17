@@ -1,9 +1,13 @@
 import logging
 import sys
+import typing as t
 from datetime import datetime
+from typing import Any, Dict, List, Union
 
+import sqlalchemy.orm.scoping
 from sqlalchemy import create_engine
 from sqlalchemy.orm import class_mapper, scoped_session, sessionmaker
+from sqlalchemy.sql.schema import MetaData
 
 from unihan_etl import process as unihan
 from unihan_etl.util import merge_dict
@@ -14,7 +18,7 @@ from .tables import Base, Unhn
 log = logging.getLogger(__name__)
 
 
-def setup_logger(logger=None, level="INFO"):
+def setup_logger(logger: None = None, level: str = "INFO") -> None:
     """
     Setup logging for CLI use.
 
@@ -119,7 +123,7 @@ TABLE_NAME = "Unihan"
 DEFAULT_FIELDS = ["ucn", "char"]
 
 
-def is_bootstrapped(metadata):
+def is_bootstrapped(metadata: MetaData) -> bool:
     """Return True if cihai is correctly bootstrapped."""
     fields = UNIHAN_FIELDS + DEFAULT_FIELDS
     if TABLE_NAME in metadata.tables.keys():
@@ -133,7 +137,9 @@ def is_bootstrapped(metadata):
         return False
 
 
-def bootstrap_data(options=None):
+def bootstrap_data(
+    options: t.Optional[Dict[str, Union[str, bool]]] = None
+) -> List[Dict[str, Any]]:
     if options is None:
         options = {}
 
@@ -144,11 +150,14 @@ def bootstrap_data(options=None):
     return p.export()
 
 
-def bootstrap_unihan(session, options=None):
+def bootstrap_unihan(
+    session: sqlalchemy.orm.scoping.scoped_session,
+    options: t.Optional[Dict[str, Union[str, bool]]] = None,
+) -> None:
+    """Download, extract and import unihan to database."""
     if options is None:
         options = {}
 
-    """Download, extract and import unihan to database."""
     if session.query(Unhn).count() == 0:
         data = bootstrap_data(options)
         log.info("bootstrap Unhn table")
