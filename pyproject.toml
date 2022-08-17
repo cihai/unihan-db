@@ -122,6 +122,7 @@ lint = [
 plugins = [
   "sqlmypy",
 ]
+strict = true
 
 [tool.coverage.run]
 branch = true
