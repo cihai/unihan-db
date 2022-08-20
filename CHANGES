@@ -13,6 +13,14 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+### Breaking changes
+
+- Python 2 compatibility module and imports removed. Python 2.x was officially
+  dropped in 0.2.0 (2021-06-15) via #299
+
+  - Bump unihan-etl to 0.15.0+ (to avoid any chance of using compat imports from
+    it in the future)
+
 ## unihan-db 0.4.0 (2022-08-16)
 
 ### Compatibility
