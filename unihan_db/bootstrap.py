@@ -6,10 +6,10 @@ from sqlalchemy import create_engine, event
 from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
 
 from unihan_etl import process as unihan
+from unihan_etl.util import merge_dict
 
 from . import dirs, importer
 from .tables import Base, Unhn
-from .util import merge_dict
 
 log = logging.getLogger(__name__)
 
