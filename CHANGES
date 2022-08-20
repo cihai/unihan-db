@@ -9,14 +9,19 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
-## unihan-db 0.5.x (unreleased)
+## unihan-db 0.6.x (unreleased)
 
 - _Insert changes/features/fixes for next release here_
 
+## unihan-db 0.5.0 (2022-08-20)
+
 ### Breaking changes
 
-- Python 2 compatibility module and imports removed. Python 2.x was officially
-  dropped in 0.2.0 (2021-06-15) via #299
+- Bump in unison with other cihai projects deprecating compat modules, via #299.
+
+  Python 2.x was already dropped in 0.2.0 (2021-06-15). There was no compat
+  module in this project, and it only only removed a duplicate function
+  (`merge_dict()`) and imported the one from `unihan_etl`.
 
   - Bump unihan-etl to 0.15.0+ (to avoid any chance of using compat imports from
     it in the future)
