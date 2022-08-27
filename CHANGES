@@ -78,7 +78,7 @@ Infrastructure updates for static type checking and doctest examples.
 
 - Update `black` to 21.6b0
 - Update trove classifiers to 3.9
-- {issue}`267` Drop python 2.7, 3.5. Remove unused `__future__` and modesets.
+- #267 Drop python 2.7, 3.5. Remove unused `__future__` and modesets.
 
 ## unihan-db 0.1.0 (2020-08-09)
 
