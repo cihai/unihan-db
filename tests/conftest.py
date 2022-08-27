@@ -1,32 +1,34 @@
 import os
 import pathlib
+import typing as t
 import zipfile
 
 import pytest
 
 from sqlalchemy import MetaData, create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.engine import Engine
+from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
 
 @pytest.fixture
-def fixture_path():
+def fixture_path() -> str:
     return os.path.abspath(os.path.join(os.path.dirname(__file__), "fixtures"))
 
 
 @pytest.fixture
-def test_config_file(fixture_path):
-    return os.path.join(fixture_path, "test_config.yml")
+def test_config_file(fixture_path: pathlib.Path) -> pathlib.Path:
+    return fixture_path / "test_config.yml"
 
 
 @pytest.fixture
-def zip_path(tmpdir: pathlib.Path):
+def zip_path(tmpdir: pathlib.Path) -> pathlib.Path:
     return tmpdir / "Unihan.zip"
 
 
 @pytest.fixture
-def zip_file(zip_path, fixture_path):
+def zip_file(zip_path: pathlib.Path, fixture_path: pathlib.Path) -> zipfile.ZipFile:
     _files = []
     for f in UNIHAN_FILES:
         _files += [os.path.join(fixture_path, f)]
@@ -37,34 +39,43 @@ def zip_file(zip_path, fixture_path):
     return zf
 
 
+class UnihanOptions(t.TypedDict):
+    source: pathlib.Path
+    work_dir: pathlib.Path
+    zip_path: pathlib.Path
+    expand: bool
+
+
 @pytest.fixture
-def unihan_options(zip_file, zip_path, tmp_path: pathlib.Path):
+def unihan_options(
+    zip_file: pathlib.Path, zip_path: pathlib.Path, tmp_path: pathlib.Path
+) -> UnihanOptions:
     return {
-        "source": str(zip_path),
-        "work_dir": str(tmp_path),
-        "zip_path": str(tmp_path / "downloads" / "Moo.zip"),
+        "source": zip_path,
+        "work_dir": tmp_path,
+        "zip_path": tmp_path / "downloads" / "Moo.zip",
         "expand": True,
     }
 
 
 @pytest.fixture(scope="function")
-def tmpdb_file(tmp_path: pathlib.Path):
+def tmpdb_file(tmp_path: pathlib.Path) -> pathlib.Path:
     return tmp_path / "test.db"
 
 
 @pytest.fixture
-def engine():
+def engine() -> Engine:
     return create_engine("sqlite:///:memory:")
 
 
 @pytest.fixture(scope="function")
-def session(engine, request):
+def session(engine: Engine, request: pytest.FixtureRequest) -> Session:
     connection = engine.connect()
     transaction = connection.begin()
     session_factory = sessionmaker(bind=engine)
     session = scoped_session(session_factory)
 
-    def teardown():
+    def teardown() -> None:
         transaction.rollback()
         connection.close()
         session.remove()
@@ -74,7 +85,6 @@ def session(engine, request):
 
 
 @pytest.fixture
-def metadata(engine):
-    metadata = MetaData()
-    metadata.engine = engine
+def metadata(engine: Engine) -> MetaData:
+    metadata = MetaData(bind=engine)
     return metadata
