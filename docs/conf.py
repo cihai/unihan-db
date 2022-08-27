@@ -30,7 +30,7 @@ extensions = [
     "sphinx.ext.linkcode",
     "sphinx_inline_tabs",
     "sphinx_copybutton",
-    "sphinx_issues",
+    "sphinx_autoissues",
     "sphinxext.opengraph",
     "sphinxext.rediraffe",
     "myst_parser",
@@ -87,6 +87,10 @@ html_sidebars = {
     ]
 }
 
+# sphinx-autoissues
+issuetracker = "github"
+issuetracker_project = "cihai/unihan-db"
+
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
 ogp_image = "_static/img/icons/icon-192x192.png"
@@ -99,9 +103,6 @@ copybutton_prompt_text = (
 )
 copybutton_prompt_is_regexp = True
 copybutton_remove_prompts = True
-
-# sphinx-issues
-issues_github_path = "cihai/unihan-db"
 
 # sphinxext-rediraffe
 rediraffe_redirects = "redirects.txt"
