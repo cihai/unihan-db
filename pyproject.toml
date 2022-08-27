@@ -59,7 +59,6 @@ sphinx = "*"
 furo = "*"
 sphinx-autobuild = "*"
 sphinx-autodoc-typehints = "*"
-sphinx-issues = "*"
 sphinx-inline-tabs = { version = "*", python = "^3.7" }
 sphinxext-opengraph = "*"
 sphinx-copybutton = "*"
@@ -92,7 +91,6 @@ types-appdirs = "^1.4.3"
 docs = [
   "docutils",
   "sphinx",
-  "sphinx-issues",
   "sphinx-autodoc-typehints",
   "sphinx-autobuild",
   "sphinx-copybutton",
