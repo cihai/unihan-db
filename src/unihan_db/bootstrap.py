@@ -229,7 +229,9 @@ def to_dict(obj, found=None):
     return result
 
 
-def get_session(engine_url="sqlite:///{user_data_dir}/unihan_db.db"):
+def get_session(
+    engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
+) -> sqlalchemy.orm.scoping.ScopedSession:
     """
     Return new SQLAlchemy session object from engine string.
 

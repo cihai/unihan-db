@@ -12,6 +12,6 @@ bootstrap.bootstrap_unihan(session)
 
 random_row = session.query(Unhn).order_by(func.random()).limit(1).first()
 
-pp = pprint.PrettyPrinter(indent=0)
+assert random_row is not None
 
-pp.pprint(bootstrap.to_dict(random_row))
+pprint.pprint(bootstrap.to_dict(random_row))
