@@ -5,9 +5,10 @@ import zipfile
 
 import pytest
 
-from sqlalchemy import MetaData, create_engine
-from sqlalchemy.engine import Engine
-from sqlalchemy.orm import Session, scoped_session, sessionmaker
+from sqlalchemy.engine import Engine, create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm.scoping import ScopedSession
+from sqlalchemy.schema import MetaData
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
@@ -39,7 +40,7 @@ def zip_file(zip_path: pathlib.Path, fixture_path: pathlib.Path) -> zipfile.ZipF
     return zf
 
 
-class UnihanOptions(t.TypedDict):
+class UnihanTestOptions(t.TypedDict):
     source: pathlib.Path
     work_dir: pathlib.Path
     zip_path: pathlib.Path
@@ -49,7 +50,7 @@ class UnihanOptions(t.TypedDict):
 @pytest.fixture
 def unihan_options(
     zip_file: pathlib.Path, zip_path: pathlib.Path, tmp_path: pathlib.Path
-) -> UnihanOptions:
+) -> UnihanTestOptions:
     return {
         "source": zip_path,
         "work_dir": tmp_path,
@@ -69,16 +70,13 @@ def engine() -> Engine:
 
 
 @pytest.fixture(scope="function")
-def session(engine: Engine, request: pytest.FixtureRequest) -> Session:
+def session(engine: Engine, request: pytest.FixtureRequest) -> ScopedSession:
     connection = engine.connect()
-    transaction = connection.begin()
     session_factory = sessionmaker(bind=engine)
     session = scoped_session(session_factory)
 
     def teardown() -> None:
-        transaction.rollback()
         connection.close()
-        session.remove()
 
     request.addfinalizer(teardown)
     return session
