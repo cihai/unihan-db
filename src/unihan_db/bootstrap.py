@@ -18,10 +18,6 @@ from .tables import Base, Unhn
 
 log = logging.getLogger(__name__)
 
-if t.TYPE_CHECKING:
-    from sqlalchemy.engine.result import RowProxy
-    from sqlalchemy.ext.declarative import DeclarativeMeta
-
 
 def setup_logger(logger: None = None, level: str = "INFO") -> None:
     """
