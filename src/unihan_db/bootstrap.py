@@ -20,6 +20,7 @@ log = logging.getLogger(__name__)
 
 if t.TYPE_CHECKING:
     from sqlalchemy.engine.result import RowProxy
+    from sqlalchemy.ext.declarative import DeclarativeMeta
 
 
 def setup_logger(logger: None = None, level: str = "INFO") -> None:
@@ -191,9 +192,7 @@ def bootstrap_unihan(
         log.info("Done adding rows.")
 
 
-def to_dict(
-    obj: "RowProxy", found: t.Optional[t.Set[str]] = None
-) -> t.Dict[str, t.Any]:
+def to_dict(obj: t.Any, found: t.Optional[t.Set[str]] = None) -> t.Dict[str, t.Any]:
     """
     Return dictionary of an SQLAlchemy Query result.
 
