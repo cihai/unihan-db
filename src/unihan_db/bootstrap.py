@@ -2,7 +2,6 @@ import logging
 import sys
 import typing as t
 from datetime import datetime
-from typing import Dict, Union
 
 import sqlalchemy.orm.scoping
 from sqlalchemy import create_engine
@@ -19,7 +18,9 @@ from .tables import Base, Unhn
 log = logging.getLogger(__name__)
 
 
-def setup_logger(logger: None = None, level: str = "INFO") -> None:
+def setup_logger(
+    logger: t.Optional[logging.Logger] = None, level: str = "INFO"
+) -> None:
     """
     Setup logging for CLI use.
 
@@ -110,7 +111,7 @@ UNIHAN_FIELDS = [
     "kCCCII",
 ]
 
-UNIHAN_ETL_DEFAULT_OPTIONS = {
+UNIHAN_ETL_DEFAULT_OPTIONS: t.Dict[str, t.Any] = {
     "input_files": UNIHAN_FILES,
     "fields": UNIHAN_FIELDS,
     "format": "python",
@@ -139,7 +140,7 @@ def is_bootstrapped(metadata: MetaData) -> bool:
 
 
 def bootstrap_data(
-    options: t.Optional[Dict[str, Union[str, bool]]] = None
+    options: t.Optional[t.Mapping[str, t.Union[str, bool]]] = None
 ) -> UntypedNormalizedData:
     if options is None:
         options = {}
@@ -154,7 +155,7 @@ def bootstrap_data(
 
 def bootstrap_unihan(
     session: sqlalchemy.orm.scoping.scoped_session,
-    options: t.Optional[Dict[str, Union[str, bool]]] = None,
+    options: t.Optional[t.Dict[str, t.Union[str, bool]]] = None,
 ) -> None:
     """Download, extract and import unihan to database."""
     if options is None:
@@ -170,6 +171,7 @@ def bootstrap_unihan(
 
         for char in data:
             c = Unhn(char=char["char"], ucn=char["ucn"])
+            assert isinstance(char, dict)
             importer.import_char(c, char)
             items.append(c)
 

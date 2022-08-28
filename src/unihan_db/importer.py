@@ -1,4 +1,4 @@
-from typing import Any, Dict
+import typing as t
 
 from unihan_db.tables import (
     Unhn,
@@ -46,7 +46,7 @@ from unihan_db.tables import (
 )
 
 
-def import_char(c: Unhn, char: Dict[str, Any]) -> None:  # NOQA: C901
+def import_char(c: Unhn, char: t.Dict[str, t.Any]) -> None:  # NOQA: C901
     if "kDefinition" in char:
         for d in char["kDefinition"]:
             c.kDefinition.append(kDefinition(definition=d))
