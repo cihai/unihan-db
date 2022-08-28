@@ -2,7 +2,7 @@ import logging
 import sys
 import typing as t
 from datetime import datetime
-from typing import Any, Dict, List, Union
+from typing import Dict, Union
 
 import sqlalchemy.orm.scoping
 from sqlalchemy import create_engine
@@ -10,12 +10,16 @@ from sqlalchemy.orm import class_mapper, scoped_session, sessionmaker
 from sqlalchemy.sql.schema import MetaData
 
 from unihan_etl import process as unihan
+from unihan_etl.types import UntypedNormalizedData
 from unihan_etl.util import merge_dict
 
 from . import dirs, importer
 from .tables import Base, Unhn
 
 log = logging.getLogger(__name__)
+
+if t.TYPE_CHECKING:
+    from sqlalchemy.engine.result import RowProxy
 
 
 def setup_logger(logger: None = None, level: str = "INFO") -> None:
@@ -139,15 +143,16 @@ def is_bootstrapped(metadata: MetaData) -> bool:
 
 def bootstrap_data(
     options: t.Optional[Dict[str, Union[str, bool]]] = None
-) -> List[Dict[str, Any]]:
+) -> UntypedNormalizedData:
     if options is None:
         options = {}
-
     options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options)
 
     p = unihan.Packager(options)
     p.download()
-    return p.export()
+    export = p.export()
+    assert export is not None
+    return export
 
 
 def bootstrap_unihan(
@@ -186,7 +191,9 @@ def bootstrap_unihan(
         log.info("Done adding rows.")
 
 
-def to_dict(obj, found=None):
+def to_dict(
+    obj: "RowProxy", found: t.Optional[t.Set[str]] = None
+) -> t.Dict[str, t.Any]:
     """
     Return dictionary of an SQLAlchemy Query result.
 
@@ -205,7 +212,7 @@ def to_dict(obj, found=None):
         dictionary representation of a SQLAlchemy query
     """
 
-    def _get_key_value(c):
+    def _get_key_value(c: str) -> t.Tuple[str, t.Any]:
         if isinstance(getattr(obj, c), datetime):
             return (c, getattr(obj, c).isoformat())
         else:
