@@ -272,4 +272,5 @@ def import_char(c: Unhn, char: t.Dict[str, t.Any]) -> None:  # NOQA: C901
                 page=d["location"]["page"], character=d["location"]["character"]
             )
         )
+
         c.kFennIndex.append(k)

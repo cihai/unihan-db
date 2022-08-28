@@ -25,6 +25,7 @@ joins`_.
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+from sqlalchemy.orm.collections import collection
 
 Base = declarative_base()
 
@@ -280,6 +281,10 @@ class GenericIndice(Base):
     locations = relationship("UnhnLocation")
 
     __mapper_args__ = {"polymorphic_identity": "generic_indice", "polymorphic_on": type}
+
+    @collection.appender
+    def append(self, append):
+        ...
 
 
 class kHanYu(GenericIndice):
