@@ -68,7 +68,7 @@ class Unhn(Base):
     kIRG_TSource = relationship("kIRG_TSource")
     kIRG_USource = relationship("kIRG_USource")
     kIRG_VSource = relationship("kIRG_VSource")
-    kGSR = relationship("kGSR")
+    kGSR = relationship("kGSR", uselist=True)
     kFennIndex = relationship("kFennIndex")
     kCheungBauerIndex = relationship("kCheungBauerIndex")
     kCCCII = relationship("kCCCII")
@@ -182,7 +182,7 @@ class GenericReading(Base):
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
     type = Column(String(50))
-    locations = relationship("UnhnLocation")
+    locations = relationship("UnhnLocation", lazy="dynamic")
     readings = relationship("UnhnReading")
 
     __mapper_args__ = {
@@ -278,7 +278,7 @@ class GenericIndice(Base):
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
     type = Column(String(50))
-    locations = relationship("UnhnLocation")
+    locations = relationship("UnhnLocation", lazy="dynamic")
 
     __mapper_args__ = {"polymorphic_identity": "generic_indice", "polymorphic_on": type}
 
@@ -310,6 +310,10 @@ class UnhnLocation(Base):
     page = Column(Integer)
     character = Column(Integer)
     virtual = Column(Integer, nullable=True)
+
+    @collection.appender
+    def append(self, append):
+        ...
 
 
 class kCihaiT(Base):
