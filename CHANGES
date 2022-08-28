@@ -13,6 +13,37 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+### Breaking changes
+
+- Tables no longer include the `to_dict()` helper method. This is due to
+  difficulty maintaing type annotations when the method was mapped.
+
+  Instead, use the `to_dict()` function on the result directly, #298
+
+  Assume a row:
+
+  ```python
+  random_row = session.query(Unhn).order_by(func.random()).limit(1).first()
+  ```
+
+  Before:
+
+  ```python
+  import pprint
+
+  pprint.pprint(random_row.to_dict())  # No longer works 0.7+
+
+  ```
+
+  Now:
+
+  ```python
+  import pprint
+  from unihan_db.bootstrap import to_dict
+
+  pprint.pprint(to_dict(random_row))
+  ```
+
 ## unihan-db 0.7.1 (2022-10-01)
 
 ### Packaging
