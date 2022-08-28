@@ -2,8 +2,8 @@ import logging
 import sys
 from datetime import datetime
 
-from sqlalchemy import create_engine, event
-from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import class_mapper, scoped_session, sessionmaker
 
 from unihan_etl import process as unihan
 from unihan_etl.util import merge_dict
@@ -220,19 +220,6 @@ def to_dict(obj, found=None):
     return result
 
 
-def add_to_dict(b):
-    """
-    Add :func:`.to_dict` method to SQLAlchemy Base object.
-
-    Parameters
-    ----------
-    b : :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
-        SQLAlchemy Base class
-    """
-    b.to_dict = to_dict
-    return b
-
-
 def get_session(engine_url="sqlite:///{user_data_dir}/unihan_db.db"):
     """
     Return new SQLAlchemy session object from engine string.
@@ -251,7 +238,6 @@ def get_session(engine_url="sqlite:///{user_data_dir}/unihan_db.db"):
     engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
     engine = create_engine(engine_url)
 
-    event.listen(mapper, "after_configured", add_to_dict(Base))
     Base.metadata.bind = engine
     Base.metadata.create_all()
     session_factory = sessionmaker(bind=engine)

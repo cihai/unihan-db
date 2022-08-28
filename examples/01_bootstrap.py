@@ -14,4 +14,4 @@ random_row = session.query(Unhn).order_by(func.random()).limit(1).first()
 
 pp = pprint.PrettyPrinter(indent=0)
 
-pp.pprint(random_row.to_dict())
+pp.pprint(bootstrap.to_dict(random_row))
