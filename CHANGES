@@ -13,6 +13,10 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+### Development
+
+- Add [flake8-bugbear](https://github.com/PyCQA/flake8-bugbear) (#300)
+
 ## unihan-db 0.6.0 (2022-08-21)
 
 ### Internal
