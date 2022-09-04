@@ -133,7 +133,10 @@ def is_bootstrapped(metadata):
         return False
 
 
-def bootstrap_data(options={}):
+def bootstrap_data(options=None):
+    if options is None:
+        options = {}
+
     options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options)
 
     p = unihan.Packager(options)
@@ -141,7 +144,10 @@ def bootstrap_data(options={}):
     return p.export()
 
 
-def bootstrap_unihan(session, options={}):
+def bootstrap_unihan(session, options=None):
+    if options is None:
+        options = {}
+
     """Download, extract and import unihan to database."""
     if session.query(Unhn).count() == 0:
         data = bootstrap_data(options)
