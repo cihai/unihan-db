@@ -924,7 +924,7 @@ python-versions = "*"
 
 [[package]]
 name = "unihan-etl"
-version = "0.17.2"
+version = "0.18.0"
 description = "Export UNIHAN data of Chinese, Japanese, Korean to CSV, JSON or YAML"
 category = "main"
 optional = false
@@ -989,7 +989,7 @@ test = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7"
-content-hash = "d203d6549831c8f44fb81d551c517edfa51a0a3d08f022e90b996803d32bd513"
+content-hash = "ebf172395fff0c36ffd97fedaa04b289ba96595786d9b3fe4579bd2c64c0f399"
 
 [metadata.files]
 alabaster = [
@@ -1573,8 +1573,8 @@ unicodecsv = [
     {file = "unicodecsv-0.14.1.tar.gz", hash = "sha256:018c08037d48649a0412063ff4eda26eaa81eff1546dbffa51fa5293276ff7fc"},
 ]
 unihan-etl = [
-    {file = "unihan-etl-0.17.2.tar.gz", hash = "sha256:3ebde87263e74b34e227607c603b0bc7f245daa17892ba1796ecbf1c1bbc6984"},
-    {file = "unihan_etl-0.17.2-py3-none-any.whl", hash = "sha256:2efa0357bda4f392798220586ef7e7445856eb1aa5c6eee06ec0f8067baa36c9"},
+    {file = "unihan-etl-0.18.0.tar.gz", hash = "sha256:d8bbe7b6fad12489e7818a871fe4cb5e73494d83677f6069da4f74ecec9d7f7b"},
+    {file = "unihan_etl-0.18.0-py3-none-any.whl", hash = "sha256:3aceafd23fb91aeffcfd0139db5cf14d9cbeb612fb4830a54807ed04077937fc"},
 ]
 urllib3 = [
     {file = "urllib3-1.26.12-py2.py3-none-any.whl", hash = "sha256:b930dd878d5a8afb066a637fbb35144fe7901e3b209d1cd4f524bd0e9deee997"},
