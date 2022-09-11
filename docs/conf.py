@@ -30,12 +30,18 @@ extensions = [
     "sphinx.ext.linkcode",
     "sphinx_inline_tabs",
     "sphinx_copybutton",
-    "sphinx_autoissues",
     "sphinxext.opengraph",
     "sphinxext.rediraffe",
     "myst_parser",
+    "sphinx_toctree_autodoc_fix",
+    "linkify_issues",
 ]
-myst_enable_extensions = ["colon_fence", "substitution", "replacements"]
+myst_enable_extensions = [
+    "colon_fence",
+    "substitution",
+    "replacements",
+    "strikethrough",
+]
 
 templates_path = ["_templates"]
 
@@ -87,9 +93,8 @@ html_sidebars = {
     ]
 }
 
-# sphinx-autoissues
-issuetracker = "github"
-issuetracker_project = "cihai/unihan-db"
+# linkify_issues
+issue_url_tpl = "https://github.com/cihai/unihan-db/issues/{issue_id}"
 
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
