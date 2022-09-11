@@ -33,7 +33,7 @@ keywords = [
 
 readme = "README.md"
 packages = [
-  { include = "unihan_db" },
+  { include = "*", from = "src" },
 ]
 include = [
   { path = "tests", format = "sdist" },
