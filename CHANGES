@@ -22,6 +22,8 @@ $ pip install --user --upgrade --pre unihan-db
   - Split out release to separate job so the PyPI Upload docker image isn't pulled on normal runs
   - Clean up CodeQL
 
+- Poetry: Update 1.1.x to 1.2.x
+
 ## unihan-db 0.7.0 (2022-09-11)
 
 **Maintenance only release, no fixes or features**
