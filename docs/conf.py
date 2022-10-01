@@ -100,6 +100,18 @@ html_sidebars = {
 # linkify_issues
 issue_url_tpl = about["__github__"] + "/issues/{issue_id}"
 
+# sphinx.ext.autodoc
+autoclass_content = "both"
+autodoc_member_order = "bysource"
+toc_object_entries_show_parents = "hide"
+autodoc_default_options = {
+    "undoc-members": True,
+    "members": True,
+    "private-members": True,
+    "show-inheritance": True,
+    "member-order": "bysource",
+}
+
 # sphinxext.opengraph
 ogp_site_url = about["__docs__"]
 ogp_image = "_static/img/icons/icon-192x192.png"
