@@ -120,12 +120,6 @@ plugins = [
   "sqlmypy",
 ]
 
-[[tool.mypy.overrides]]
-module = [
-  "unihan_etl.*",
-]
-ignore_missing_imports = true
-
 [tool.coverage.run]
 branch = true
 parallel = true
