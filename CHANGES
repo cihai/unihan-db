@@ -13,7 +13,7 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
-## unihan-db 0.7.1 (unreleased)
+## unihan-db 0.7.1 (2022-10-01)
 
 ### Packaging
 
