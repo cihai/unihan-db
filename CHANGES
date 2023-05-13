@@ -13,6 +13,8 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+## unihan-db 0.7.2 (2023-05-13)
+
 ### Packaging
 
 - Bump unihan-etl from 0.18.1 -> 0.18.2
