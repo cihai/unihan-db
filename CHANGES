@@ -13,6 +13,12 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+### Packaging
+
+- Bump unihan-etl from 0.18.1 -> 0.18.2
+
+  Typing update for `merge_dict`
+
 ## unihan-db 0.7.1 (2022-10-01)
 
 ### Packaging
