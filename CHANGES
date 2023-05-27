@@ -11,7 +11,20 @@ $ pip install --user --upgrade --pre unihan-db
 
 ## unihan-db 0.8.x (unreleased)
 
+<!-- Maintainers, insert changes / features for the next release here -->
+
 - _Insert changes/features/fixes for next release here_
+
+### Internal improvements
+
+- Move formatting, import sorting, and linting to [ruff].
+
+  This rust-based checker has dramatically improved performance. Linting and
+  formatting can be done almost instantly.
+
+  This change replaces black, isort, flake8 and flake8 plugins.
+
+[ruff]: https://ruff.rs
 
 ## unihan-db 0.7.2 (2023-05-13)
 
