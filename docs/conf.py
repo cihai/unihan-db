@@ -37,7 +37,6 @@ extensions = [
     "sphinxext.opengraph",
     "sphinxext.rediraffe",
     "myst_parser",
-    "sphinx_toctree_autodoc_fix",
     "linkify_issues",
 ]
 myst_enable_extensions = [
