@@ -15,6 +15,8 @@ $ pip install --user --upgrade --pre unihan-db
 
 - _Insert changes/features/fixes for next release here_
 
+_Maintenance only, no bug fixes or features_
+
 ### Internal improvements
 
 - Move formatting, import sorting, and linting to [ruff].
@@ -22,7 +24,7 @@ $ pip install --user --upgrade --pre unihan-db
   This rust-based checker has dramatically improved performance. Linting and
   formatting can be done almost instantly.
 
-  This change replaces black, isort, flake8 and flake8 plugins.
+  This change replaces isort, flake8 and flake8 plugins.
 - poetry: 1.4.0 -> 1.5.0
 
   See also: https://github.com/python-poetry/poetry/releases/tag/1.5.0
