@@ -83,6 +83,10 @@ $ cd unihan-etl
 
 [Bootstrap your environment and learn more about contributing](https://cihai.git-pull.com/contributing/). We use the same conventions / tools across all cihai projects: `pytest`, `sphinx`, `flake8`, `mypy`, `black`, `isort`, `tmuxp`, and file watcher helpers (e.g. `entr(1)`).
 
+## Python versions
+
+- 0.8.0: Last Python 3.7 release
+
 ## More information
 
 [![Docs](https://github.com/cihai/unihan-db/workflows/docs/badge.svg)](https://unihan-db.git-pull.com/)
