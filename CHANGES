@@ -13,7 +13,15 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
-- _Insert changes/features/fixes for next release here_
+### Breaking
+
+- **Python 3.7 Dropped**
+
+  Python 3.7 support has been dropped (#309)
+
+  Its end-of-life is June 27th, 2023 and Python 3.8 will add support for
+  `typing.TypedDict` and `typing.Protocol` out of the box without needing
+  `typing_extensions`.
 
 ## unihan-db 0.8.0 (2023-05-13)
 
