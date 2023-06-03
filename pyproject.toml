@@ -50,7 +50,7 @@ Repository = "https://github.com/cihai/unihan-db"
 [tool.poetry.dependencies]
 python = "^3.8"
 appdirs = "*"
-SQLAlchemy = "<2"
+SQLAlchemy = ">=2"
 unihan-etl = "~=0.19.1"
 
 [tool.poetry.group.dev.dependencies]
@@ -81,7 +81,6 @@ pytest-cov = "*"
 black = "*"
 ruff = "*"
 mypy = "*"
-sqlalchemy-stubs = "*"
 types-appdirs = "*"
 
 [tool.poetry.extras]
@@ -104,14 +103,10 @@ lint = [
   "black",
   "ruff",
   "mypy",
-  "sqlalchemy-stubs",
   "types-appdirs",
 ]
 
 [tool.mypy]
-plugins = [
-  "sqlmypy",
-]
 files = [
   "src/",
   "tests/",
