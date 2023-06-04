@@ -16,14 +16,12 @@ def test_import_object(session, engine):
 
 
 def test_import_unihan(zip_file, session, engine, unihan_options):
-    Base.metadata.bind = engine
-    Base.metadata.create_all()
+    Base.metadata.create_all(bind=engine)
     # bootstrap.bootstrap_unihan(Base.metadata, unihan_options)
 
 
 def test_import_unihan_raw(zip_file, session, engine, unihan_options):
-    Base.metadata.bind = engine
-    Base.metadata.create_all()
+    Base.metadata.create_all(bind=engine)
 
     bootstrap.bootstrap_unihan(session, unihan_options)
 
