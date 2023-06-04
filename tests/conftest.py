@@ -6,6 +6,7 @@ import sqlalchemy
 
 import pytest
 from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.orm.scoping import ScopedSession
 from unihan_db.bootstrap import UNIHAN_FILES
 
 
@@ -74,13 +75,15 @@ def metadata() -> sqlalchemy.MetaData:
 
 
 @pytest.fixture(scope="function")
-def session(engine, request):
+def session(
+    engine: sqlalchemy.Engine, request: pytest.FixtureRequest
+) -> ScopedSession[t.Any]:
     connection = engine.connect()
     transaction = connection.begin()
     session_factory = sessionmaker(bind=engine)
     session = scoped_session(session_factory)
 
-    def teardown():
+    def teardown() -> None:
         transaction.rollback()
         connection.close()
         session.remove()

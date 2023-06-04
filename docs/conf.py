@@ -171,7 +171,9 @@ intersphinx_mapping = {
 }
 
 
-def linkcode_resolve(domain, info):  # NOQA: C901
+def linkcode_resolve(
+    domain: str, info: t.Dict[str, str]
+) -> t.Union[None, str]:  # NOQA: C901
     """
     Determine the URL corresponding to Python object
 
@@ -204,7 +206,8 @@ def linkcode_resolve(domain, info):  # NOQA: C901
     except AttributeError:
         pass
     else:
-        obj = unwrap(obj)
+        if callable(obj):
+            obj = unwrap(obj)
 
     try:
         fn = inspect.getsourcefile(obj)
