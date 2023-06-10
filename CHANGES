@@ -13,7 +13,30 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+## Development
+
+- **Improved typings**
+
+  Move to strict mypy typings (#311)
+
+  This will make future refactoring simplifications easier and maintain code
+  quality in the long term, in addition to more intelligent completions.
+
+  [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
+
 ### Breaking
+
+- SQLAlchemy: Upgraded to v2 (#311)
+
+  Downstream packages will require SQLAlchemy v2 at a minimum.
+
+  Benefits in include: Built-in types for mypy, being able to use SQLAlchemy
+  core API against ORM entities.
+
+  See also: [What's new in SQLAlchemy
+  2.0](https://docs.sqlalchemy.org/en/20/changelog/whatsnew_20.html),
+  [Migrating to SQLAlchemy
+  2.0](https://docs.sqlalchemy.org/en/20/changelog/migration_20.html)
 
 - **Python 3.7 Dropped**
 
@@ -39,6 +62,7 @@ _Maintenance only, no bug fixes or features_
   formatting can be done almost instantly.
 
   This change replaces isort, flake8 and flake8 plugins.
+
 - poetry: 1.4.0 -> 1.5.0
 
   See also: https://github.com/python-poetry/poetry/releases/tag/1.5.0

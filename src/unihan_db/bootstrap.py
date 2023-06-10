@@ -1,11 +1,14 @@
 import logging
 import sys
 from datetime import datetime
-
+import typing as t
 from sqlalchemy import create_engine, event
-from sqlalchemy.orm import class_mapper, mapper, scoped_session, sessionmaker
-
+import sqlalchemy
+from sqlalchemy.orm import Session, class_mapper, scoped_session, sessionmaker
+from sqlalchemy.orm.decl_api import registry
+from sqlalchemy.orm.scoping import ScopedSession
 from unihan_etl import process as unihan
+from unihan_etl.types import UntypedUnihanData
 from unihan_etl.util import merge_dict
 
 from . import dirs, importer
@@ -13,8 +16,18 @@ from .tables import Base, Unhn
 
 log = logging.getLogger(__name__)
 
+mapper_reg = registry()
 
-def setup_logger(logger=None, level="INFO"):
+if t.TYPE_CHECKING:
+    from unihan_etl.types import (
+        UntypedNormalizedData,
+    )
+
+
+def setup_logger(
+    logger: t.Optional[logging.Logger] = None,
+    level: t.Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO",
+) -> None:
     """
     Setup logging for CLI use.
 
@@ -119,7 +132,7 @@ TABLE_NAME = "Unihan"
 DEFAULT_FIELDS = ["ucn", "char"]
 
 
-def is_bootstrapped(metadata):
+def is_bootstrapped(metadata: sqlalchemy.MetaData) -> bool:
     """Return True if cihai is correctly bootstrapped."""
     fields = UNIHAN_FIELDS + DEFAULT_FIELDS
     if TABLE_NAME in metadata.tables.keys():
@@ -133,24 +146,30 @@ def is_bootstrapped(metadata):
         return False
 
 
-def bootstrap_data(options=None):
+def bootstrap_data(
+    options: t.Union[UntypedUnihanData, None] = None,
+) -> t.Optional["UntypedNormalizedData"]:
     if options is None:
         options = {}
+    _options = options
 
-    options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options)
+    _options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), _options)
 
-    p = unihan.Packager(options)
+    p = unihan.Packager(_options)
     p.download()
     return p.export()
 
 
-def bootstrap_unihan(session, options=None):
-    if options is None:
-        options = {}
+def bootstrap_unihan(
+    session: t.Union[Session, ScopedSession[t.Any]],
+    options: t.Optional[UntypedUnihanData] = None,
+) -> None:
+    _options = options if options is not None else {}
 
     """Download, extract and import unihan to database."""
     if session.query(Unhn).count() == 0:
-        data = bootstrap_data(options)
+        data = bootstrap_data(_options)
+        assert data is not None
         log.info("bootstrap Unhn table")
         log.info("bootstrap Unhn table finished")
         count = 0
@@ -158,6 +177,7 @@ def bootstrap_unihan(session, options=None):
         items = []
 
         for char in data:
+            assert isinstance(char, dict)
             c = Unhn(char=char["char"], ucn=char["ucn"])
             importer.import_char(c, char)
             items.append(c)
@@ -177,7 +197,7 @@ def bootstrap_unihan(session, options=None):
         log.info("Done adding rows.")
 
 
-def to_dict(obj, found=None):
+def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, object]:
     """
     Return dictionary of an SQLAlchemy Query result.
 
@@ -196,21 +216,26 @@ def to_dict(obj, found=None):
         dictionary representation of a SQLAlchemy query
     """
 
-    def _get_key_value(c):
+    def _get_key_value(c: str) -> t.Any:
         if isinstance(getattr(obj, c), datetime):
             return (c, getattr(obj, c).isoformat())
         else:
             return (c, getattr(obj, c))
 
+    _found: t.Set[t.Any]
+
     if found is None:
-        found = set()
-    mapper = class_mapper(obj.__class__)
-    columns = [column.key for column in mapper.columns]
+        _found = set()
+    else:
+        _found = found
+
+    _mapper = class_mapper(obj.__class__)
+    columns = [column.key for column in _mapper.columns]
 
     result = dict(map(_get_key_value, columns))
-    for name, relation in mapper.relationships.items():
-        if relation not in found:
-            found.add(relation)
+    for name, relation in _mapper.relationships.items():
+        if relation not in _found:
+            _found.add(relation)
             related_obj = getattr(obj, name)
             if related_obj is not None:
                 if relation.uselist:
@@ -220,7 +245,7 @@ def to_dict(obj, found=None):
     return result
 
 
-def add_to_dict(b):
+def add_to_dict(b: t.Any) -> t.Any:
     """
     Add :func:`.to_dict` method to SQLAlchemy Base object.
 
@@ -233,7 +258,9 @@ def add_to_dict(b):
     return b
 
 
-def get_session(engine_url="sqlite:///{user_data_dir}/unihan_db.db"):
+def get_session(
+    engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
+) -> "ScopedSession[t.Any]":
     """
     Return new SQLAlchemy session object from engine string.
 
@@ -251,9 +278,8 @@ def get_session(engine_url="sqlite:///{user_data_dir}/unihan_db.db"):
     engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
     engine = create_engine(engine_url)
 
-    event.listen(mapper, "after_configured", add_to_dict(Base))
-    Base.metadata.bind = engine
-    Base.metadata.create_all()
+    event.listen(mapper_reg, "after_configured", add_to_dict(Base))
+    Base.metadata.create_all(bind=engine)
     session_factory = sessionmaker(bind=engine)
     session = scoped_session(session_factory)
 
