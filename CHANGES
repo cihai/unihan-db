@@ -9,22 +9,13 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
-## unihan-db 0.9.x (unreleased)
+## unihan-db 0.10.x (unreleased)
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
-## Development
+## unihan-db 0.9.0 (2023-06-10)
 
-- **Improved typings**
-
-  Move to strict mypy typings (#311)
-
-  This will make future refactoring simplifications easier and maintain code
-  quality in the long term, in addition to more intelligent completions.
-
-  [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
-
-### Breaking
+### Breaking changes
 
 - SQLAlchemy: Upgraded to v2 (#311)
 
@@ -45,6 +36,17 @@ $ pip install --user --upgrade --pre unihan-db
   Its end-of-life is June 27th, 2023 and Python 3.8 will add support for
   `typing.TypedDict` and `typing.Protocol` out of the box without needing
   `typing_extensions`.
+
+### Development
+
+- **Improved typings**
+
+  Move to strict mypy typings (#311)
+
+  This will make future refactoring simplifications easier and maintain code
+  quality in the long term, in addition to more intelligent completions.
+
+  [`mypy --strict`]: https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-strict
 
 ## unihan-db 0.8.0 (2023-05-13)
 

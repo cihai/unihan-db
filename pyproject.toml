@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "unihan_db"
-version = "0.8.0"
+version = "0.9.0"
 description = "SQLAlchemy models for UNIHAN CJK database"
 license = "MIT"
 authors = ["Tony Narlock <tony@git-pull.com>"]
