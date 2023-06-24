@@ -1386,20 +1386,20 @@ files = [
 
 [[package]]
 name = "unihan-etl"
-version = "0.22.1"
+version = "0.24.0"
 description = "Export UNIHAN data of Chinese, Japanese, Korean to CSV, JSON or YAML"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "unihan_etl-0.22.1-py3-none-any.whl", hash = "sha256:85458a65f2b011c995e35c347095ac3bdb8f87288fdafa258ed1ab7ff55f70dd"},
-    {file = "unihan_etl-0.22.1.tar.gz", hash = "sha256:11217e250a6309c1fc501741dd3c60ec5eb1d0988bfd5ee836117e8ff8aa3681"},
+    {file = "unihan_etl-0.24.0-py3-none-any.whl", hash = "sha256:7670368f49c8112f878efc2a4370763269a38418fe24271ca2fc6295544ae4fb"},
+    {file = "unihan_etl-0.24.0.tar.gz", hash = "sha256:451831b659d1efc49248538af1be228da392e75a29d330b4196fff89465fcc35"},
 ]
 
 [package.dependencies]
 appdirs = "*"
 PyYAML = "*"
 unicodecsv = "*"
-zhon = "*"
+zhon = ">=2.0,<2.1"
 
 [[package]]
 name = "urllib3"
@@ -1459,13 +1459,17 @@ watchmedo = ["PyYAML (>=3.10)"]
 
 [[package]]
 name = "zhon"
-version = "1.1.5"
+version = "2.0.0"
 description = "Zhon provides constants used in Chinese text processing."
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "zhon-1.1.5.tar.gz", hash = "sha256:793723575c46f10ace8846c579ce740b04c73e2aa583e04e000aedbd4a47f87f"},
+    {file = "zhon-2.0.0-py3-none-any.whl", hash = "sha256:a3e12593ebeab2f77b9f4bbe32f920bc684dafa840bccbf47fe95bb7059b6b44"},
+    {file = "zhon-2.0.0.tar.gz", hash = "sha256:766cf66d1e6a3b6efe43790fada0cc0c428e6d4bc0e3b28b66a07fe8175050a6"},
 ]
+
+[package.dependencies]
+appdirs = "*"
 
 [[package]]
 name = "zipp"
@@ -1491,4 +1495,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "18c4bbf34869f5c74421c8c35a40d94f0a926917cc265e46aed8c0c8292a414d"
+content-hash = "d8371ce506a89fe74ccd1bc228f00cb61689f1450e6b83cb4860723820172a23"
