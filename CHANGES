@@ -15,15 +15,26 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Development
 
-- unihan-etl: 
+- unihan-etl:
+
+  - 0.23.1 -> 0.24.0 (#314)
+
+    Subdependency updated for zhon: 1.1.5 -> 2.0.0 (#289, fixes #282)
+
+    [zhon 2.0's Release notes](https://github.com/tsroten/zhon/blob/v2.0.0/CHANGES.rst#v200-2023-06-24)
+
+    Fixes pytest warning related to regular expressions.
+
+  - 0.22.1 -> 0.23.0 (#314):
+
+    Package introduces configurable application directories (for test purposes)
+  - 0.21.1 -> 0.22.1 (#348):
+
+    {obj}`dataclasses.dataclass`-based configuration
 
   - 0.19.2 -> 0.20.0
 
     Drops python 3.7, normalizes `typing` imports
-
-  - 0.21.1 -> 0.22.1 (#348):
-
-    {obj}`dataclasses.dataclass`-based configuration
 
 ## unihan-db 0.9.0 (2023-06-10)
 
