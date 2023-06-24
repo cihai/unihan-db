@@ -15,8 +15,15 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Development
 
-- unihan-etl: Bump 0.19.2 -> 0.20.0 (Drops python 3.7, normalizes `typing`
-  imports)
+- unihan-etl: 
+
+  - 0.19.2 -> 0.20.0
+
+    Drops python 3.7, normalizes `typing` imports
+
+  - 0.21.1 -> 0.22.1 (#348):
+
+    {obj}`dataclasses.dataclass`-based configuration
 
 ## unihan-db 0.9.0 (2023-06-10)
 

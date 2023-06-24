@@ -7,7 +7,7 @@ import sqlalchemy
 from sqlalchemy.orm import Session, class_mapper, scoped_session, sessionmaker
 from sqlalchemy.orm.decl_api import registry
 from sqlalchemy.orm.scoping import ScopedSession
-from unihan_etl import process as unihan
+from unihan_etl import core as unihan
 from unihan_etl.types import UntypedUnihanData
 from unihan_etl.util import merge_dict
 
