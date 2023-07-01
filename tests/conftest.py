@@ -1,4 +1,3 @@
-import os
 import pathlib
 import typing as t
 import zipfile
@@ -27,8 +26,8 @@ def fixture_path(tests_path: pathlib.Path) -> pathlib.Path:
 
 
 @pytest.fixture
-def test_config_file(fixture_path: str) -> str:
-    return os.path.join(fixture_path, "test_config.yml")
+def test_config_file(fixture_path: pathlib.Path) -> pathlib.Path:
+    return fixture_path / "test_config.yml"
 
 
 @pytest.fixture
