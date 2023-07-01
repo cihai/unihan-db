@@ -2,10 +2,10 @@ import os
 import pathlib
 import typing as t
 import zipfile
-import sqlalchemy
 
 import pytest
-from sqlalchemy.orm import sessionmaker, scoped_session
+import sqlalchemy
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession
 from unihan_db.bootstrap import UNIHAN_FILES
 
