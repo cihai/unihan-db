@@ -1,10 +1,10 @@
-import os
+from appdirs import AppDirs as BaseAppDirs
 
-from appdirs import AppDirs
+from unihan_etl._internal.app_dirs import AppDirs
 
 #: XDG App directory locations
-dirs = AppDirs("unihan_db", "cihai team")  # appname  # app author
+dirs = AppDirs(_app_dirs=BaseAppDirs("unihan_db", "cihai team"))
 
 
-if not os.path.exists(dirs.user_data_dir):
-    os.makedirs(dirs.user_data_dir)
+if not dirs.user_data_dir.exists():
+    dirs.user_data_dir.mkdir(parents=True)
