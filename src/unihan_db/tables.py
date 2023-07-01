@@ -1,3 +1,4 @@
+# ruff: noqa: RUF012
 """
 unihan_db table design
 ----------------------
