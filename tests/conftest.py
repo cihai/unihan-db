@@ -1,11 +1,10 @@
-import os
 import pathlib
 import typing as t
 import zipfile
-import sqlalchemy
 
 import pytest
-from sqlalchemy.orm import sessionmaker, scoped_session
+import sqlalchemy
+from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession
 from unihan_db.bootstrap import UNIHAN_FILES
 
@@ -27,8 +26,8 @@ def fixture_path(tests_path: pathlib.Path) -> pathlib.Path:
 
 
 @pytest.fixture
-def test_config_file(fixture_path: str) -> str:
-    return os.path.join(fixture_path, "test_config.yml")
+def test_config_file(fixture_path: pathlib.Path) -> pathlib.Path:
+    return fixture_path / "test_config.yml"
 
 
 @pytest.fixture

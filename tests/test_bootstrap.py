@@ -1,10 +1,10 @@
 import pathlib
-from sqlalchemy.orm import Session
-from unihan_db import bootstrap
-from unihan_db.tables import Base, Unhn
 import typing as t
 
 import sqlalchemy
+from sqlalchemy.orm import Session
+from unihan_db import bootstrap
+from unihan_db.tables import Base, Unhn
 
 
 class UnihanOptions(t.TypedDict):

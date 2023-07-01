@@ -1,12 +1,14 @@
 import logging
 import sys
-from datetime import datetime
 import typing as t
-from sqlalchemy import create_engine, event
+from datetime import datetime
+
 import sqlalchemy
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session, class_mapper, scoped_session, sessionmaker
 from sqlalchemy.orm.decl_api import registry
 from sqlalchemy.orm.scoping import ScopedSession
+
 from unihan_etl import core as unihan
 from unihan_etl.types import UntypedUnihanData
 from unihan_etl.util import merge_dict
@@ -135,13 +137,10 @@ DEFAULT_FIELDS = ["ucn", "char"]
 def is_bootstrapped(metadata: sqlalchemy.MetaData) -> bool:
     """Return True if cihai is correctly bootstrapped."""
     fields = UNIHAN_FIELDS + DEFAULT_FIELDS
-    if TABLE_NAME in metadata.tables.keys():
+    if TABLE_NAME in metadata.tables:
         table = metadata.tables[TABLE_NAME]
 
-        if set(fields) == {c.name for c in table.columns}:
-            return True
-        else:
-            return False
+        return set(fields) == {c.name for c in table.columns}
     else:
         return False
 
@@ -224,10 +223,7 @@ def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, o
 
     _found: t.Set[t.Any]
 
-    if found is None:
-        _found = set()
-    else:
-        _found = found
+    _found = set() if found is None else found
 
     _mapper = class_mapper(obj.__class__)
     columns = [column.key for column in _mapper.columns]

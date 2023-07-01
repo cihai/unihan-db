@@ -1,4 +1,5 @@
 import typing as t
+
 from unihan_db.tables import (
     Unhn,
     UnhnLocation,
@@ -58,7 +59,7 @@ def import_char(
             t.Dict[str, object],
         ],
     ],
-) -> None:  # NOQA: C901
+) -> None:
     if "kDefinition" in char:
         for kd in char["kDefinition"]:
             c.kDefinition.append(kDefinition(definition=kd))
