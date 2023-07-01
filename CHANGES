@@ -13,6 +13,13 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Development
+
+- ruff: Improve code quality stringency (#315)
+- unihan-etl: 0.24.0 -> 0.25.0
+
+  Improve code quality via `ruff` rules strictness
+
 ## unihan-db 0.10.x (2023-06-24)
 
 _Maintenance only, no bug fixes, or new features_
