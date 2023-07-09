@@ -13,6 +13,12 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Development
+
+- unihan-etl: 0.25.0 -> 0.26.0
+
+  pytest plugin with cached UNIHAN data.
+
 ## unihan-db 0.11.0 (2023-07-01)
 
 _Maintenance only, no bug fixes, or new features_

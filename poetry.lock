@@ -1386,13 +1386,13 @@ files = [
 
 [[package]]
 name = "unihan-etl"
-version = "0.25.2"
+version = "0.26.0"
 description = "Export UNIHAN data of Chinese, Japanese, Korean to CSV, JSON or YAML"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "unihan_etl-0.25.2-py3-none-any.whl", hash = "sha256:4970366baeb4f091dbd90c16467a6c36d79f292a3e0de9e6faabe7c88275572c"},
-    {file = "unihan_etl-0.25.2.tar.gz", hash = "sha256:8670ceddc96c2e458bfddc09399debaa6f07c8779bfba77e99f2ac5b21011f94"},
+    {file = "unihan_etl-0.26.0-py3-none-any.whl", hash = "sha256:3d385c49cb0f3a3df291f3b7d252bc5fea4147119c4eddf0f1653ed2a78d4f16"},
+    {file = "unihan_etl-0.26.0.tar.gz", hash = "sha256:df17835309d45f9b49dee19f0a9a14872d268ce42a888801f49a4d227652c48a"},
 ]
 
 [package.dependencies]
@@ -1492,4 +1492,4 @@ test = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "4406355c99593a7837944592d3d6d12e063669c25acf3a7cf1635c1a0aceb349"
+content-hash = "49312cb99e4cffe2b49679790097712b40c235c2f602a1523e41afdbc7010756"
