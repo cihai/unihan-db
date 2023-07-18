@@ -9,15 +9,24 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
-## unihan-db 0.12.x (unreleased)
+## unihan-db 0.13.x (unreleased)
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+## unihan-db 0.12.0 (2023-07-18)
+
 ### Development
 
-- unihan-etl: 0.25.0 -> 0.26.0
+- unihan-etl:
 
-  pytest plugin with cached UNIHAN data.
+  - 0.26.0 -> 0.27.0 (#317)
+
+    Fixes for pytest plugin data locations.
+
+  - 0.25.0 -> 0.26.0
+
+    pytest plugin with cached UNIHAN data.
+
 - ruff: Code quality fixes (#316)
 
 ## unihan-db 0.11.0 (2023-07-01)
@@ -50,6 +59,7 @@ _Maintenance only, no bug fixes, or new features_
   - 0.22.1 -> 0.23.0 (#314):
 
     Package introduces configurable application directories (for test purposes)
+
   - 0.21.1 -> 0.22.1 (#348):
 
     {obj}`dataclasses.dataclass`-based configuration
