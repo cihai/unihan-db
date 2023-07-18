@@ -1,3 +1,4 @@
+# flake8: noqa: PERF401
 import typing as t
 
 from unihan_db.tables import (
