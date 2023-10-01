@@ -13,6 +13,10 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Packaging
+
+- Move pytest configuration to `pyproject.toml` (#318)
+
 ### Development
 
 - ruff: Remove ERA / `eradicate` plugin
