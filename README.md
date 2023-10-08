@@ -85,7 +85,7 @@ $ cd unihan-etl
 
 ## Python versions
 
-- 0.8.0: 
+- 0.8.0:
   - Last Python 3.7 release
   - Last SQLAlchemy 1.3 release
 
