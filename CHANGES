@@ -22,6 +22,9 @@ $ pip install --user --upgrade --pre unihan-db
 - ruff: Remove ERA / `eradicate` plugin
 
   This rule had too many false positives to trust. Other ruff rules have been beneficial.
+- Poetry: 1.6.1 -> 1.7.0
+
+  See also: https://github.com/python-poetry/poetry/blob/1.7.0/CHANGELOG.md
 
 ## unihan-db 0.12.0 (2023-07-18)
 
