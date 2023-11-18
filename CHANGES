@@ -25,6 +25,12 @@ $ pip install --user --upgrade --pre unihan-db
 - Poetry: 1.6.1 -> 1.7.0
 
   See also: https://github.com/python-poetry/poetry/blob/1.7.0/CHANGELOG.md
+- Move formatting from `black` to [`ruff format`] (#321)
+
+  This retains the same formatting style of `black` while eliminating a
+  dev dependency by using our existing rust-based `ruff` linter.
+
+  [`ruff format`]: https://docs.astral.sh/ruff/formatter/
 
 ## unihan-db 0.12.0 (2023-07-18)
 
