@@ -53,7 +53,7 @@ appdirs = "*"
 SQLAlchemy = ">=2"
 unihan-etl = "~=0.28.0"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.docs.dependencies]
 ### Docs ###
 sphinx = "*"
 furo = "*"
@@ -67,42 +67,25 @@ sphinxext-rediraffe = "*"
 myst_parser = ">=0.18.1"
 docutils = "*"
 
+[tool.poetry.group.test.dependencies]
 ### Testing ###
 pytest = "*"
 pytest-rerunfailures = "*"
 pytest-watcher = "*"
 
+[tool.poetry.group.coverage.dependencies]
 ### Coverage ###
 codecov = "*"
 coverage = "*"
 pytest-cov = "*"
 
+[tool.poetry.group.lint.dependencies]
 ### Lint ###
 ruff = "*"
 mypy = "*"
-types-appdirs = "*"
 
-[tool.poetry.extras]
-docs = [
-  "docutils",
-  "sphinx",
-  "sphinx-autodoc-typehints",
-  "sphinx-autobuild",
-  "sphinx-copybutton",
-  "sphinxext-opengraph",
-  "sphinx-inline-tabs",
-  "sphinxext-rediraffe",
-  "myst_parser",
-  "furo",
-  "gp-libs",
-]
-test = ["pytest", "pytest-rerunfailures", "pytest-watcher"]
-coverage = ["codecov", "coverage", "pytest-cov"]
-lint = [
-  "ruff",
-  "mypy",
-  "types-appdirs",
-]
+[tool.poetry.group.types.dependencies]
+types-appdirs = "*"
 
 [tool.mypy]
 strict = true
