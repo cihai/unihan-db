@@ -16,21 +16,43 @@ $ pip install --user --upgrade --pre unihan-db
 ### Packaging
 
 - Move pytest configuration to `pyproject.toml` (#318)
+- unihan-etl: 0.28.0 -> 0.29.0
+- Add Python 3.12 to trove classifiers
+- Packaging (poetry): Fix development dependencies
+
+  Per [Poetry's docs on managing dependencies] and `poetry check`, we had it wrong: Instead of using extras, we should create these:
+
+  ```toml
+  [tool.poetry.group.[group-name].dependencies]
+  dev-dependency = "1.0.0"
+  ```
+
+  Which we now do.
+
+  [Poetry's docs on managing dependencies]: https://python-poetry.org/docs/master/managing-dependencies/
 
 ### Development
 
 - ruff: Remove ERA / `eradicate` plugin
 
   This rule had too many false positives to trust. Other ruff rules have been beneficial.
+
 - Poetry: 1.6.1 -> 1.7.0
 
   See also: https://github.com/python-poetry/poetry/blob/1.7.0/CHANGELOG.md
+
 - Move formatting from `black` to [`ruff format`] (#321)
 
   This retains the same formatting style of `black` while eliminating a
   dev dependency by using our existing rust-based `ruff` linter.
 
   [`ruff format`]: https://docs.astral.sh/ruff/formatter/
+
+- CI: Update action packages to fix warnings
+
+  - [dorny/paths-filter]: 2.7.0 -> 2.11.1
+
+  [dorny/paths-filter]: https://github.com/dorny/paths-filter
 
 ## unihan-db 0.12.0 (2023-07-18)
 
