@@ -25,7 +25,7 @@ $ pip install --user --upgrade --pre unihan-db
   Per [Poetry's docs on managing dependencies] and `poetry check`, we had it wrong: Instead of using extras, we should create these:
 
   ```toml
-  [tool.poetry.group.[group-name].dependencies]
+  [tool.poetry.group.group-name.dependencies]
   dev-dependency = "1.0.0"
   ```
 
