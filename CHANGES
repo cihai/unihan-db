@@ -19,6 +19,10 @@ $ pip install --user --upgrade --pre unihan-db
 
   Documentation updates
 
+### CI
+
+- Move CodeQL from advanced configuration file to GitHub's default
+
 ## unihan-db 0.13.0 (2023-11-19)
 
 ### Packaging
