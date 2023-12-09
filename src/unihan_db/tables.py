@@ -1,6 +1,6 @@
 # ruff: noqa: RUF012
 """
-unihan_db table design
+unihan_db table design.
 ----------------------
 
 Tables are split into general categories, similar to how UNIHAN db's files are:
