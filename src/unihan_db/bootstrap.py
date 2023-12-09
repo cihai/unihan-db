@@ -270,7 +270,6 @@ def get_session(
     engine_url : str
         SQLAlchemy engine string
     """
-
     engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
     engine = create_engine(engine_url)
 
