@@ -14,6 +14,7 @@ can specify a custom database destination by passing a database url into
 
 ```python
 #!/usr/bin/env python
+"""Example for bootstrapping UNIHAN DB and print out a row."""
 import pprint
 
 from sqlalchemy.sql.expression import func
@@ -25,13 +26,15 @@ session = bootstrap.get_session()
 
 bootstrap.bootstrap_unihan(session)
 
-random_row = session.query(Unhn).order_by(
-    func.random()
-).limit(1).first()
+random_row_query = session.query(Unhn).order_by(func.random()).limit(1)
 
-pp = pprint.PrettyPrinter(indent=0)
+assert random_row_query is not None
 
-pp.pprint(random_row.to_dict())
+random_row = random_row_query.first()
+
+pprint.pprint(bootstrap.to_dict(random_row))
+
+pprint.pprint(random_row.to_dict())  # type:ignore
 ```
 
 Run:
