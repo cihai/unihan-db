@@ -1,19 +1,12 @@
 """Tests for bootstrapping of UNIHAN."""
 import pathlib
-import typing as t
 
 import sqlalchemy
 from sqlalchemy.orm import Session
 from unihan_db import bootstrap
 from unihan_db.tables import Base, Unhn
 
-
-class UnihanOptions(t.TypedDict):
-    """Typed dictionary for Unihan's options."""
-
-    source: pathlib.Path
-    work_dir: pathlib.Path
-    zip_path: pathlib.Path
+from .conftest import UnihanOptions
 
 
 def test_reflect_db(
