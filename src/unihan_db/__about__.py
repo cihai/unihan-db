@@ -1,3 +1,4 @@
+"""Metadata for unihan-db."""
 __title__ = "unihan-db"
 __package_name__ = "unihan_db"
 __description__ = "SQLAlchemy models for UNIHAN CJK database"
