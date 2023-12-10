@@ -9,15 +9,18 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
-## unihan-db 0.14.x (unreleased)
+## unihan-db 0.15.x (unreleased)
 
 <!-- Maintainers, insert changes / features for the next release here -->
+
+## unihan-db 0.14.0 (2023-12-10)
 
 ### Bug fixes
 
 - SQLAlchemy: Fix `add_to_dict()` event mapper bug (#325)
 
   This allows `Unhn` rows to use `row.as_dict()` once more.
+
 - Importer bug fixes (#327): `kXHC1983`, `kHanyuPinyin`, `kHanyuPinlu`, `kCCCII`
 - Bump unihan-etl 0.30.0post0 -> 0.30.1
 
