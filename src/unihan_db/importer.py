@@ -251,7 +251,6 @@ def import_char(
     if "kHanyuPinlu" in char:
         for _khp in char["kHanyuPinlu"]:
             assert isinstance(_khp, dict)
-            assert isinstance(_khp["location"], dict)
             c.kHanyuPinlu.append(
                 kHanyuPinlu(phonetic=_khp["phonetic"], frequency=_khp["frequency"])
             )
