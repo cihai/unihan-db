@@ -51,7 +51,7 @@ Repository = "https://github.com/cihai/unihan-db"
 [tool.poetry.dependencies]
 python = "^3.8"
 appdirs = "*"
-SQLAlchemy = ">=2"
+sqlalchemy = { extras = ["mypy"], version = "~2.0" }
 unihan-etl = "~=0.30.1"
 
 [tool.poetry.group.docs.dependencies]
@@ -94,6 +94,9 @@ strict = true
 files = [
   "src/",
   "tests/",
+]
+plugins = [
+  "sqlalchemy.ext.mypy.plugin"
 ]
 
 [tool.ruff]
