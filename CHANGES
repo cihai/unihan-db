@@ -28,6 +28,11 @@ $ pip install --user --upgrade --pre unihan-db
 ### CI
 
 - Move CodeQL from advanced configuration file to GitHub's default
+- ci: Add pydocstyle rule to ruff (#322)
+
+### Documentation
+
+- Add docstrings to functions, methods, classes, and packages (#322)
 
 ## unihan-db 0.13.0 (2023-11-19)
 
