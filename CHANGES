@@ -37,6 +37,7 @@ $ pip install --user --upgrade --pre unihan-db
 ### Documentation
 
 - Add docstrings to functions, methods, classes, and packages (#322)
+- Split API docs into multiple pages (#328)
 
 ## unihan-db 0.13.0 (2023-11-19)
 
