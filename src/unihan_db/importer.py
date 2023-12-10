@@ -71,7 +71,7 @@ def import_char(
             c.kCantonese.append(kCantonese(definition=kc))
     if "kCCCII" in char:
         for kci in char["kCCCII"]:
-            assert isinstance(kci, dict)
+            assert isinstance(kci, str)
             c.kCCCII.append(kCCCII(hex=kci))
     if "kMandarin" in char:
         km = char["kMandarin"]
