@@ -21,4 +21,4 @@ windows:
   - focus: true
   - pane
   - pane
-  - make starts
+  - make start
