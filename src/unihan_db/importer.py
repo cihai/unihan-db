@@ -105,7 +105,7 @@ def import_char(
                 khp_readings.append(UnhnReading(reading=reading))
             c.kHanyuPinyin.append(
                 kHanyuPinyin(
-                    locations=khp_readings,
+                    locations=khp_locations,
                     readings=khp_readings,
                 )
             )
