@@ -17,3 +17,5 @@ assert random_row_query is not None
 random_row = random_row_query.first()
 
 pprint.pprint(bootstrap.to_dict(random_row))
+
+pprint.pprint(random_row.to_dict())  # type:ignore
