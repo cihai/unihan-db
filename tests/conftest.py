@@ -7,6 +7,7 @@ import pytest
 import sqlalchemy
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession
+
 from unihan_db.bootstrap import UNIHAN_FILES
 
 from .types import UnihanOptions
