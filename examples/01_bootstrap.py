@@ -23,6 +23,8 @@ def run(unihan_options: t.Optional[t.Dict[str, object]] = None) -> None:
 
     pprint.pprint(bootstrap.to_dict(random_row))
 
+    assert random_row is not None
+
     pprint.pprint(random_row.to_dict())  # type:ignore
 
 
