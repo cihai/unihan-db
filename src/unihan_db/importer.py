@@ -71,7 +71,7 @@ def import_char(
             c.kCantonese.append(kCantonese(definition=kc))
     if "kCCCII" in char:
         for kci in char["kCCCII"]:
-            assert isinstance(kci, dict)
+            assert isinstance(kci, str)
             c.kCCCII.append(kCCCII(hex=kci))
     if "kMandarin" in char:
         km = char["kMandarin"]
@@ -105,7 +105,7 @@ def import_char(
                 khp_readings.append(UnhnReading(reading=reading))
             c.kHanyuPinyin.append(
                 kHanyuPinyin(
-                    locations=khp_readings,
+                    locations=khp_locations,
                     readings=khp_readings,
                 )
             )
@@ -153,7 +153,7 @@ def import_char(
                         substituted=loc["substituted"],
                     )
                 )
-            c.kXHC1983.append(kXHC1983(readings=kxhc_locations))
+            c.kXHC1983.append(kXHC1983(locations=kxhc_locations))
 
     if "kCheungBauer" in char:
         for _kcb in char["kCheungBauer"]:
@@ -251,7 +251,6 @@ def import_char(
     if "kHanyuPinlu" in char:
         for _khp in char["kHanyuPinlu"]:
             assert isinstance(_khp, dict)
-            assert isinstance(_khp["location"], dict)
             c.kHanyuPinlu.append(
                 kHanyuPinlu(phonetic=_khp["phonetic"], frequency=_khp["frequency"])
             )
