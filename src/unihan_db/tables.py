@@ -1,7 +1,5 @@
 # ruff: noqa: RUF012
-"""
-unihan_db table design
-----------------------
+"""unihan_db table schemas.
 
 Tables are split into general categories, similar to how UNIHAN db's files are:
 
@@ -28,10 +26,14 @@ from sqlalchemy.orm import DeclarativeBase, relationship
 
 
 class Base(DeclarativeBase):
+    """SQLAlchemy Declarative base class for UNIHAN DB."""
+
     pass
 
 
 class Unhn(Base):
+    """Unhn core table."""
+
     __tablename__ = "Unhn"
     char = Column(String(1), primary_key=True, index=True, unique=True)
     ucn = Column(String(8), index=True, unique=True)
@@ -76,6 +78,8 @@ class Unhn(Base):
 
 
 class kCCCII(Base):
+    """Table for kCCCII UNIHAN data."""
+
     __tablename__ = "kCCCII"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -83,6 +87,8 @@ class kCCCII(Base):
 
 
 class GenericIRG(Base):
+    """Table for Generic IRG UNIHAN data."""
+
     __tablename__ = "GenericIRG"
 
     id = Column(Integer, primary_key=True)
@@ -95,60 +101,80 @@ class GenericIRG(Base):
 
 
 class kIRG_GSource(GenericIRG):
+    """Table for kIRG_GSource UNIHAN data."""
+
     __tablename__ = "kIRG_GSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_GSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_HSource(GenericIRG):
+    """Table for kIRG_HSource UNIHAN data."""
+
     __tablename__ = "kIRG_HSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_HSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_JSource(GenericIRG):
+    """Table for kIRG_JSource UNIHAN data."""
+
     __tablename__ = "kIRG_JSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_JSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_KPSource(GenericIRG):
+    """Table for kIRG_KPSource UNIHAN data."""
+
     __tablename__ = "kIRG_KPSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_KPSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_KSource(GenericIRG):
+    """Table for kIRG_KSource UNIHAN data."""
+
     __tablename__ = "kIRG_KSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_KSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_MSource(GenericIRG):
+    """Table for kIRG_MSource UNIHAN data."""
+
     __tablename__ = "kIRG_MSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_MSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_TSource(GenericIRG):
+    """Table for kIRG_TSource UNIHAN data."""
+
     __tablename__ = "kIRG_TSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_TSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_USource(GenericIRG):
+    """Table for kIRG_USource UNIHAN data."""
+
     __tablename__ = "kIRG_USource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_USource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kIRG_VSource(GenericIRG):
+    """Table for kIRG_VSource UNIHAN data."""
+
     __tablename__ = "kIRG_VSource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_VSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
 class kDefinition(Base):
+    """Table for kDefinition UNIHAN data."""
+
     __tablename__ = "kDefinition"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -156,6 +182,8 @@ class kDefinition(Base):
 
 
 class kCantonese(Base):
+    """Table for kCantonese UNIHAN data."""
+
     __tablename__ = "kCantonese"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -163,6 +191,8 @@ class kCantonese(Base):
 
 
 class kMandarin(Base):
+    """Table for kManadarin UNIHAN data."""
+
     __tablename__ = "kMandarin"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -171,6 +201,8 @@ class kMandarin(Base):
 
 
 class kTotalStrokes(Base):
+    """Table for kTotalStrokes UNIHAN data."""
+
     __tablename__ = "kTotalStrokes"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -179,6 +211,8 @@ class kTotalStrokes(Base):
 
 
 class GenericReading(Base):
+    """Table for GenericReading UNIHAN data."""
+
     __tablename__ = "GenericReading"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -193,6 +227,8 @@ class GenericReading(Base):
 
 
 class GenericRadicalStrokes(Base):
+    """Table for GenericRadicalStrokes UNIHAN data."""
+
     __tablename__ = "GenericRadicalStrokes"
 
     id = Column(Integer, primary_key=True)
@@ -209,36 +245,48 @@ class GenericRadicalStrokes(Base):
 
 
 class kRSUnicode(GenericRadicalStrokes):
+    """Table for kRSUnicode UNIHAN data."""
+
     __tablename__ = "kRSUnicode"
     __mapper_args__ = {"polymorphic_identity": "kRSUnicode"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 
 class kRSJapanese(GenericRadicalStrokes):
+    """Table for kRSJapanese UNIHAN data."""
+
     __tablename__ = "kRSJapanese"
     __mapper_args__ = {"polymorphic_identity": "kRSJapanese"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 
 class kRSKangXi(GenericRadicalStrokes):
+    """Table for kRSKangXi UNIHAN data."""
+
     __tablename__ = "kRSKangXi"
     __mapper_args__ = {"polymorphic_identity": "kRSKangXi"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 
 class kRSKanWa(GenericRadicalStrokes):
+    """Table for kRSKanWa UNIHAN data."""
+
     __tablename__ = "kRSKanWa"
     __mapper_args__ = {"polymorphic_identity": "kRSKanWa"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 
 class kRSKorean(GenericRadicalStrokes):
+    """Table for kRSKorean UNIHAN data."""
+
     __tablename__ = "kRSKorean"
     __mapper_args__ = {"polymorphic_identity": "kRSKorean"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 
 class kRSAdobe_Japan1_6(Base):
+    """Table for kRSAdobe_Japan1_6 UNIHAN data."""
+
     __tablename__ = "kRSAdobe_Japan1_6"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -250,6 +298,8 @@ class kRSAdobe_Japan1_6(Base):
 
 
 class kHanyuPinyin(GenericReading):
+    """Table for kHanyuPinyin Unihan data."""
+
     __tablename__ = "kHanyuPinyin"
     __mapper_args__ = {"polymorphic_identity": "kHanyuPinyin"}
 
@@ -257,6 +307,8 @@ class kHanyuPinyin(GenericReading):
 
 
 class kXHC1983(GenericReading):
+    """Table for kXHC1983 UNIHAN data."""
+
     __tablename__ = "kXHC1983"
     __mapper_args__ = {"polymorphic_identity": "kXHC1983"}
 
@@ -265,6 +317,8 @@ class kXHC1983(GenericReading):
 
 
 class kCheungBauer(GenericReading):
+    """Table for kCheungBauer UNIHAN data."""
+
     __tablename__ = "kCheungBauer"
     __mapper_args__ = {"polymorphic_identity": "kCheungBauer"}
 
@@ -275,6 +329,8 @@ class kCheungBauer(GenericReading):
 
 
 class GenericIndice(Base):
+    """Table for GenericIndice UNIHAN data."""
+
     __tablename__ = "GenericIndice"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -285,6 +341,8 @@ class GenericIndice(Base):
 
 
 class kHanYu(GenericIndice):
+    """Table for kHanYu UNIHAN data."""
+
     __tablename__ = "kHanYu"
     __mapper_args__ = {"polymorphic_identity": "kHanYu"}
 
@@ -292,6 +350,8 @@ class kHanYu(GenericIndice):
 
 
 class kIRGHanyuDaZidian(GenericIndice):
+    """Table for kIRGHanyuDaZidian UNIHAN data."""
+
     __tablename__ = "kIRGHanyuDaZidian"
     __mapper_args__ = {"polymorphic_identity": "kIRGHanyuDaZidian"}
 
@@ -299,6 +359,8 @@ class kIRGHanyuDaZidian(GenericIndice):
 
 
 class UnhnLocation(Base):
+    """Table for UnhnLocation UNIHAN data."""
+
     __tablename__ = "UnhnLocation"
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey("GenericReading.id"))
@@ -310,6 +372,8 @@ class UnhnLocation(Base):
 
 
 class kCihaiT(Base):
+    """Table for kCihaiT UNIHAN data."""
+
     __tablename__ = "UnhnLocationkCihaiT"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -319,6 +383,8 @@ class kCihaiT(Base):
 
 
 class kIICoreSource(Base):
+    """Table for kIICoreSource UIHAN data."""
+
     __tablename__ = "kIICoreSource"
     id = Column(Integer, primary_key=True)
     source_id = Column(Integer, ForeignKey("kIICore.id"))
@@ -326,6 +392,8 @@ class kIICoreSource(Base):
 
 
 class kIICore(Base):
+    """Table for kIICore UNIHAN data."""
+
     __tablename__ = "kIICore"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -334,6 +402,8 @@ class kIICore(Base):
 
 
 class UnhnLocationkXHC1983(Base):
+    """Table for UnhnLocationkXHC1983 UNIHAN data."""
+
     __tablename__ = "UnhnLocationkXHC1983"
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey("GenericReading.id"))
@@ -345,6 +415,8 @@ class UnhnLocationkXHC1983(Base):
 
 
 class UnhnReading(Base):
+    """Table for UnhnReading UNIHAN data."""
+
     __tablename__ = "UnhnReading"
     id = Column(Integer, primary_key=True)
     generic_reading_id = Column(Integer, ForeignKey("GenericReading.id"))
@@ -352,6 +424,8 @@ class UnhnReading(Base):
 
 
 class kDaeJaweon(GenericIndice):
+    """Table for kDaewJaweon UNIHAN data."""
+
     __tablename__ = "kDaeJaweon"
     __mapper_args__ = {"polymorphic_identity": "kDaeJaweon"}
 
@@ -359,6 +433,8 @@ class kDaeJaweon(GenericIndice):
 
 
 class kIRGKangXi(GenericIndice):
+    """Table for kIRGKangXi UNIHAN data."""
+
     __tablename__ = "kIRGKangXi"
     __mapper_args__ = {"polymorphic_identity": "kIRGKangXi"}
 
@@ -366,6 +442,8 @@ class kIRGKangXi(GenericIndice):
 
 
 class kIRGDaeJaweon(GenericIndice):
+    """Table for kIRGDaeJaweon UNIHAN data."""
+
     __tablename__ = "kIRGDaeJaweon"
     __mapper_args__ = {"polymorphic_identity": "kIRGDaeJaweon"}
 
@@ -373,6 +451,8 @@ class kIRGDaeJaweon(GenericIndice):
 
 
 class kFenn(Base):
+    """Table for kFenn UNIHAN data."""
+
     __tablename__ = "kFenn"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -381,6 +461,8 @@ class kFenn(Base):
 
 
 class kHanyuPinlu(Base):
+    """Table for kHanyuPinlu UNIHAN data."""
+
     __tablename__ = "kHanyuPinlu"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -389,6 +471,8 @@ class kHanyuPinlu(Base):
 
 
 class kGSR(Base):
+    """Table for kGSR UNIHAN data."""
+
     __tablename__ = "kGSR"
     id = Column(Integer, primary_key=True)
     char_id = Column(String(1), ForeignKey("Unhn.char"))
@@ -398,6 +482,8 @@ class kGSR(Base):
 
 
 class kHDZRadBreak(GenericIndice):
+    """Table for kHDZRadBreak UNIHAN data."""
+
     __tablename__ = "kHDZRadBreak"
     __mapper_args__ = {"polymorphic_identity": "kHDZRadBreak"}
 
@@ -407,6 +493,8 @@ class kHDZRadBreak(GenericIndice):
 
 
 class kSBGY(GenericIndice):
+    """Table for kSBGY UNIHAN data."""
+
     __tablename__ = "kSBGY"
     __mapper_args__ = {"polymorphic_identity": "kSBGY"}
 
@@ -414,6 +502,8 @@ class kSBGY(GenericIndice):
 
 
 class kCheungBauerIndex(GenericIndice):
+    """Table for kCheungBauerIndex UNIHAN data."""
+
     __tablename__ = "kCheungBauerIndex"
     __mapper_args__ = {"polymorphic_identity": "kCheungBauerIndex"}
 
@@ -421,6 +511,8 @@ class kCheungBauerIndex(GenericIndice):
 
 
 class kFennIndex(GenericIndice):
+    """Table for kFennIndex UNIHAN data."""
+
     __tablename__ = "kFennIndex"
     __mapper_args__ = {"polymorphic_identity": "kFennIndex"}
 

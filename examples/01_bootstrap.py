@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""Example for bootstrapping UNIHAN DB."""
 import pprint
 
 from sqlalchemy.sql.expression import func

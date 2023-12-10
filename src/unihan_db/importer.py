@@ -1,4 +1,5 @@
 # flake8: noqa: PERF401
+"""Import functionality for UNIHAN DB."""
 import typing as t
 
 from unihan_db.tables import (
@@ -61,6 +62,7 @@ def import_char(
         ],
     ],
 ) -> None:
+    """Import character data into Unhn model (row in Unhn table)."""
     if "kDefinition" in char:
         for kd in char["kDefinition"]:
             c.kDefinition.append(kDefinition(definition=kd))

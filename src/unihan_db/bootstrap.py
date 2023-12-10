@@ -1,3 +1,4 @@
+"""Fetch, extract, transform, and load UNIHAN into database."""
 import logging
 import sys
 import typing as t
@@ -30,8 +31,7 @@ def setup_logger(
     logger: t.Optional[logging.Logger] = None,
     level: t.Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO",
 ) -> None:
-    """
-    Setup logging for CLI use.
+    """Configure logging for CLI use.
 
     Parameters
     ----------
@@ -148,6 +148,7 @@ def is_bootstrapped(metadata: sqlalchemy.MetaData) -> bool:
 def bootstrap_data(
     options: t.Union[UntypedUnihanData, None] = None,
 ) -> t.Optional["UntypedNormalizedData"]:
+    """Fetch, download, and export UNIHAN data in dictionary format."""
     if options is None:
         options = {}
     _options = options
@@ -163,6 +164,7 @@ def bootstrap_unihan(
     session: t.Union[Session, ScopedSession[t.Any]],
     options: t.Optional[UntypedUnihanData] = None,
 ) -> None:
+    """Bootstrap UNIHAN to database."""
     _options = options if options is not None else {}
 
     """Download, extract and import unihan to database."""
@@ -197,8 +199,7 @@ def bootstrap_unihan(
 
 
 def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, object]:
-    """
-    Return dictionary of an SQLAlchemy Query result.
+    """Return dictionary of an SQLAlchemy Query result.
 
     Supports recursive relationships.
 
@@ -242,8 +243,7 @@ def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, o
 
 
 def add_to_dict(b: t.Any) -> t.Any:
-    """
-    Add :func:`.to_dict` method to SQLAlchemy Base object.
+    """Add :func:`.to_dict` method to SQLAlchemy Base object.
 
     Parameters
     ----------
@@ -257,8 +257,7 @@ def add_to_dict(b: t.Any) -> t.Any:
 def get_session(
     engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
 ) -> "ScopedSession[t.Any]":
-    """
-    Return new SQLAlchemy session object from engine string.
+    """Return new SQLAlchemy session object from engine string.
 
     *engine_url* accepts a string template variable for ``{user_data_dir}``,
     which is replaced to the XDG data directory for the user running the script
@@ -270,7 +269,6 @@ def get_session(
     engine_url : str
         SQLAlchemy engine string
     """
-
     engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
     engine = create_engine(engine_url)
 

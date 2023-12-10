@@ -1,16 +1,12 @@
+"""Tests for bootstrapping of UNIHAN."""
 import pathlib
-import typing as t
 
 import sqlalchemy
 from sqlalchemy.orm import Session
 from unihan_db import bootstrap
 from unihan_db.tables import Base, Unhn
 
-
-class UnihanOptions(t.TypedDict):
-    source: pathlib.Path
-    work_dir: pathlib.Path
-    zip_path: pathlib.Path
+from .types import UnihanOptions
 
 
 def test_reflect_db(
@@ -18,10 +14,12 @@ def test_reflect_db(
     unihan_options: UnihanOptions,
     metadata: sqlalchemy.MetaData,
 ) -> None:
+    """Test is_bootstrapped()."""
     assert not bootstrap.is_bootstrapped(metadata)
 
 
 def test_import_object(session: Session, engine: sqlalchemy.Engine) -> None:
+    """Test importing and querying of character to Unhn table."""
     Base.metadata.create_all(engine)
     session.add(Unhn(char="好", ucn="U+4E09"))
     session.commit()
@@ -36,6 +34,7 @@ def test_import_unihan(
     engine: sqlalchemy.Engine,
     unihan_options: UnihanOptions,
 ) -> None:
+    """Test creation of UNIHAN database."""
     Base.metadata.create_all(bind=engine)
 
 
@@ -45,6 +44,7 @@ def test_import_unihan_raw(
     engine: sqlalchemy.Engine,
     unihan_options: UnihanOptions,
 ) -> None:
+    """Test import of UNIHAN data to database."""
     Base.metadata.create_all(bind=engine)
 
     bootstrap.bootstrap_unihan(session, unihan_options)
