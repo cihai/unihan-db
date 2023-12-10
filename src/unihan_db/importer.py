@@ -153,7 +153,7 @@ def import_char(
                         substituted=loc["substituted"],
                     )
                 )
-            c.kXHC1983.append(kXHC1983(readings=kxhc_locations))
+            c.kXHC1983.append(kXHC1983(locations=kxhc_locations))
 
     if "kCheungBauer" in char:
         for _kcb in char["kCheungBauer"]:
