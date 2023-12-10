@@ -13,6 +13,12 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Bug fixes
+
+- Bump unihan-etl 0.30.0post0 -> 0.30.1
+
+  Fix `kRSUnicode` double apostrophes.
+
 ### Development
 
 - unihan-etl: 0.29.0 -> 0.30.0post0
