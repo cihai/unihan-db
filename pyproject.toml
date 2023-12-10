@@ -115,7 +115,7 @@ select = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["unihan_etl", "cihai"]
+known-first-party = ["unihan_db", "unihan_etl", "cihai"]
 combine-as-imports = true
 
 [tool.ruff.pydocstyle]
