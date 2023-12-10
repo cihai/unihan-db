@@ -6,7 +6,7 @@ from datetime import datetime
 
 import sqlalchemy
 from sqlalchemy import create_engine, event
-from sqlalchemy.orm import Session, class_mapper, scoped_session, sessionmaker
+from sqlalchemy.orm import Mapper, Session, class_mapper, scoped_session, sessionmaker
 from sqlalchemy.orm.decl_api import registry
 from sqlalchemy.orm.scoping import ScopedSession
 
@@ -198,6 +198,12 @@ def bootstrap_unihan(
         log.info("Done adding rows.")
 
 
+@event.listens_for(Unhn, "before_mapper_configured", once=True)
+def setup_orm_mappings(mapper: Mapper[Base], class_: Base) -> None:
+    """Add special methods to Base declarative model used in Unihan DB."""
+    add_to_dict(class_)  # Add .to_dict() to rows returned
+
+
 def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, object]:
     """Return dictionary of an SQLAlchemy Query result.
 
@@ -272,7 +278,6 @@ def get_session(
     engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
     engine = create_engine(engine_url)
 
-    event.listen(mapper_reg, "after_configured", add_to_dict(Base))
     Base.metadata.create_all(bind=engine)
     session_factory = sessionmaker(bind=engine)
     session = scoped_session(session_factory)
