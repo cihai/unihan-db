@@ -39,6 +39,24 @@ $ pip install --user --upgrade --pre unihan-db
 - Add docstrings to functions, methods, classes, and packages (#322)
 - Split API docs into multiple pages (#328)
 
+### Tests
+
+- Test `examples/` (#324)
+
+  These are high-level integrative tests of the same example code the project
+  uses in documentation.
+
+  This brings code coverage from 69.77 to 93.92%.
+
+  **A note on test times**
+
+  - CI (GitHub Actions) can take 5-6 minutes per test
+
+    This may change in future cases when UNIHAN is cached.
+
+  - Initial (cold) py.tests on local environments won't be cached and will take
+    similar times. Subsequent tests can be <0.6 seconds.
+
 ## unihan-db 0.13.0 (2023-11-19)
 
 ### Packaging
