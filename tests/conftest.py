@@ -9,13 +9,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.orm.scoping import ScopedSession
 from unihan_db.bootstrap import UNIHAN_FILES
 
-
-class UnihanOptions(t.TypedDict):
-    """Unihan options dictionary."""
-
-    source: pathlib.Path
-    work_dir: pathlib.Path
-    zip_path: pathlib.Path
+from .types import UnihanOptions
 
 
 @pytest.fixture

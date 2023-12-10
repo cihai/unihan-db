@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from unihan_db import bootstrap
 from unihan_db.tables import Base, Unhn
 
-from .conftest import UnihanOptions
+from .types import UnihanOptions
 
 
 def test_reflect_db(
