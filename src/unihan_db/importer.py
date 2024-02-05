@@ -37,10 +37,6 @@ from unihan_db.tables import (
     kIRGKangXi,
     kMandarin,
     kRSAdobe_Japan1_6,
-    kRSJapanese,
-    kRSKangXi,
-    kRSKanWa,
-    kRSKorean,
     kRSUnicode,
     kSBGY,
     kTotalStrokes,
@@ -285,10 +281,6 @@ def import_char(
 
     rs_fields = (  # radical-stroke fields, since they're the same structure
         ("kRSUnicode", kRSUnicode, c.kRSUnicode),
-        ("kRSJapanese", kRSJapanese, c.kRSJapanese),
-        ("kRSKangXi", kRSKangXi, c.kRSKangXi),
-        ("kRSKanWa", kRSKanWa, c.kRSKanWa),
-        ("kRSKorean", kRSKorean, c.kRSKorean),
     )
 
     for f_rs, RSModel, rs_column in rs_fields:
