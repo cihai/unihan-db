@@ -58,18 +58,16 @@ class Unhn(Base):
     kHDZRadBreak = relationship("kHDZRadBreak")
     kSBGY = relationship("kSBGY")
     kRSUnicode = relationship("kRSUnicode")
-    kRSJapanese = relationship("kRSJapanese")
-    kRSKangXi = relationship("kRSKangXi")
-    kRSKanWa = relationship("kRSKanWa")
-    kRSKorean = relationship("kRSKorean")
     kIRG_GSource = relationship("kIRG_GSource")
     kIRG_HSource = relationship("kIRG_HSource")
     kIRG_JSource = relationship("kIRG_JSource")
     kIRG_KPSource = relationship("kIRG_KPSource")
     kIRG_KSource = relationship("kIRG_KSource")
     kIRG_MSource = relationship("kIRG_MSource")
+    kIRG_SSource = relationship("kIRG_SSource")
     kIRG_TSource = relationship("kIRG_TSource")
     kIRG_USource = relationship("kIRG_USource")
+    kIRG_UKSource = relationship("kIRG_UKSource")
     kIRG_VSource = relationship("kIRG_VSource")
     kGSR = relationship("kGSR")
     kFennIndex = relationship("kFennIndex")
@@ -148,6 +146,14 @@ class kIRG_MSource(GenericIRG):
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
+class kIRG_SSource(GenericIRG):
+    """Table for kIRG_SSource UNIHAN data."""
+
+    __tablename__ = "kIRG_SSource"
+    __mapper_args__ = {"polymorphic_identity": "kIRG_SSource"}
+    id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
+
+
 class kIRG_TSource(GenericIRG):
     """Table for kIRG_TSource UNIHAN data."""
 
@@ -161,6 +167,14 @@ class kIRG_USource(GenericIRG):
 
     __tablename__ = "kIRG_USource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_USource"}
+    id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
+
+
+class kIRG_UKSource(GenericIRG):
+    """Table for kIRG_UKSource UNIHAN data."""
+
+    __tablename__ = "kIRG_UKSource"
+    __mapper_args__ = {"polymorphic_identity": "kIRG_UKSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
@@ -249,38 +263,6 @@ class kRSUnicode(GenericRadicalStrokes):
 
     __tablename__ = "kRSUnicode"
     __mapper_args__ = {"polymorphic_identity": "kRSUnicode"}
-    id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
-
-
-class kRSJapanese(GenericRadicalStrokes):
-    """Table for kRSJapanese UNIHAN data."""
-
-    __tablename__ = "kRSJapanese"
-    __mapper_args__ = {"polymorphic_identity": "kRSJapanese"}
-    id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
-
-
-class kRSKangXi(GenericRadicalStrokes):
-    """Table for kRSKangXi UNIHAN data."""
-
-    __tablename__ = "kRSKangXi"
-    __mapper_args__ = {"polymorphic_identity": "kRSKangXi"}
-    id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
-
-
-class kRSKanWa(GenericRadicalStrokes):
-    """Table for kRSKanWa UNIHAN data."""
-
-    __tablename__ = "kRSKanWa"
-    __mapper_args__ = {"polymorphic_identity": "kRSKanWa"}
-    id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
-
-
-class kRSKorean(GenericRadicalStrokes):
-    """Table for kRSKorean UNIHAN data."""
-
-    __tablename__ = "kRSKorean"
-    __mapper_args__ = {"polymorphic_identity": "kRSKorean"}
     id = Column(Integer, ForeignKey("GenericRadicalStrokes.id"), primary_key=True)
 
 

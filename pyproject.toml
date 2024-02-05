@@ -52,7 +52,7 @@ Repository = "https://github.com/cihai/unihan-db"
 python = "^3.8"
 appdirs = "*"
 SQLAlchemy = ">=2"
-unihan-etl = "~=0.30.1"
+unihan-etl = "~=0.32.0"
 
 [tool.poetry.group.docs.dependencies]
 ### Docs ###
@@ -159,6 +159,10 @@ testpaths = [
 filterwarnings = [
   "ignore:The frontend.Option(Parser)? class.*:DeprecationWarning::",
 ]
+
+[tool.pytest-watcher]
+now = true
+ignore_patterns = ["*.py.*.py"]
 
 [build-system]
 requires = ["poetry_core>=1.0.0"]
