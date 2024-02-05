@@ -13,6 +13,28 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Breaking changes: UNIHAN 15.1.0 (#330)
+
+- Bump unihan-etl 0.32.0
+
+#### Removed fields
+
+- 15.1.0: [kHKSCS](https://www.unicode.org/L2/L2023/23005.htm#174-C10),
+  [kIRGDaiKanwaZiten](https://www.unicode.org/L2/L2022/22241.htm#173-C9),
+  [kKPS0](https://www.unicode.org/L2/L2023/23005.htm#174-C11),
+  [kKPS1](https://www.unicode.org/L2/L2023/23005.htm#174-C11),
+  [kKSC0](https://www.unicode.org/L2/L2023/23005.htm#174-C9),
+  [kKSC1](https://www.unicode.org/L2/L2023/23005.htm#174-C9),
+  [kRSKangXi](https://www.unicode.org/L2/L2022/22241.htm#173-C12)
+- 13.0.0:
+  [kRSJapanese](https://www.unicode.org/cgi-bin/GetDocumentLink?L2/19-209),
+  [kRSKanWa](https://www.unicode.org/cgi-bin/GetDocumentLink?L2/19-209),
+  [kRSKorean](https://www.unicode.org/cgi-bin/GetDocumentLink?L2/19-209)
+- 12.0.0:
+  [kDefaultSortKey](https://www.unicode.org/cgi-bin/GetDocumentLink?L2/18-118)
+  (private property)
+
+
 ## unihan-db 0.14.0 (2023-12-10)
 
 ### Bug fixes
