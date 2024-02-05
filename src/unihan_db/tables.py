@@ -64,8 +64,10 @@ class Unhn(Base):
     kIRG_KPSource = relationship("kIRG_KPSource")
     kIRG_KSource = relationship("kIRG_KSource")
     kIRG_MSource = relationship("kIRG_MSource")
+    kIRG_SSource = relationship("kIRG_SSource")
     kIRG_TSource = relationship("kIRG_TSource")
     kIRG_USource = relationship("kIRG_USource")
+    kIRG_UKSource = relationship("kIRG_UKSource")
     kIRG_VSource = relationship("kIRG_VSource")
     kGSR = relationship("kGSR")
     kFennIndex = relationship("kFennIndex")
@@ -144,6 +146,14 @@ class kIRG_MSource(GenericIRG):
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
+class kIRG_SSource(GenericIRG):
+    """Table for kIRG_SSource UNIHAN data."""
+
+    __tablename__ = "kIRG_SSource"
+    __mapper_args__ = {"polymorphic_identity": "kIRG_SSource"}
+    id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
+
+
 class kIRG_TSource(GenericIRG):
     """Table for kIRG_TSource UNIHAN data."""
 
@@ -157,6 +167,14 @@ class kIRG_USource(GenericIRG):
 
     __tablename__ = "kIRG_USource"
     __mapper_args__ = {"polymorphic_identity": "kIRG_USource"}
+    id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
+
+
+class kIRG_UKSource(GenericIRG):
+    """Table for kIRG_UKSource UNIHAN data."""
+
+    __tablename__ = "kIRG_UKSource"
+    __mapper_args__ = {"polymorphic_identity": "kIRG_UKSource"}
     id = Column(Integer, ForeignKey("GenericIRG.id"), primary_key=True)
 
 
