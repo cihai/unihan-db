@@ -186,7 +186,9 @@ def import_char(
         for _kct in char["kCihaiT"]:
             assert isinstance(_kct, dict)
             c.kCihaiT.append(
-                kCihaiT(page=_kct["page"], row=_kct["row"], character=_kct["character"]),
+                kCihaiT(
+                    page=_kct["page"], row=_kct["row"], character=_kct["character"]
+                ),
             )
 
     if "kIICore" in char:
