@@ -95,7 +95,7 @@ def import_char(
                         page=loc["page"],
                         character=loc["character"],
                         virtual=loc["virtual"],
-                    )
+                    ),
                 )
             for reading in _khp["readings"]:
                 khp_readings.append(UnhnReading(reading=reading))
@@ -103,7 +103,7 @@ def import_char(
                 kHanyuPinyin(
                     locations=khp_locations,
                     readings=khp_readings,
-                )
+                ),
             )
 
     if "kHanYu" in char:
@@ -116,7 +116,7 @@ def import_char(
                     page=_khy["page"],
                     character=_khy["character"],
                     virtual=_khy["virtual"],
-                )
+                ),
             )
         c.kHanYu.append(kHanYu(locations=khy_locations))
 
@@ -131,7 +131,7 @@ def import_char(
                     page=_khdz["page"],
                     character=_khdz["character"],
                     virtual=_khdz["virtual"],
-                )
+                ),
             )
         c.kIRGHanyuDaZidian.append(kIRGHanyuDaZidian(locations=_khdz_locations))
 
@@ -147,7 +147,7 @@ def import_char(
                         character=loc["character"],
                         entry=loc["entry"],
                         substituted=loc["substituted"],
-                    )
+                    ),
                 )
             c.kXHC1983.append(kXHC1983(locations=kxhc_locations))
 
@@ -166,7 +166,7 @@ def import_char(
                     strokes=_kcb["strokes"],
                     cangjie=_kcb["cangjie"],
                     readings=k_readings,
-                )
+                ),
             )
 
     if "kRSAdobe_Japan1_6" in char:
@@ -179,14 +179,14 @@ def import_char(
                     radical=_kaj["radical"],
                     strokes=_kaj["strokes"],
                     strokes_residue=_kaj["strokes-residue"],
-                )
+                ),
             )
 
     if "kCihaiT" in char:
         for _kct in char["kCihaiT"]:
             assert isinstance(_kct, dict)
             c.kCihaiT.append(
-                kCihaiT(page=_kct["page"], row=_kct["row"], character=_kct["character"])
+                kCihaiT(page=_kct["page"], row=_kct["row"], character=_kct["character"]),
             )
 
     if "kIICore" in char:
@@ -208,9 +208,9 @@ def import_char(
                         page=_kdj["page"],
                         character=_kdj["character"],
                         virtual=_kdj["virtual"],
-                    )
-                ]
-            )
+                    ),
+                ],
+            ),
         )
 
     if "kIRGKangXi" in char:
@@ -222,7 +222,7 @@ def import_char(
                     page=_kikx["page"],
                     character=_kikx["character"],
                     virtual=_kikx["virtual"],
-                )
+                ),
             )
         c.kIRGKangXi.append(kIRGKangXi(locations=_kikx_locations))
 
@@ -235,7 +235,7 @@ def import_char(
                     page=_kidj["page"],
                     character=_kidj["character"],
                     virtual=_kidj["virtual"],
-                )
+                ),
             )
         c.kIRGDaeJaweon.append(kIRGDaeJaweon(locations=_kidj_locations))
 
@@ -248,7 +248,7 @@ def import_char(
         for _khp in char["kHanyuPinlu"]:
             assert isinstance(_khp, dict)
             c.kHanyuPinlu.append(
-                kHanyuPinlu(phonetic=_khp["phonetic"], frequency=_khp["frequency"])
+                kHanyuPinlu(phonetic=_khp["phonetic"], frequency=_khp["frequency"]),
             )
 
     if "kHDZRadBreak" in char:
@@ -265,9 +265,9 @@ def import_char(
                         page=_khrb["location"]["page"],
                         character=_khrb["location"]["character"],
                         virtual=_khrb["location"]["virtual"],
-                    )
+                    ),
                 ],
-            )
+            ),
         )
 
     if "kSBGY" in char:
@@ -275,7 +275,7 @@ def import_char(
         for _ksbgy in char["kSBGY"]:
             assert isinstance(_ksbgy, dict)
             _ksbgy_locations.append(
-                UnhnLocation(page=_ksbgy["page"], character=_ksbgy["character"])
+                UnhnLocation(page=_ksbgy["page"], character=_ksbgy["character"]),
             )
         c.kSBGY.append(kSBGY(locations=_ksbgy_locations))
 
@@ -292,7 +292,7 @@ def import_char(
                         radical=_md["radical"],
                         strokes=_md["strokes"],
                         simplified=_md["simplified"],
-                    )
+                    ),
                 )
 
     irg_fields = (  # IRG, since they're the same structure
@@ -321,7 +321,7 @@ def import_char(
                     set=_kgsr["set"],
                     letter=_kgsr["letter"],
                     apostrophe=_kgsr["apostrophe"],
-                )
+                ),
             )
 
     if "kCheungBauerIndex" in char:
@@ -334,9 +334,9 @@ def import_char(
                     UnhnLocation(
                         page=kcbi["location"]["page"],
                         character=kcbi["location"]["character"],
-                    )
-                ]
-            )
+                    ),
+                ],
+            ),
         )
 
     if "kFennIndex" in char:
@@ -348,6 +348,6 @@ def import_char(
                 locations=UnhnLocation(
                     page=_kFennIndex["location"]["page"],
                     character=_kFennIndex["location"]["character"],
-                )
-            )
+                ),
+            ),
         )

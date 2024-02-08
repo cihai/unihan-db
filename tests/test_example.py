@@ -14,7 +14,7 @@ class LoadScriptFn(t.Protocol):
     """Protocol typings for load_script()."""
 
     def __callable__(
-        self, example: str, project_root: pathlib.Path
+        self, example: str, project_root: pathlib.Path,
     ) -> types.ModuleType:
         """Return script as a module."""
         ...
