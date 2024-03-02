@@ -36,6 +36,11 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Development
 
+- ruff 0.2.2 -> 0.3.0 (#332)
+
+  Related formattings. Update CI to use `ruff check .` instead of `ruff .`.
+
+  See also: https://github.com/astral-sh/ruff/blob/v0.3.0/CHANGELOG.md
 - Strengthen linting (#331)
 
   - Add flake8-commas (COM)
