@@ -1,5 +1,6 @@
 # flake8: NOQA: E501
 """Sphinx documentation configuration for unihan-db."""
+
 import inspect
 import pathlib
 import sys

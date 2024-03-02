@@ -1,4 +1,5 @@
 """Pytest configuration for Unihan DB."""
+
 import pathlib
 import typing as t
 import zipfile

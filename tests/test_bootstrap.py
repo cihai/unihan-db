@@ -1,4 +1,5 @@
 """Tests for bootstrapping of UNIHAN."""
+
 import pathlib
 
 import sqlalchemy
