@@ -1,4 +1,5 @@
 """Fetch, extract, transform, and load UNIHAN into database."""
+
 import logging
 import sys
 import typing as t

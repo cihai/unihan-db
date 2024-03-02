@@ -1,4 +1,5 @@
 """Typings for unihan-db tests."""
+
 import pathlib
 import typing as t
 

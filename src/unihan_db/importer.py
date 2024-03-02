@@ -1,5 +1,6 @@
 # flake8: noqa: PERF401
 """Import functionality for UNIHAN DB."""
+
 import typing as t
 
 from unihan_db.tables import (

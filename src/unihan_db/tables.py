@@ -21,6 +21,7 @@ joins`_.
 .. _polymorphic joins: https://en.wikipedia.org/wiki/Polymorphic_association
 
 """
+
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import DeclarativeBase, relationship
 

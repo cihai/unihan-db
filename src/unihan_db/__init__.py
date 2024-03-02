@@ -1,4 +1,5 @@
 """unihan_db package."""
+
 from appdirs import AppDirs as BaseAppDirs
 
 from unihan_etl._internal.app_dirs import AppDirs

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """Example for bootstrapping UNIHAN DB."""
+
 import pprint
 import typing as t
 
