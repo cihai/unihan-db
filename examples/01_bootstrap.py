@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 """Example for bootstrapping UNIHAN DB."""
 
-import pprint
 import typing as t
 
 from sqlalchemy.sql.expression import func
@@ -22,11 +21,7 @@ def run(unihan_options: t.Optional[t.Dict[str, object]] = None) -> None:
 
     random_row = random_row_query.first()
 
-    pprint.pprint(bootstrap.to_dict(random_row))
-
     assert random_row is not None
-
-    pprint.pprint(random_row.to_dict())  # type:ignore
 
 
 if __name__ == "__main__":

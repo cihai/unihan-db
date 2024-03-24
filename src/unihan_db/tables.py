@@ -29,8 +29,6 @@ from sqlalchemy.orm import DeclarativeBase, relationship
 class Base(DeclarativeBase):
     """SQLAlchemy Declarative base class for UNIHAN DB."""
 
-    pass
-
 
 class Unhn(Base):
     """Unhn core table."""
