@@ -140,8 +140,7 @@ def is_bootstrapped(metadata: sqlalchemy.MetaData) -> bool:
         table = metadata.tables[TABLE_NAME]
 
         return set(fields) == {c.name for c in table.columns}
-    else:
-        return False
+    return False
 
 
 def bootstrap_data(
@@ -224,8 +223,7 @@ def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, o
     def _get_key_value(c: str) -> t.Any:
         if isinstance(getattr(obj, c), datetime):
             return (c, getattr(obj, c).isoformat())
-        else:
-            return (c, getattr(obj, c))
+        return (c, getattr(obj, c))
 
     _found: t.Set[t.Any]
 
@@ -274,11 +272,9 @@ def get_session(
     engine_url : str
         SQLAlchemy engine string
     """
-    engine_url = engine_url.format(**{"user_data_dir": dirs.user_data_dir})
+    engine_url = engine_url.format(user_data_dir=dirs.user_data_dir)
     engine = create_engine(engine_url)
 
     Base.metadata.create_all(bind=engine)
     session_factory = sessionmaker(bind=engine)
-    session = scoped_session(session_factory)
-
-    return session
+    return scoped_session(session_factory)
