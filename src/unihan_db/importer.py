@@ -188,7 +188,9 @@ def import_char(
             assert isinstance(_kct, dict)
             c.kCihaiT.append(
                 kCihaiT(
-                    page=_kct["page"], row=_kct["row"], character=_kct["character"]
+                    page=_kct["page"],
+                    row=_kct["row"],
+                    character=_kct["character"],
                 ),
             )
 

@@ -11,34 +11,35 @@ from sqlalchemy.orm.scoping import ScopedSession
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
-from .types import UnihanOptions
+if t.TYPE_CHECKING:
+    from .types import UnihanOptions
 
 
-@pytest.fixture
+@pytest.fixture()
 def tests_path() -> pathlib.Path:
     """Return ``Path`` of tests/."""
     return pathlib.Path(__file__).parent
 
 
-@pytest.fixture
+@pytest.fixture()
 def fixture_path(tests_path: pathlib.Path) -> pathlib.Path:
     """Return ``Path`` of tests/fixtures/."""
     return tests_path / "fixtures"
 
 
-@pytest.fixture
+@pytest.fixture()
 def test_config_file(fixture_path: pathlib.Path) -> pathlib.Path:
     """Return ``Path`` to test_config.yml."""
     return fixture_path / "test_config.yml"
 
 
-@pytest.fixture
+@pytest.fixture()
 def zip_path(tmp_path: pathlib.Path) -> pathlib.Path:
     """Return path to temporary test Unihan.zip."""
     return tmp_path / "Unihan.zip"
 
 
-@pytest.fixture
+@pytest.fixture()
 def zip_file(zip_path: pathlib.Path, fixture_path: pathlib.Path) -> zipfile.ZipFile:
     """Zip and return archive with ``UNIHAN_FILES``."""
     _files = []
@@ -51,7 +52,7 @@ def zip_file(zip_path: pathlib.Path, fixture_path: pathlib.Path) -> zipfile.ZipF
     return zf
 
 
-@pytest.fixture
+@pytest.fixture()
 def unihan_options(
     zip_file: zipfile.ZipFile,
     zip_path: pathlib.Path,
@@ -65,7 +66,7 @@ def unihan_options(
     }
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def tmpdb_file(tmpdir: pathlib.Path) -> pathlib.Path:
     """Return ``tests.db`` for SQLite."""
     return tmpdir / "test.db"
@@ -83,7 +84,7 @@ def metadata() -> sqlalchemy.MetaData:
     return sqlalchemy.MetaData()
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def session(
     engine: sqlalchemy.Engine,
     request: pytest.FixtureRequest,
