@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """Example for bootstrapping UNIHAN DB."""
 
+import logging
 import pprint
 import typing as t
 
@@ -8,6 +9,9 @@ from sqlalchemy.sql.expression import func
 
 from unihan_db import bootstrap
 from unihan_db.tables import Unhn
+
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 def run(unihan_options: t.Optional[t.Dict[str, object]] = None) -> None:
@@ -22,11 +26,11 @@ def run(unihan_options: t.Optional[t.Dict[str, object]] = None) -> None:
 
     random_row = random_row_query.first()
 
-    pprint.pprint(bootstrap.to_dict(random_row))
+    log.info(pprint.pformat(bootstrap.to_dict(random_row)))
 
     assert random_row is not None
 
-    pprint.pprint(random_row.to_dict())  # type:ignore
+    log.info(pprint.pformat(random_row.to_dict()))  # type:ignore
 
 
 if __name__ == "__main__":
