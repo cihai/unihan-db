@@ -15,7 +15,7 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Breaking changes: UNIHAN 15.1.0 (#330)
 
-- Bump unihan-etl 0.32.0
+- Bump unihan-etl 0.27.0 -> 0.34.0
 
 #### Removed fields
 
