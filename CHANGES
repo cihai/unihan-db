@@ -13,6 +13,10 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Documentation
+
+- Automatically linkify links that were previously only text.
+
 ## unihan-db 0.15.0 (2024-04-01)
 
 ### Breaking changes: UNIHAN 15.1.0 (#330)
