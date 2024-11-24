@@ -13,6 +13,14 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Development
+
+#### Project and package management: poetry to uv (#344)
+
+[uv] is the new package and project manager for the project, replacing Poetry.
+
+[uv]: https://github.com/astral-sh/uv
+
 ## unihan-db 0.16.0 (2024-11-25)
 
 ### Breaking Changes: UNIHAN Revision 37 (#345)
@@ -58,6 +66,10 @@ Updates for UNIHAN [Revision 37](https://www.unicode.org/reports/tr38/tr38-37.ht
 
 ### Development
 
+- Project and package management: poetry to uv (#344)
+
+  [uv] is the new package and project manager for the project, replacing Poetry.
+
 - Aggressive automated lint fixes via `ruff` (#333)
 
   via ruff v0.3.4, all automated lint fixes, including unsafe and previews were applied:
@@ -74,10 +86,6 @@ Updates for UNIHAN [Revision 37](https://www.unicode.org/reports/tr38/tr38-37.ht
       --exec 'poetry run ruff check --select ALL . --fix --unsafe-fixes --preview --show-fixes; poetry run ruff format .; git add src tests; git commit --amend --no-edit' \
       origin/master
   ```
-
-- poetry: 1.7.1 -> 1.8.2
-
-  See also: https://github.com/python-poetry/poetry/blob/1.8.2/CHANGELOG.md
 
 - ruff 0.2.2 -> 0.3.0 (#332)
 
@@ -101,6 +109,8 @@ Updates for UNIHAN [Revision 37](https://www.unicode.org/reports/tr38/tr38-37.ht
 
     - https://docs.astral.sh/ruff/rules/#flake8-errmsg-em
     - https://pypi.org/project/flake8-errmsg/
+
+[uv]: https://github.com/astral-sh/uv
 
 ## unihan-db 0.14.0 (2023-12-10)
 
