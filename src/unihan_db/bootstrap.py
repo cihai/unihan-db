@@ -184,7 +184,7 @@ def bootstrap_unihan(
             if log.isEnabledFor(logging.INFO):
                 count += 1
                 sys.stdout.write(
-                    "\rProcessing %s (%d of %d)" % (char["char"], count, total_count),
+                    f"\rProcessing {char['char']} ({count} of {total_count})"
                 )
                 sys.stdout.flush()
 
