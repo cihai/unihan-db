@@ -19,7 +19,7 @@ $ pip install --user --upgrade --pre unihan-db
 
 ## unihan-db 0.15.0 (2024-04-01)
 
-### Breaking changes: UNIHAN 15.1.0 (#330)
+### Breaking changes: UNIHAN Revision 35 (#330)
 
 - Bump unihan-etl 0.27.0 -> 0.34.0
 
