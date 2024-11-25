@@ -74,7 +74,6 @@ UNIHAN_FIELDS = [
     "kDefinition",
     "kFenn",
     "kFourCornerCode",
-    "kFrequency",
     "kGradeLevel",
     "kHDZRadBreak",
     "kHKGlyph",
