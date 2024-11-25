@@ -52,7 +52,7 @@ Repository = "https://github.com/cihai/unihan-db"
 python = "^3.8"
 appdirs = "*"
 SQLAlchemy = ">=2"
-unihan-etl = "~=0.34.0"
+unihan-etl = "~=0.35.0"
 
 [tool.poetry.group.docs.dependencies]
 ### Docs ###

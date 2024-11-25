@@ -43,6 +43,7 @@ from unihan_db.tables import (
     kTotalStrokes,
     kXHC1983,
 )
+from unihan_etl.expansion import kRSSimplifiedType
 
 
 def import_char(
@@ -296,7 +297,9 @@ def import_char(
                     RSModel(
                         radical=_md["radical"],
                         strokes=_md["strokes"],
-                        simplified=_md["simplified"],
+                        simplified=_md["simplified"].value
+                        if isinstance(_md["simplified"], kRSSimplifiedType)
+                        else "",
                     ),
                 )
 
