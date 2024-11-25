@@ -248,7 +248,7 @@ class GenericRadicalStrokes(Base):
     char_id = Column(String(1), ForeignKey("Unhn.char"))
     radical = Column(Integer)
     strokes = Column(Integer)
-    simplified = Column(Boolean, nullable=True)
+    simplified = Column(String(50), nullable=True)
     type = Column(String(50))
 
     __mapper_args__ = {
