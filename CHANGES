@@ -9,9 +9,11 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
-## unihan-db 0.16.x (unreleased)
+## unihan-db 0.17.x (unreleased)
 
 <!-- Maintainers, insert changes / features for the next release here -->
+
+## unihan-db 0.16.0 (2024-11-25)
 
 ### Breaking Changes: UNIHAN Revision 37 (#345)
 
