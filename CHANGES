@@ -13,6 +13,20 @@ $ pip install --user --upgrade --pre unihan-db
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Breaking Changes: UNIHAN Revision 37 (#345)
+
+Updates for UNIHAN [Revision 37](https://www.unicode.org/reports/tr38/tr38-37.html#Modifications):
+
+- Bump unihan-etl 0.34.0 -> 0.35.0
+
+#### Updated fields
+
+- `kRSUnicode`: Support for double and triple apostrophes for simplified radicals.
+
+#### Removed fields
+
+- [kFrequency](https://www.unicode.org/L2/L2024/24006.htm#178-C17)
+
 ### Documentation
 
 - Automatically linkify links that were previously only text.
