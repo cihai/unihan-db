@@ -1192,7 +1192,7 @@ types = [
 requires-dist = [
     { name = "appdirs" },
     { name = "sqlalchemy", specifier = ">=2" },
-    { name = "unihan-etl", specifier = "~=0.35.0" },
+    { name = "unihan-etl", specifier = "~=0.36.0" },
 ]
 
 [package.metadata.requires-dev]
@@ -1252,7 +1252,7 @@ types = [{ name = "types-appdirs" }]
 
 [[package]]
 name = "unihan-etl"
-version = "0.35.0"
+version = "0.36.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "appdirs" },
@@ -1260,9 +1260,9 @@ dependencies = [
     { name = "unicodecsv" },
     { name = "zhon" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/45/3a/597e6818f739418e2443eb8c669cef1386facad784763e61828250a7277a/unihan_etl-0.35.0.tar.gz", hash = "sha256:e9c1f9f99e3ae4cbd1880158929aedbbdb42eabdccb61540886f01625db456d5", size = 71069 }
+sdist = { url = "https://files.pythonhosted.org/packages/4f/7c/d95b3cad5016d5334464ae7fe3d430363b4b1723d09a3f0cd75da7923f06/unihan_etl-0.36.0.tar.gz", hash = "sha256:b100a23323d433c6660bec73c48c5f79e9da7613984d7a3b548cee6103ba3fc6", size = 249315 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/22/cc/cffaf8dd569dbca0465066583f0f6219372c64b2a9d7622f37b8b945b1bf/unihan_etl-0.35.0-py3-none-any.whl", hash = "sha256:229b3fd7348c4a133b58d7cd57a05ba57267355f96752b609b5088a034f765c0", size = 59872 },
+    { url = "https://files.pythonhosted.org/packages/f5/66/79b01a6a7cc019587b456d9a6ac75414b8988837a584ff7eb7642d822c0c/unihan_etl-0.36.0-py3-none-any.whl", hash = "sha256:adb9a91e12ff0beba32e071d9c900d81bc28c0a311bb3657102c16f930bf422b", size = 59891 },
 ]
 
 [[package]]
