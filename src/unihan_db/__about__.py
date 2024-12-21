@@ -3,7 +3,7 @@
 __title__ = "unihan-db"
 __package_name__ = "unihan_db"
 __description__ = "SQLAlchemy models for UNIHAN CJK database"
-__version__ = "0.17.0"
+__version__ = "0.18.0"
 __author__ = "Tony Narlock"
 __github__ = "https://github.com/cihai/unihan-db"
 __docs__ = "https://unihan-db.git-pull.com"
