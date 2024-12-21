@@ -148,11 +148,11 @@ def bootstrap_data(
     """Fetch, download, and export UNIHAN data in dictionary format."""
     if options is None:
         options = {}
-    _options = options
+    options_ = options
 
-    _options = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), _options)
+    options_ = merge_dict(UNIHAN_ETL_DEFAULT_OPTIONS.copy(), options_)
 
-    p = unihan.Packager(_options)
+    p = unihan.Packager(options_)
     p.download()
     return p.export()
 
@@ -162,11 +162,11 @@ def bootstrap_unihan(
     options: t.Optional[UntypedUnihanData] = None,
 ) -> None:
     """Bootstrap UNIHAN to database."""
-    _options = options if options is not None else {}
+    options_ = options if options is not None else {}
 
     """Download, extract and import unihan to database."""
     if session.query(Unhn).count() == 0:
-        data = bootstrap_data(_options)
+        data = bootstrap_data(options_)
         assert data is not None
         log.info("bootstrap Unhn table")
         log.info("bootstrap Unhn table finished")
@@ -183,7 +183,7 @@ def bootstrap_unihan(
             if log.isEnabledFor(logging.INFO):
                 count += 1
                 sys.stdout.write(
-                    f"\rProcessing {char['char']} ({count} of {total_count})"
+                    f"\rProcessing {char['char']} ({count} of {total_count})",
                 )
                 sys.stdout.flush()
 
@@ -201,7 +201,7 @@ def setup_orm_mappings(mapper: Mapper[Base], class_: Base) -> None:
     add_to_dict(class_)  # Add .to_dict() to rows returned
 
 
-def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, object]:
+def to_dict(obj: t.Any, found: t.Optional[set[t.Any]] = None) -> dict[str, object]:
     """Return dictionary of an SQLAlchemy Query result.
 
     Supports recursive relationships.
@@ -224,17 +224,17 @@ def to_dict(obj: t.Any, found: t.Optional[t.Set[t.Any]] = None) -> t.Dict[str, o
             return (c, getattr(obj, c).isoformat())
         return (c, getattr(obj, c))
 
-    _found: t.Set[t.Any]
+    found_: set[t.Any]
 
-    _found = set() if found is None else found
+    found_ = set() if found is None else found
 
-    _mapper = class_mapper(obj.__class__)
-    columns = [column.key for column in _mapper.columns]
+    mapper = class_mapper(obj.__class__)
+    columns = [column.key for column in mapper.columns]
 
     result = dict(map(_get_key_value, columns))
-    for name, relation in _mapper.relationships.items():
-        if relation not in _found:
-            _found.add(relation)
+    for name, relation in mapper.relationships.items():
+        if relation not in found_:
+            found_.add(relation)
             related_obj = getattr(obj, name)
             if related_obj is not None:
                 if relation.uselist:
