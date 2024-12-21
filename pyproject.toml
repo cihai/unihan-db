@@ -44,7 +44,7 @@ homepage = "https://unihan-db.git-pull.com"
 dependencies = [
   "appdirs",
   "SQLAlchemy>=2",
-  "unihan-etl~=0.36.0"
+  "unihan-etl~=0.37.0"
 ]
 
 [project.urls]
