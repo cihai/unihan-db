@@ -48,15 +48,15 @@ from unihan_etl.expansion import kRSSimplifiedType
 
 def import_char(
     c: Unhn,
-    char: t.Dict[
+    char: dict[
         str,
         t.Union[
-            t.Dict[
+            dict[
                 str,
-                t.Union[int, str, t.List[t.Dict[str, object]], t.Dict[str, object]],
+                t.Union[int, str, list[dict[str, object]], dict[str, object]],
             ],
-            t.List[t.Dict[str, object]],
-            t.Dict[str, object],
+            list[dict[str, object]],
+            dict[str, object],
         ],
     ],
 ) -> None:
@@ -86,8 +86,8 @@ def import_char(
             assert isinstance(_khp, dict)
             assert isinstance(_khp["locations"], list)
             assert isinstance(_khp["readings"], list)
-            khp_readings: t.List[UnhnReading] = []
-            khp_locations: t.List[UnhnLocation] = []
+            khp_readings: list[UnhnReading] = []
+            khp_locations: list[UnhnLocation] = []
 
             for loc in _khp["locations"]:
                 assert isinstance(loc, dict)
@@ -109,7 +109,7 @@ def import_char(
             )
 
     if "kHanYu" in char:
-        khy_locations: t.List[UnhnLocation] = []
+        khy_locations: list[UnhnLocation] = []
         for _khy in char["kHanYu"]:
             assert isinstance(_khy, dict)
             khy_locations.append(
@@ -123,11 +123,11 @@ def import_char(
         c.kHanYu.append(kHanYu(locations=khy_locations))
 
     if "kIRGHanyuDaZidian" in char:
-        _khdz_locations: t.List[UnhnLocation] = []
+        khdz_locations: list[UnhnLocation] = []
         for _khdz in char["kIRGHanyuDaZidian"]:
             assert isinstance(_khdz, dict)
 
-            _khdz_locations.append(
+            khdz_locations.append(
                 UnhnLocation(
                     volume=_khdz["volume"],
                     page=_khdz["page"],
@@ -135,13 +135,13 @@ def import_char(
                     virtual=_khdz["virtual"],
                 ),
             )
-        c.kIRGHanyuDaZidian.append(kIRGHanyuDaZidian(locations=_khdz_locations))
+        c.kIRGHanyuDaZidian.append(kIRGHanyuDaZidian(locations=khdz_locations))
 
     if "kXHC1983" in char:
         for kxhc in char["kXHC1983"]:
             assert isinstance(kxhc, dict)
             assert isinstance(kxhc["locations"], list)
-            kxhc_locations: t.List[UnhnLocationkXHC1983] = []
+            kxhc_locations: list[UnhnLocationkXHC1983] = []
             for loc in kxhc["locations"]:
                 kxhc_locations.append(
                     UnhnLocationkXHC1983(
@@ -157,7 +157,7 @@ def import_char(
         for _kcb in char["kCheungBauer"]:
             assert isinstance(_kcb, dict)
             assert isinstance(_kcb["readings"], list)
-            k_readings: t.List[UnhnReading] = []
+            k_readings: list[UnhnReading] = []
 
             for reading in _kcb["readings"]:
                 k_readings.append(UnhnReading(reading=reading))
@@ -197,7 +197,7 @@ def import_char(
 
     if "kIICore" in char:
         for _kiic in char["kIICore"]:
-            k_sources: t.List[kIICoreSource] = []
+            k_sources: list[kIICoreSource] = []
             assert isinstance(_kiic, dict)
             assert isinstance(_kiic["sources"], list)
             for _kiic_source in _kiic["sources"]:
@@ -205,45 +205,45 @@ def import_char(
             c.kIICore.append(kIICore(priority=_kiic["priority"], sources=k_sources))
 
     if "kDaeJaweon" in char:
-        _kdj = char["kDaeJaweon"]
-        assert isinstance(_kdj, dict)
+        kdj = char["kDaeJaweon"]
+        assert isinstance(kdj, dict)
         c.kDaeJaweon.append(
             kDaeJaweon(
                 locations=[
                     UnhnLocation(
-                        page=_kdj["page"],
-                        character=_kdj["character"],
-                        virtual=_kdj["virtual"],
+                        page=kdj["page"],
+                        character=kdj["character"],
+                        virtual=kdj["virtual"],
                     ),
                 ],
             ),
         )
 
     if "kIRGKangXi" in char:
-        _kikx_locations: t.List[UnhnLocation] = []
+        kikx_locations: list[UnhnLocation] = []
         for _kikx in char["kIRGKangXi"]:
             assert isinstance(_kikx, dict)
-            _kikx_locations.append(
+            kikx_locations.append(
                 UnhnLocation(
                     page=_kikx["page"],
                     character=_kikx["character"],
                     virtual=_kikx["virtual"],
                 ),
             )
-        c.kIRGKangXi.append(kIRGKangXi(locations=_kikx_locations))
+        c.kIRGKangXi.append(kIRGKangXi(locations=kikx_locations))
 
     if "kIRGDaeJaweon" in char:
-        _kidj_locations: t.List[UnhnLocation] = []
+        kidj_locations: list[UnhnLocation] = []
         for _kidj in char["kIRGDaeJaweon"]:
             assert isinstance(_kidj, dict)
-            _kidj_locations.append(
+            kidj_locations.append(
                 UnhnLocation(
                     page=_kidj["page"],
                     character=_kidj["character"],
                     virtual=_kidj["virtual"],
                 ),
             )
-        c.kIRGDaeJaweon.append(kIRGDaeJaweon(locations=_kidj_locations))
+        c.kIRGDaeJaweon.append(kIRGDaeJaweon(locations=kidj_locations))
 
     if "kFenn" in char:
         for _kf in char["kFenn"]:
@@ -258,32 +258,32 @@ def import_char(
             )
 
     if "kHDZRadBreak" in char:
-        _khrb = char["kHDZRadBreak"]
-        assert isinstance(_khrb, dict)
-        assert isinstance(_khrb["location"], dict)
+        khrb = char["kHDZRadBreak"]
+        assert isinstance(khrb, dict)
+        assert isinstance(khrb["location"], dict)
         c.kHDZRadBreak.append(
             kHDZRadBreak(
-                radical=_khrb["radical"],
-                ucn=_khrb["ucn"],
+                radical=khrb["radical"],
+                ucn=khrb["ucn"],
                 locations=[
                     UnhnLocation(
-                        volume=_khrb["location"]["volume"],
-                        page=_khrb["location"]["page"],
-                        character=_khrb["location"]["character"],
-                        virtual=_khrb["location"]["virtual"],
+                        volume=khrb["location"]["volume"],
+                        page=khrb["location"]["page"],
+                        character=khrb["location"]["character"],
+                        virtual=khrb["location"]["virtual"],
                     ),
                 ],
             ),
         )
 
     if "kSBGY" in char:
-        _ksbgy_locations: t.List[UnhnLocation] = []
+        ksbgy_locations: list[UnhnLocation] = []
         for _ksbgy in char["kSBGY"]:
             assert isinstance(_ksbgy, dict)
-            _ksbgy_locations.append(
+            ksbgy_locations.append(
                 UnhnLocation(page=_ksbgy["page"], character=_ksbgy["character"]),
             )
-        c.kSBGY.append(kSBGY(locations=_ksbgy_locations))
+        c.kSBGY.append(kSBGY(locations=ksbgy_locations))
 
     rs_fields = (  # radical-stroke fields, since they're the same structure
         ("kRSUnicode", kRSUnicode, c.kRSUnicode),
@@ -317,9 +317,9 @@ def import_char(
 
     for f_irg, IRGModel, column in irg_fields:
         if f_irg in char:
-            _irg = char[f_irg]
-            assert isinstance(_irg, dict)
-            column.append(IRGModel(source=_irg["source"], location=_irg["location"]))
+            irg = char[f_irg]
+            assert isinstance(irg, dict)
+            column.append(IRGModel(source=irg["source"], location=irg["location"]))
 
     if "kGSR" in char:
         for _kgsr in char["kGSR"]:
@@ -348,14 +348,14 @@ def import_char(
         )
 
     if "kFennIndex" in char:
-        _kFennIndex = char["kFennIndex"]
-        assert isinstance(_kFennIndex, dict)
-        assert isinstance(_kFennIndex["location"], dict)
+        kFennIndex_ = char["kFennIndex"]
+        assert isinstance(kFennIndex_, dict)
+        assert isinstance(kFennIndex_["location"], dict)
         c.kFennIndex.append(
             kFennIndex(
                 locations=UnhnLocation(
-                    page=_kFennIndex["location"]["page"],
-                    character=_kFennIndex["location"]["character"],
+                    page=kFennIndex_["location"]["page"],
+                    character=kFennIndex_["location"]["character"],
                 ),
             ),
         )

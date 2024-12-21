@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
-def run(unihan_options: t.Optional[t.Dict[str, object]] = None) -> None:
+def run(unihan_options: t.Optional[dict[str, object]] = None) -> None:
     """Initialize Unihan DB via ``bootstrap_unihan()``."""
     session = bootstrap.get_session()
 
