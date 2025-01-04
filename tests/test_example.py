@@ -1,13 +1,16 @@
 """Test examples/ found in cihai source directory."""
 
+from __future__ import annotations
+
 import importlib
 import importlib.util
-import pathlib
 import sys
-import types
 import typing as t
 
 if t.TYPE_CHECKING:
+    import pathlib
+    import types
+
     from .types import UnihanOptions
 
 
@@ -40,7 +43,7 @@ def load_script(example: str, project_root: pathlib.Path) -> types.ModuleType:
 
 
 def test_01_bootstrap(
-    unihan_options: "UnihanOptions",
+    unihan_options: UnihanOptions,
     project_root: pathlib.Path,
 ) -> None:
     """Test example dataset."""

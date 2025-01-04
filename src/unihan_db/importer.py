@@ -1,7 +1,7 @@
 # flake8: noqa: PERF401
 """Import functionality for UNIHAN DB."""
 
-import typing as t
+from __future__ import annotations
 
 from unihan_db.tables import (
     Unhn,
@@ -50,14 +50,9 @@ def import_char(
     c: Unhn,
     char: dict[
         str,
-        t.Union[
-            dict[
-                str,
-                t.Union[int, str, list[dict[str, object]], dict[str, object]],
-            ],
-            list[dict[str, object]],
-            dict[str, object],
-        ],
+        dict[str, int | str | list[dict[str, object]] | dict[str, object]]
+        | list[dict[str, object]]
+        | dict[str, object],
     ],
 ) -> None:
     """Import character data into Unhn model (row in Unhn table)."""

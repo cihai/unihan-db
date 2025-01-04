@@ -1,14 +1,19 @@
 """Tests for bootstrapping of UNIHAN."""
 
-import pathlib
+from __future__ import annotations
 
-import sqlalchemy
-from sqlalchemy.orm import Session
+from typing import TYPE_CHECKING
 
 from unihan_db import bootstrap
 from unihan_db.tables import Base, Unhn
 
-from .types import UnihanOptions
+if TYPE_CHECKING:
+    import pathlib
+
+    import sqlalchemy
+    from sqlalchemy.orm import Session
+
+    from .types import UnihanOptions
 
 
 def test_reflect_db(
