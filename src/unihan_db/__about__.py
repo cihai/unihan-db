@@ -1,5 +1,7 @@
 """Metadata for unihan-db."""
 
+from __future__ import annotations
+
 __title__ = "unihan-db"
 __package_name__ = "unihan_db"
 __description__ = "SQLAlchemy models for UNIHAN CJK database"

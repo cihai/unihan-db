@@ -11,7 +11,20 @@ $ pip install --user --upgrade --pre unihan-db
 
 ## unihan-db 0.19.x (unreleased)
 
+- _Add your latest changes from PRs here_
+
 <!-- Maintainers, insert changes / features for the next release here -->
+
+### Development
+
+#### chore: Implement PEP 563 deferred annotation resolution (#348)
+
+- Add `from __future__ import annotations` to defer annotation resolution and reduce unnecessary runtime computations during type checking.
+- Enable Ruff checks for PEP-compliant annotations:
+  - [non-pep585-annotation (UP006)](https://docs.astral.sh/ruff/rules/non-pep585-annotation/)
+  - [non-pep604-annotation (UP007)](https://docs.astral.sh/ruff/rules/non-pep604-annotation/)
+
+For more details on PEP 563, see: https://peps.python.org/pep-0563/
 
 ## unihan-db 0.18.0 (2024-12-21)
 

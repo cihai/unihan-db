@@ -1,5 +1,7 @@
 """Pytest configuration for Unihan DB."""
 
+from __future__ import annotations
+
 import pathlib
 import typing as t
 import zipfile
@@ -7,11 +9,12 @@ import zipfile
 import pytest
 import sqlalchemy
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.orm.scoping import ScopedSession
 
 from unihan_db.bootstrap import UNIHAN_FILES
 
 if t.TYPE_CHECKING:
+    from sqlalchemy.orm.scoping import ScopedSession
+
     from .types import UnihanOptions
 
 
@@ -57,7 +60,7 @@ def unihan_options(
     zip_file: zipfile.ZipFile,
     zip_path: pathlib.Path,
     tmp_path: pathlib.Path,
-) -> "UnihanOptions":
+) -> UnihanOptions:
     """Return test ``UnihanOptions``."""
     return {
         "source": zip_path,

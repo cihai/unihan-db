@@ -1,5 +1,7 @@
 """Fetch, extract, transform, and load UNIHAN into database."""
 
+from __future__ import annotations
+
 import logging
 import sys
 import typing as t
@@ -9,10 +11,8 @@ import sqlalchemy
 from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Mapper, Session, class_mapper, scoped_session, sessionmaker
 from sqlalchemy.orm.decl_api import registry
-from sqlalchemy.orm.scoping import ScopedSession
 
 from unihan_etl import core as unihan
-from unihan_etl.types import UntypedUnihanData
 from unihan_etl.util import merge_dict
 
 from . import dirs, importer
@@ -23,13 +23,16 @@ log = logging.getLogger(__name__)
 mapper_reg = registry()
 
 if t.TYPE_CHECKING:
+    from sqlalchemy.orm.scoping import ScopedSession
+
     from unihan_etl.types import (
         UntypedNormalizedData,
+        UntypedUnihanData,
     )
 
 
 def setup_logger(
-    logger: t.Optional[logging.Logger] = None,
+    logger: logging.Logger | None = None,
     level: t.Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO",
 ) -> None:
     """Configure logging for CLI use.
@@ -143,8 +146,8 @@ def is_bootstrapped(metadata: sqlalchemy.MetaData) -> bool:
 
 
 def bootstrap_data(
-    options: t.Union[UntypedUnihanData, None] = None,
-) -> t.Optional["UntypedNormalizedData"]:
+    options: UntypedUnihanData | None = None,
+) -> UntypedNormalizedData | None:
     """Fetch, download, and export UNIHAN data in dictionary format."""
     if options is None:
         options = {}
@@ -158,8 +161,8 @@ def bootstrap_data(
 
 
 def bootstrap_unihan(
-    session: t.Union[Session, ScopedSession[t.Any]],
-    options: t.Optional[UntypedUnihanData] = None,
+    session: Session | ScopedSession[t.Any],
+    options: UntypedUnihanData | None = None,
 ) -> None:
     """Bootstrap UNIHAN to database."""
     options_ = options if options is not None else {}
@@ -201,7 +204,7 @@ def setup_orm_mappings(mapper: Mapper[Base], class_: Base) -> None:
     add_to_dict(class_)  # Add .to_dict() to rows returned
 
 
-def to_dict(obj: t.Any, found: t.Optional[set[t.Any]] = None) -> dict[str, object]:
+def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
     """Return dictionary of an SQLAlchemy Query result.
 
     Supports recursive relationships.
@@ -258,7 +261,7 @@ def add_to_dict(b: t.Any) -> t.Any:
 
 def get_session(
     engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
-) -> "ScopedSession[t.Any]":
+) -> ScopedSession[t.Any]:
     """Return new SQLAlchemy session object from engine string.
 
     *engine_url* accepts a string template variable for ``{user_data_dir}``,

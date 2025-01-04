@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 """Example for bootstrapping UNIHAN DB."""
 
+from __future__ import annotations
+
 import logging
 import pprint
-import typing as t
 
 from sqlalchemy.sql.expression import func
 
@@ -14,7 +15,7 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
-def run(unihan_options: t.Optional[dict[str, object]] = None) -> None:
+def run(unihan_options: dict[str, object] | None = None) -> None:
     """Initialize Unihan DB via ``bootstrap_unihan()``."""
     session = bootstrap.get_session()
 
