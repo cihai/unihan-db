@@ -53,8 +53,8 @@ Documentation = "https://unihan-db.git-pull.com"
 Repository = "https://github.com/cihai/unihan-db"
 "Release notes" = "https://github.com/cihai/unihan-db/blob/master/CHANGES"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
   # Docs
   "sphinx",
   "furo",
@@ -84,7 +84,6 @@ dev-dependencies = [
   "types-appdirs",
 ]
 
-[dependency-groups]
 docs = [
   "sphinx",
   "furo",
