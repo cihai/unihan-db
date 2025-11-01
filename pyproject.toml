@@ -2,7 +2,7 @@
 name = "unihan_db"
 version = "0.18.0"
 description = "SQLAlchemy models for UNIHAN CJK database"
-requires-python = ">=3.9,<4.0"
+requires-python = ">=3.10,<4.0"
 license = { text = "MIT" }
 authors = [
   {name = "Tony Narlock", email = "tony@git-pull.com"}
