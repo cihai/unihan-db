@@ -36,6 +36,7 @@ $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstra
 
 ### Breaking changes
 
+- Bump minimum unihan-etl v0.37.0 -> v0.38.0
 - Drop support for Python 3.9; the new minimum is Python 3.10 (#351).
 
   See also:
