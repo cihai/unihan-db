@@ -17,6 +17,8 @@ $ pip install --user --upgrade --pre unihan-db
 
 ### Development
 
+- Add Python 3.14 to test matrix (#350)
+
 #### chore: Implement PEP 563 deferred annotation resolution (#348)
 
 - Add `from __future__ import annotations` to defer annotation resolution and reduce unnecessary runtime computations during type checking.
