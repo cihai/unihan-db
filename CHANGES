@@ -9,6 +9,25 @@ To install the unreleased unihan-db version, see
 $ pip install --user --upgrade --pre unihan-db
 ```
 
+[pipx](https://pypa.github.io/pipx/docs/):
+
+```console
+$ pipx install --suffix=@next 'unihan-db' --pip-args '\--pre' --include-deps --force
+// Provides the unihan-etl CLI from the dependency set.
+```
+
+[uv](https://docs.astral.sh/uv/):
+
+```console
+$ uv add unihan-db --prerelease allow
+```
+
+[uvx](https://docs.astral.sh/uv/guides/tools/):
+
+```console
+$ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstrap as bootstrap; print(bootstrap.TABLE_NAME)"
+```
+
 ## unihan-db 0.19.x (unreleased)
 
 - _Add your latest changes from PRs here_
