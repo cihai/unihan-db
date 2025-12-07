@@ -142,7 +142,7 @@ def test_can_round_trip_char(session, engine):
 ## Coding Standards
 
 - Include `from __future__ import annotations` in Python modules.
-- Prefer namespace imports (`import typing as t`) to keep type usage explicit.
+- Prefer namespace imports for stdlib (`import typing as t`) to keep type usage explicit; third-party packages may use `from X import Y`.
 - Use Ruff for style/formatting; keep docstrings in NumPy/reST sections (`Parameters`, `Returns`).
 - Align with existing patterns: SQLAlchemy ORM models, scoped sessions, and helper functions in `bootstrap.py`.
 
