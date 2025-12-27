@@ -50,7 +50,7 @@ uv pip sync
 
 ```bash
 # Run full suite
-make test        # wraps uv run py.test
+just test        # wraps uv run py.test
 uv run pytest    # equivalent
 
 # Single file / test
@@ -58,7 +58,7 @@ uv run pytest tests/test_bootstrap.py
 uv run pytest tests/test_bootstrap.py::test_import_unihan_raw
 
 # Continuous testing
-make start       # make test then uv run ptw .
+just start       # just test then uv run ptw .
 uv run ptw .     # pytest-watcher
 ```
 
@@ -66,28 +66,28 @@ uv run ptw .     # pytest-watcher
 
 ```bash
 # Ruff lint
-make ruff
+just ruff
 uv run ruff check . --fix --show-fixes
 
 # Format with ruff
-make ruff_format
+just ruff-format
 uv run ruff format .
 
 # mypy
-make mypy
+just mypy
 uv run mypy src tests
 
 # Watchers (requires entr)
-make watch_ruff
-make watch_mypy
+just watch-ruff
+just watch-mypy
 ```
 
 ### Documentation
 
 ```bash
-make build_docs   # sphinx html
-make start_docs   # sphinx autobuild server
-make design_docs  # rebuild CSS/JS assets
+just build-docs   # sphinx html
+just start-docs   # sphinx autobuild server
+just design-docs  # rebuild CSS/JS assets
 ```
 
 ## Development Workflow
