@@ -150,6 +150,40 @@ def test_can_round_trip_char(session, engine):
 
 Use concise, component-scoped messages in the format `Component(type[scope]): summary`, and document briefly why the change is needed plus key what-changed bullets.
 
+## Documentation Standards
+
+### Code Blocks in Documentation
+
+When writing documentation (README, CHANGES, docs/), follow these rules for code blocks:
+
+**One command per code block.** This makes commands individually copyable.
+
+**Put explanations outside the code block**, not as comments inside.
+
+Good:
+
+Run the tests:
+
+```console
+$ uv run pytest
+```
+
+Run with coverage:
+
+```console
+$ uv run pytest --cov
+```
+
+Bad:
+
+```console
+# Run the tests
+$ uv run pytest
+
+# Run with coverage
+$ uv run pytest --cov
+```
+
 ## Debugging Tips
 
 - When ETL runs slowly, log level INFO in `bootstrap` already streams progress; avoid adding noisy prints.
