@@ -30,9 +30,13 @@ $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstra
 
 ## unihan-db 0.20.x (unreleased)
 
-- _Add your latest changes from PRs here_
-
 <!-- Maintainers, insert changes / features for the next release here -->
+
+_Add your latest changes from PRs here_
+
+### Packaging / CI
+
+- Migrate to PyPI Trusted Publisher (#352)
 
 ### Development
 
