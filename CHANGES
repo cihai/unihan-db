@@ -28,11 +28,13 @@ $ uv add unihan-db --prerelease allow
 $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstrap as bootstrap; print(bootstrap.TABLE_NAME)"
 ```
 
-## unihan-db 0.20.x (unreleased)
+## unihan-db 0.21.x (unreleased)
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
 _Add your latest changes from PRs here_
+
+## unihan-db 0.20.0 (2026-01-24)
 
 ### Breaking changes
 
