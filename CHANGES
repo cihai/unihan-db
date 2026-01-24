@@ -34,6 +34,10 @@ $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstra
 
 _Add your latest changes from PRs here_
 
+### Breaking changes
+
+- Bump unihan-etl v0.38.0 -> v0.39.1 (#354)
+
 ### Packaging / CI
 
 - Migrate to PyPI Trusted Publisher (#352)
