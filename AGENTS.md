@@ -148,7 +148,7 @@ def test_can_round_trip_char(session, engine):
 
 ## Git Commit Standards
 
-Commit subjects: `Component/File(commit-type[scope]): Concise description`
+Commit subjects: `Scope(type[detail]): concise description`
 
 Body template:
 ```
@@ -172,7 +172,9 @@ Common commit types:
 - **style**: Code style and formatting
 - **py(deps)**: Dependencies
 - **py(deps[dev])**: Dev dependencies
-- **ai(rules[LLM type])**: AI rule updates (e.g., `ai(rules[AGENTS])`)
+- **ai(rules[AGENTS])**: AI rule updates
+- **ai(claude[rules])**: Claude Code rules (CLAUDE.md)
+- **ai(claude[command])**: Claude Code command changes
 
 ## Documentation Standards
 
