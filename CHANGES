@@ -36,6 +36,10 @@ _Notes on the upcoming release will go here._
 
 <!-- Maintainers, insert changes / features for the next release here -->
 
+### Development
+
+- Use string form for `polymorphic_on` in mapper args to fix 4 ruff [`A003`](https://docs.astral.sh/ruff/rules/builtin-attribute-shadowing/) (`builtin-attribute-shadowing`) lint violations (#357)
+
 ## unihan-db 0.20.0 (2026-01-24)
 
 ### Breaking changes
