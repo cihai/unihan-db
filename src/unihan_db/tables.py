@@ -96,7 +96,7 @@ class GenericIRG(Base):
     location = Column(String(10), nullable=True)
     type = Column(String(50))
 
-    __mapper_args__ = {"polymorphic_identity": "generic_irg", "polymorphic_on": type}
+    __mapper_args__ = {"polymorphic_identity": "generic_irg", "polymorphic_on": "type"}
 
 
 class kIRG_GSource(GenericIRG):
@@ -237,7 +237,7 @@ class GenericReading(Base):
 
     __mapper_args__ = {
         "polymorphic_identity": "generic_reading",
-        "polymorphic_on": type,
+        "polymorphic_on": "type",
     }
 
 
@@ -255,7 +255,7 @@ class GenericRadicalStrokes(Base):
 
     __mapper_args__ = {
         "polymorphic_identity": "generic_radical_strokes",
-        "polymorphic_on": type,
+        "polymorphic_on": "type",
     }
 
 
@@ -320,7 +320,10 @@ class GenericIndice(Base):
     type = Column(String(50))
     locations = relationship("UnhnLocation")
 
-    __mapper_args__ = {"polymorphic_identity": "generic_indice", "polymorphic_on": type}
+    __mapper_args__ = {
+        "polymorphic_identity": "generic_indice",
+        "polymorphic_on": "type",
+    }
 
 
 class kHanYu(GenericIndice):
