@@ -38,7 +38,7 @@ _Notes on the upcoming release will go here._
 
 ### Breaking changes
 
-- Bump unihan-etl v0.39.1 -> v0.41.0
+- Bump unihan-etl v0.39.1 -> v0.41.0 (#358)
 
 ## unihan-db 0.20.1 (2026-03-21)
 
