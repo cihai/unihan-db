@@ -1,6 +1,6 @@
 [project]
 name = "unihan_db"
-version = "0.20.0"
+version = "0.20.1"
 description = "SQLAlchemy models for UNIHAN CJK database"
 requires-python = ">=3.10,<4.0"
 license = { text = "MIT" }
