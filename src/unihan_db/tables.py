@@ -27,11 +27,21 @@ import typing as t
 from datetime import datetime
 from typing import Annotated
 
-from sqlalchemy import Boolean, ForeignKey, String, inspect as sa_inspect
+from sqlalchemy import (
+    Boolean,
+    ForeignKey,
+    String,
+    exists,
+    func,
+    inspect as sa_inspect,
+    select as sa_select,
+)
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import (
     DeclarativeBase,
     Mapped,
     class_mapper,
+    column_property,
     mapped_column,
     relationship,
 )
@@ -102,6 +112,37 @@ class Unhn(Base):
     def __repr__(self) -> str:
         """Return string representation with char and ucn."""
         return f"<Unhn char={self.char!r} ucn={self.ucn!r}>"
+
+    @hybrid_property
+    def has_definition(self) -> bool:
+        """Return True if this character has at least one definition."""
+        return len(self.kDefinition) > 0
+
+    @has_definition.inplace.expression
+    @classmethod
+    def _has_definition_expression(cls) -> t.Any:
+        return exists().where(kDefinition.char_id == cls.char)
+
+    @hybrid_property
+    def definition_text(self) -> str | None:
+        """Return the first definition text, or None."""
+        if self.kDefinition:
+            return self.kDefinition[0].definition
+        return None
+
+    @definition_text.inplace.expression
+    @classmethod
+    def _definition_text_expression(cls) -> t.Any:
+        return (
+            sa_select(kDefinition.definition)
+            .where(kDefinition.char_id == cls.char)
+            .limit(1)
+            .correlate(cls)
+            .scalar_subquery()
+        )
+
+    if t.TYPE_CHECKING:
+        definition_count: Mapped[int]
 
     kDefinition: Mapped[list[kDefinition]] = relationship(
         back_populates="unhn",
@@ -344,6 +385,15 @@ class kDefinition(Base):
     char_id: Mapped[char_fk]
     definition: Mapped[str] = mapped_column(String(296))
     unhn: Mapped[Unhn] = relationship(back_populates="kDefinition")
+
+
+Unhn.definition_count = column_property(
+    sa_select(func.count(kDefinition.id))
+    .where(kDefinition.char_id == Unhn.char)
+    .correlate_except(kDefinition)
+    .scalar_subquery(),
+    deferred=True,
+)
 
 
 class kCantonese(Base):
