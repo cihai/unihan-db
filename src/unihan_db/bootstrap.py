@@ -9,7 +9,7 @@ from contextlib import contextmanager
 
 import sqlalchemy
 from sqlalchemy import create_engine, func, select
-from sqlalchemy.orm import Session, scoped_session, sessionmaker
+from sqlalchemy.orm import Session, scoped_session, selectinload, sessionmaker
 
 from unihan_etl import core as unihan
 from unihan_etl.util import merge_dict
@@ -266,3 +266,37 @@ def get_session_context(
 
     with Session(engine) as session:
         yield session
+
+
+def lookup_char(
+    session: Session | ScopedSession[t.Any],
+    char: str,
+) -> Unhn | None:
+    """Look up a character with common fields eagerly loaded.
+
+    Loads kDefinition, kMandarin, kCantonese, and kTotalStrokes via
+    selectinload to prevent N+1 queries for common lookup patterns.
+
+    Parameters
+    ----------
+    session : :class:`~sqlalchemy.orm.Session`
+        SQLAlchemy session
+    char : str
+        Single Unicode character to look up
+
+    Returns
+    -------
+    :class:`Unhn` or None
+        The character row with eagerly loaded fields, or None if not found.
+    """
+    stmt = (
+        select(Unhn)
+        .where(Unhn.char == char)
+        .options(
+            selectinload(Unhn.kDefinition),
+            selectinload(Unhn.kMandarin),
+            selectinload(Unhn.kCantonese),
+            selectinload(Unhn.kTotalStrokes),
+        )
+    )
+    return session.scalar(stmt)
