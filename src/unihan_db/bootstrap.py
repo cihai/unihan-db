@@ -5,12 +5,10 @@ from __future__ import annotations
 import logging
 import sys
 import typing as t
-from datetime import datetime
 
 import sqlalchemy
-from sqlalchemy import create_engine, event
-from sqlalchemy.orm import Mapper, Session, class_mapper, scoped_session, sessionmaker
-from sqlalchemy.orm.decl_api import registry
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
 from unihan_etl import core as unihan
 from unihan_etl.util import merge_dict
@@ -19,8 +17,6 @@ from . import dirs, importer
 from .tables import Base, Unhn
 
 log = logging.getLogger(__name__)
-
-mapper_reg = registry()
 
 if t.TYPE_CHECKING:
     from sqlalchemy.orm.scoping import ScopedSession
@@ -198,16 +194,10 @@ def bootstrap_unihan(
         log.info("Done adding rows.")
 
 
-@event.listens_for(Unhn, "before_mapper_configured", once=True)
-def setup_orm_mappings(mapper: Mapper[Base], class_: Base) -> None:
-    """Add special methods to Base declarative model used in Unihan DB."""
-    add_to_dict(class_)  # Add .to_dict() to rows returned
-
-
 def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
     """Return dictionary of an SQLAlchemy Query result.
 
-    Supports recursive relationships.
+    Delegates to :meth:`Base.to_dict`. Kept for backward compatibility.
 
     Parameters
     ----------
@@ -221,42 +211,8 @@ def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
     dict :
         dictionary representation of a SQLAlchemy query
     """
-
-    def _get_key_value(c: str) -> t.Any:
-        if isinstance(getattr(obj, c), datetime):
-            return (c, getattr(obj, c).isoformat())
-        return (c, getattr(obj, c))
-
-    found_: set[t.Any]
-
-    found_ = set() if found is None else found
-
-    mapper = class_mapper(obj.__class__)
-    columns = [column.key for column in mapper.columns]
-
-    result = dict(map(_get_key_value, columns))
-    for name, relation in mapper.relationships.items():
-        if relation not in found_:
-            found_.add(relation)
-            related_obj = getattr(obj, name)
-            if related_obj is not None:
-                if relation.uselist:
-                    result[name] = [to_dict(child, found_) for child in related_obj]
-                else:
-                    result[name] = to_dict(related_obj, found_)
+    result: dict[str, object] = obj.to_dict(found)
     return result
-
-
-def add_to_dict(b: t.Any) -> t.Any:
-    """Add :func:`.to_dict` method to SQLAlchemy Base object.
-
-    Parameters
-    ----------
-    b : :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
-        SQLAlchemy Base class
-    """
-    b.to_dict = to_dict
-    return b
 
 
 def get_session(

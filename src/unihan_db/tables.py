@@ -23,8 +23,17 @@ joins`_.
 
 from __future__ import annotations
 
+import typing as t
+from datetime import datetime
+
 from sqlalchemy import Boolean, ForeignKey, String, inspect as sa_inspect
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    class_mapper,
+    mapped_column,
+    relationship,
+)
 
 
 class Base(DeclarativeBase):
@@ -36,6 +45,45 @@ class Base(DeclarativeBase):
         pk_cols = [col.key for col in mapper.primary_key if col.key is not None]
         attrs = ", ".join(f"{k}={getattr(self, k)!r}" for k in pk_cols)
         return f"<{self.__class__.__name__} {attrs}>"
+
+    def to_dict(self, found: set[t.Any] | None = None) -> dict[str, object]:
+        """Return dictionary representation of this ORM object.
+
+        Supports recursive relationships.
+
+        Parameters
+        ----------
+        found : set, optional
+            Tracks visited relationships to prevent infinite recursion.
+
+        Returns
+        -------
+        dict :
+            Dictionary representation including columns and relationships.
+        """
+
+        def _get_key_value(c: str) -> tuple[str, object]:
+            val = getattr(self, c)
+            if isinstance(val, datetime):
+                return (c, val.isoformat())
+            return (c, val)
+
+        found_ = set() if found is None else found
+
+        mapper = class_mapper(self.__class__)
+        columns = [column.key for column in mapper.columns]
+
+        result = dict(map(_get_key_value, columns))
+        for name, relation in mapper.relationships.items():
+            if relation not in found_:
+                found_.add(relation)
+                related_obj = getattr(self, name)
+                if related_obj is not None:
+                    if relation.uselist:
+                        result[name] = [child.to_dict(found_) for child in related_obj]
+                    else:
+                        result[name] = related_obj.to_dict(found_)
+        return result
 
 
 class Unhn(Base):

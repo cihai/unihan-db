@@ -31,7 +31,7 @@ def run(unihan_options: dict[str, object] | None = None) -> None:
 
     assert random_row is not None
 
-    log.info(pprint.pformat(random_row.to_dict()))  # type:ignore
+    log.info(pprint.pformat(random_row.to_dict()))
 
 
 if __name__ == "__main__":
