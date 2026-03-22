@@ -7,7 +7,7 @@ import typing as t
 from sqlalchemy import func, select
 
 from unihan_db import bootstrap
-from unihan_db.tables import Base, Unhn, kDefinition
+from unihan_db.tables import Base, Unhn, UnhnReading, kDefinition, kHanyuPinyin
 
 if t.TYPE_CHECKING:
     import pathlib
@@ -167,3 +167,37 @@ def test_definition_count(session: Session, engine: sqlalchemy.Engine) -> None:
 
     session.expire(char)
     assert char.definition_count == 2
+
+
+def test_reading_strings_proxy(
+    session: Session,
+    engine: sqlalchemy.Engine,
+) -> None:
+    """Test reading_strings association proxy on GenericReading."""
+    Base.metadata.create_all(engine)
+    char = Unhn(char="月", ucn="U+6708")
+    khp = kHanyuPinyin(
+        readings=[UnhnReading(reading="yue4")],
+    )
+    char.kHanyuPinyin.append(khp)
+    session.add(char)
+    session.commit()
+
+    assert khp.reading_strings == ["yue4"]
+
+
+def test_lookup_char_full(
+    zip_file: object,
+    session: Session,
+    engine: sqlalchemy.Engine,
+    unihan_options: UnihanOptions,
+) -> None:
+    """Test lookup_char_full() returns character with all relationships."""
+    Base.metadata.create_all(bind=engine)
+    bootstrap.bootstrap_unihan(session, unihan_options)
+    session.commit()
+
+    result = bootstrap.lookup_char_full(session, "好")
+    if result is not None:
+        assert result.char == "好"
+        assert isinstance(result.kDefinition, list)
