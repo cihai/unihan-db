@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import logging
 import typing as t
+from collections.abc import Generator
+from contextlib import contextmanager
 
 import sqlalchemy
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, func, select
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 
 from unihan_etl import core as unihan
@@ -159,8 +161,7 @@ def bootstrap_unihan(
     """Bootstrap UNIHAN to database."""
     options_ = options if options is not None else {}
 
-    """Download, extract and import unihan to database."""
-    if session.query(Unhn).count() == 0:
+    if session.scalar(select(func.count()).select_from(Unhn)) == 0:
         data = bootstrap_data(options_)
         assert data is not None
         log.info("bootstrap Unhn table started")
@@ -240,3 +241,28 @@ def get_session(
     Base.metadata.create_all(bind=engine)
     session_factory = sessionmaker(bind=engine)
     return scoped_session(session_factory)
+
+
+@contextmanager
+def get_session_context(
+    engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
+) -> Generator[Session, None, None]:
+    """Return a context-managed SQLAlchemy session.
+
+    Usage::
+
+        with get_session_context() as session:
+            bootstrap_unihan(session)
+            result = session.execute(select(Unhn)).scalars().all()
+
+    Parameters
+    ----------
+    engine_url : str
+        SQLAlchemy engine string
+    """
+    engine_url = engine_url.format(user_data_dir=dirs.user_data_dir)
+    engine = create_engine(engine_url)
+    Base.metadata.create_all(bind=engine)
+
+    with Session(engine) as session:
+        yield session
