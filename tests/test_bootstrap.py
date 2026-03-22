@@ -110,3 +110,60 @@ def test_to_dict_compat(session: Session, engine: sqlalchemy.Engine) -> None:
     result = bootstrap.to_dict(char)
     assert result["char"] == "天"
     assert result["ucn"] == "U+5929"
+
+
+def test_has_definition_python(session: Session, engine: sqlalchemy.Engine) -> None:
+    """Test has_definition hybrid_property at Python level."""
+    Base.metadata.create_all(engine)
+    with_def = Unhn(char="水", ucn="U+6C34")
+    with_def.kDefinition.append(kDefinition(definition="water"))
+    without_def = Unhn(char="火", ucn="U+706B")
+    session.add_all([with_def, without_def])
+    session.commit()
+
+    assert with_def.has_definition is True
+    assert without_def.has_definition is False
+
+
+def test_has_definition_sql(session: Session, engine: sqlalchemy.Engine) -> None:
+    """Test has_definition hybrid_property in SQL WHERE clause."""
+    Base.metadata.create_all(engine)
+    with_def = Unhn(char="金", ucn="U+91D1")
+    with_def.kDefinition.append(kDefinition(definition="gold"))
+    without_def = Unhn(char="木", ucn="U+6728")
+    session.add_all([with_def, without_def])
+    session.commit()
+
+    results = session.scalars(select(Unhn).where(Unhn.has_definition)).all()
+    chars = {r.char for r in results}
+    assert "金" in chars
+    assert "木" not in chars
+
+
+def test_definition_text(session: Session, engine: sqlalchemy.Engine) -> None:
+    """Test definition_text hybrid_property."""
+    Base.metadata.create_all(engine)
+    char = Unhn(char="土", ucn="U+571F")
+    char.kDefinition.append(kDefinition(definition="earth"))
+    session.add(char)
+    session.commit()
+
+    assert char.definition_text == "earth"
+
+    result = session.scalar(
+        select(Unhn.definition_text).where(Unhn.char == "土"),
+    )
+    assert result == "earth"
+
+
+def test_definition_count(session: Session, engine: sqlalchemy.Engine) -> None:
+    """Test definition_count column_property."""
+    Base.metadata.create_all(engine)
+    char = Unhn(char="日", ucn="U+65E5")
+    char.kDefinition.append(kDefinition(definition="sun"))
+    char.kDefinition.append(kDefinition(definition="day"))
+    session.add(char)
+    session.commit()
+
+    session.expire(char)
+    assert char.definition_count == 2
