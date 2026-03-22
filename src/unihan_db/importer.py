@@ -318,7 +318,7 @@ def import_char(
         if f_irg in char:
             irg = char[f_irg]
             assert isinstance(irg, dict)
-            column.append(IRGModel(source=irg["source"], location=irg["location"]))
+            column.append(IRGModel(source=irg["source"], location=irg["location"]))  # type: ignore[arg-type]
 
     if "kGSR" in char:
         for _kgsr in char["kGSR"]:
