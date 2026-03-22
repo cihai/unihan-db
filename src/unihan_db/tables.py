@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import typing as t
 from datetime import datetime
+from typing import Annotated
 
 from sqlalchemy import Boolean, ForeignKey, String, inspect as sa_inspect
 from sqlalchemy.orm import (
@@ -34,6 +35,9 @@ from sqlalchemy.orm import (
     mapped_column,
     relationship,
 )
+
+intpk = Annotated[int, mapped_column(primary_key=True)]
+char_fk = Annotated[str, mapped_column(String(1), ForeignKey("Unhn.char"), index=True)]
 
 
 class Base(DeclarativeBase):
@@ -221,8 +225,8 @@ class kCCCII(Base):
     """Table for kCCCII UNIHAN data."""
 
     __tablename__ = "kCCCII"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     hex: Mapped[str] = mapped_column(String(6))
     unhn: Mapped[Unhn] = relationship(back_populates="kCCCII")
 
@@ -232,12 +236,8 @@ class GenericIRG(Base):
 
     __tablename__ = "GenericIRG"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(
-        String(1),
-        ForeignKey("Unhn.char"),
-        index=True,
-    )
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     source: Mapped[int] = mapped_column()
     location: Mapped[str | None] = mapped_column(String(10))
     type: Mapped[str] = mapped_column(String(50))
@@ -340,8 +340,8 @@ class kDefinition(Base):
     """Table for kDefinition UNIHAN data."""
 
     __tablename__ = "kDefinition"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     definition: Mapped[str] = mapped_column(String(296))
     unhn: Mapped[Unhn] = relationship(back_populates="kDefinition")
 
@@ -350,8 +350,8 @@ class kCantonese(Base):
     """Table for kCantonese UNIHAN data."""
 
     __tablename__ = "kCantonese"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     definition: Mapped[str] = mapped_column(String(128))
     unhn: Mapped[Unhn] = relationship(back_populates="kCantonese")
 
@@ -360,8 +360,8 @@ class kMandarin(Base):
     """Table for kManadarin UNIHAN data."""
 
     __tablename__ = "kMandarin"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     hans: Mapped[str] = mapped_column(String(10))
     hant: Mapped[str] = mapped_column(String(10))
     unhn: Mapped[Unhn] = relationship(back_populates="kMandarin")
@@ -371,8 +371,8 @@ class kTotalStrokes(Base):
     """Table for kTotalStrokes UNIHAN data."""
 
     __tablename__ = "kTotalStrokes"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     hans: Mapped[int] = mapped_column()
     hant: Mapped[int] = mapped_column()
     unhn: Mapped[Unhn] = relationship(back_populates="kTotalStrokes")
@@ -382,12 +382,8 @@ class GenericReading(Base):
     """Table for GenericReading UNIHAN data."""
 
     __tablename__ = "GenericReading"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(
-        String(1),
-        ForeignKey("Unhn.char"),
-        index=True,
-    )
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     type: Mapped[str] = mapped_column(String(50))
     locations: Mapped[list[UnhnLocation]] = relationship(
         "UnhnLocation",
@@ -410,12 +406,8 @@ class GenericRadicalStrokes(Base):
 
     __tablename__ = "GenericRadicalStrokes"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(
-        String(1),
-        ForeignKey("Unhn.char"),
-        index=True,
-    )
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     radical: Mapped[int] = mapped_column()
     strokes: Mapped[int] = mapped_column()
     simplified: Mapped[str | None] = mapped_column(String(50))
@@ -442,8 +434,8 @@ class kRSAdobe_Japan1_6(Base):
     """Table for kRSAdobe_Japan1_6 UNIHAN data."""
 
     __tablename__ = "kRSAdobe_Japan1_6"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     type: Mapped[str] = mapped_column(String(1))
     cid: Mapped[int] = mapped_column()
     radical: Mapped[int] = mapped_column()
@@ -498,12 +490,8 @@ class GenericIndice(Base):
     """Table for GenericIndice UNIHAN data."""
 
     __tablename__ = "GenericIndice"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(
-        String(1),
-        ForeignKey("Unhn.char"),
-        index=True,
-    )
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     type: Mapped[str] = mapped_column(String(50))
     locations: Mapped[list[UnhnLocation]] = relationship(
         "UnhnLocation",
@@ -539,7 +527,7 @@ class UnhnLocation(Base):
     """Table for UnhnLocation UNIHAN data."""
 
     __tablename__ = "UnhnLocation"
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[intpk]
     generic_reading_id: Mapped[int | None] = mapped_column(
         ForeignKey("GenericReading.id"),
         index=True,
@@ -558,8 +546,8 @@ class kCihaiT(Base):
     """Table for kCihaiT UNIHAN data."""
 
     __tablename__ = "UnhnLocationkCihaiT"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     page: Mapped[int] = mapped_column()
     row: Mapped[int] = mapped_column()
     character: Mapped[int] = mapped_column()
@@ -570,7 +558,7 @@ class kIICoreSource(Base):
     """Table for kIICoreSource UIHAN data."""
 
     __tablename__ = "kIICoreSource"
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[intpk]
     source_id: Mapped[int] = mapped_column(ForeignKey("kIICore.id"), index=True)
     source: Mapped[str] = mapped_column(String(1))
     iicore: Mapped[kIICore] = relationship(back_populates="sources")
@@ -580,8 +568,8 @@ class kIICore(Base):
     """Table for kIICore UNIHAN data."""
 
     __tablename__ = "kIICore"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     priority: Mapped[str] = mapped_column(String(1))
     sources: Mapped[list[kIICoreSource]] = relationship(
         back_populates="iicore",
@@ -594,7 +582,7 @@ class UnhnLocationkXHC1983(Base):
     """Table for UnhnLocationkXHC1983 UNIHAN data."""
 
     __tablename__ = "UnhnLocationkXHC1983"
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[intpk]
     generic_reading_id: Mapped[int | None] = mapped_column(
         ForeignKey("GenericReading.id"),
         index=True,
@@ -613,7 +601,7 @@ class UnhnReading(Base):
     """Table for UnhnReading UNIHAN data."""
 
     __tablename__ = "UnhnReading"
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[intpk]
     generic_reading_id: Mapped[int] = mapped_column(
         ForeignKey("GenericReading.id"),
         index=True,
@@ -652,8 +640,8 @@ class kFenn(Base):
     """Table for kFenn UNIHAN data."""
 
     __tablename__ = "kFenn"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     phonetic: Mapped[str] = mapped_column(String(10))
     frequency: Mapped[str] = mapped_column(String(10))
     unhn: Mapped[Unhn] = relationship(back_populates="kFenn")
@@ -663,8 +651,8 @@ class kHanyuPinlu(Base):
     """Table for kHanyuPinlu UNIHAN data."""
 
     __tablename__ = "kHanyuPinlu"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     phonetic: Mapped[str] = mapped_column(String(10))
     frequency: Mapped[str] = mapped_column(String(10))
     unhn: Mapped[Unhn] = relationship(back_populates="kHanyuPinlu")
@@ -674,8 +662,8 @@ class kGSR(Base):
     """Table for kGSR UNIHAN data."""
 
     __tablename__ = "kGSR"
-    id: Mapped[int] = mapped_column(primary_key=True)
-    char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
+    id: Mapped[intpk]
+    char_id: Mapped[char_fk]
     set: Mapped[int] = mapped_column()
     letter: Mapped[str] = mapped_column(String(1))
     apostrophe: Mapped[bool] = mapped_column(Boolean)
