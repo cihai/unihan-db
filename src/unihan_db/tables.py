@@ -36,6 +36,7 @@ from sqlalchemy import (
     inspect as sa_inspect,
     select as sa_select,
 )
+from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import (
     DeclarativeBase,
@@ -443,6 +444,10 @@ class GenericReading(Base):
     readings: Mapped[list[UnhnReading]] = relationship(
         "UnhnReading",
         cascade="all, delete-orphan",
+    )
+    reading_strings: AssociationProxy[list[str]] = association_proxy(
+        "readings",
+        "reading",
     )
 
     __mapper_args__ = {  # noqa: RUF012
