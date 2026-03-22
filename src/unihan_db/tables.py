@@ -23,12 +23,19 @@ joins`_.
 
 from __future__ import annotations
 
-from sqlalchemy import Boolean, ForeignKey, String
+from sqlalchemy import Boolean, ForeignKey, String, inspect as sa_inspect
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
 
 class Base(DeclarativeBase):
     """SQLAlchemy Declarative base class for UNIHAN DB."""
+
+    def __repr__(self) -> str:
+        """Return string representation with primary key columns."""
+        mapper = sa_inspect(self.__class__)
+        pk_cols = [col.key for col in mapper.primary_key if col.key is not None]
+        attrs = ", ".join(f"{k}={getattr(self, k)!r}" for k in pk_cols)
+        return f"<{self.__class__.__name__} {attrs}>"
 
 
 class Unhn(Base):
@@ -39,6 +46,10 @@ class Unhn(Base):
         String(1), primary_key=True, index=True, unique=True
     )
     ucn: Mapped[str] = mapped_column(String(8), index=True, unique=True)
+
+    def __repr__(self) -> str:
+        """Return string representation with char and ucn."""
+        return f"<Unhn char={self.char!r} ucn={self.ucn!r}>"
 
     kDefinition: Mapped[list[kDefinition]] = relationship("kDefinition")
     kCantonese: Mapped[list[kCantonese]] = relationship("kCantonese")
