@@ -300,3 +300,69 @@ def lookup_char(
         )
     )
     return session.scalar(stmt)
+
+
+def lookup_char_full(
+    session: Session | ScopedSession[t.Any],
+    char: str,
+) -> Unhn | None:
+    """Look up a character with all fields eagerly loaded.
+
+    Loads all relationships via selectinload for comprehensive character
+    data. Use :func:`lookup_char` for lightweight lookups that only need
+    definitions and readings.
+
+    Parameters
+    ----------
+    session : :class:`~sqlalchemy.orm.Session`
+        SQLAlchemy session
+    char : str
+        Single Unicode character to look up
+
+    Returns
+    -------
+    :class:`Unhn` or None
+        The character row with all relationships eagerly loaded, or None.
+    """
+    stmt = (
+        select(Unhn)
+        .where(Unhn.char == char)
+        .options(
+            selectinload(Unhn.kDefinition),
+            selectinload(Unhn.kMandarin),
+            selectinload(Unhn.kCantonese),
+            selectinload(Unhn.kTotalStrokes),
+            selectinload(Unhn.kHanyuPinyin),
+            selectinload(Unhn.kXHC1983),
+            selectinload(Unhn.kCheungBauer),
+            selectinload(Unhn.kRSUnicode),
+            selectinload(Unhn.kRSAdobe_Japan1_6),
+            selectinload(Unhn.kIICore),
+            selectinload(Unhn.kHanYu),
+            selectinload(Unhn.kDaeJaweon),
+            selectinload(Unhn.kIRGHanyuDaZidian),
+            selectinload(Unhn.kIRGDaeJaweon),
+            selectinload(Unhn.kIRGKangXi),
+            selectinload(Unhn.kHDZRadBreak),
+            selectinload(Unhn.kSBGY),
+            selectinload(Unhn.kFenn),
+            selectinload(Unhn.kHanyuPinlu),
+            selectinload(Unhn.kGSR),
+            selectinload(Unhn.kCihaiT),
+            selectinload(Unhn.kCCCII),
+            selectinload(Unhn.kFennIndex),
+            selectinload(Unhn.kCheungBauerIndex),
+            selectinload(Unhn.kIRG_GSource),
+            selectinload(Unhn.kIRG_HSource),
+            selectinload(Unhn.kIRG_JSource),
+            selectinload(Unhn.kIRG_KPSource),
+            selectinload(Unhn.kIRG_KSource),
+            selectinload(Unhn.kIRG_MSource),
+            selectinload(Unhn.kIRG_SSource),
+            selectinload(Unhn.kIRG_TSource),
+            selectinload(Unhn.kIRG_USource),
+            selectinload(Unhn.kIRG_UKSource),
+            selectinload(Unhn.kIRG_VSource),
+        )
+    )
+    return session.scalar(stmt)
