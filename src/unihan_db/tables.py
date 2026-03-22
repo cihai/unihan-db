@@ -51,47 +51,122 @@ class Unhn(Base):
         """Return string representation with char and ucn."""
         return f"<Unhn char={self.char!r} ucn={self.ucn!r}>"
 
-    kDefinition: Mapped[list[kDefinition]] = relationship("kDefinition")
-    kCantonese: Mapped[list[kCantonese]] = relationship("kCantonese")
-    kMandarin: Mapped[list[kMandarin]] = relationship("kMandarin")
-    kTotalStrokes: Mapped[list[kTotalStrokes]] = relationship("kTotalStrokes")
+    kDefinition: Mapped[list[kDefinition]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kCantonese: Mapped[list[kCantonese]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kMandarin: Mapped[list[kMandarin]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kTotalStrokes: Mapped[list[kTotalStrokes]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
     kIRGHanyuDaZidian: Mapped[list[kIRGHanyuDaZidian]] = relationship(
-        "kIRGHanyuDaZidian",
+        cascade="all, delete-orphan",
     )
-    kIRGDaeJaweon: Mapped[list[kIRGDaeJaweon]] = relationship("kIRGDaeJaweon")
-    kIRGKangXi: Mapped[list[kIRGKangXi]] = relationship("kIRGKangXi")
-    kHanyuPinyin: Mapped[list[kHanyuPinyin]] = relationship("kHanyuPinyin")
-    kXHC1983: Mapped[list[kXHC1983]] = relationship("kXHC1983")
-    kCheungBauer: Mapped[list[kCheungBauer]] = relationship("kCheungBauer")
+    kIRGDaeJaweon: Mapped[list[kIRGDaeJaweon]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRGKangXi: Mapped[list[kIRGKangXi]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kHanyuPinyin: Mapped[list[kHanyuPinyin]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kXHC1983: Mapped[list[kXHC1983]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kCheungBauer: Mapped[list[kCheungBauer]] = relationship(
+        cascade="all, delete-orphan",
+    )
     kRSAdobe_Japan1_6: Mapped[list[kRSAdobe_Japan1_6]] = relationship(
-        "kRSAdobe_Japan1_6",
+        back_populates="unhn",
+        cascade="all, delete-orphan",
     )
-    kCihaiT: Mapped[list[kCihaiT]] = relationship("kCihaiT")
-    kIICore: Mapped[list[kIICore]] = relationship("kIICore")
-    kHanYu: Mapped[list[kHanYu]] = relationship("kHanYu")
-    kDaeJaweon: Mapped[list[kDaeJaweon]] = relationship("kDaeJaweon")
-    kFenn: Mapped[list[kFenn]] = relationship("kFenn")
-    kHanyuPinlu: Mapped[list[kHanyuPinlu]] = relationship("kHanyuPinlu")
-    kHDZRadBreak: Mapped[list[kHDZRadBreak]] = relationship("kHDZRadBreak")
-    kSBGY: Mapped[list[kSBGY]] = relationship("kSBGY")
-    kRSUnicode: Mapped[list[kRSUnicode]] = relationship("kRSUnicode")
-    kIRG_GSource: Mapped[list[kIRG_GSource]] = relationship("kIRG_GSource")
-    kIRG_HSource: Mapped[list[kIRG_HSource]] = relationship("kIRG_HSource")
-    kIRG_JSource: Mapped[list[kIRG_JSource]] = relationship("kIRG_JSource")
-    kIRG_KPSource: Mapped[list[kIRG_KPSource]] = relationship("kIRG_KPSource")
-    kIRG_KSource: Mapped[list[kIRG_KSource]] = relationship("kIRG_KSource")
-    kIRG_MSource: Mapped[list[kIRG_MSource]] = relationship("kIRG_MSource")
-    kIRG_SSource: Mapped[list[kIRG_SSource]] = relationship("kIRG_SSource")
-    kIRG_TSource: Mapped[list[kIRG_TSource]] = relationship("kIRG_TSource")
-    kIRG_USource: Mapped[list[kIRG_USource]] = relationship("kIRG_USource")
-    kIRG_UKSource: Mapped[list[kIRG_UKSource]] = relationship("kIRG_UKSource")
-    kIRG_VSource: Mapped[list[kIRG_VSource]] = relationship("kIRG_VSource")
-    kGSR: Mapped[list[kGSR]] = relationship("kGSR")
-    kFennIndex: Mapped[list[kFennIndex]] = relationship("kFennIndex")
+    kCihaiT: Mapped[list[kCihaiT]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kIICore: Mapped[list[kIICore]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kHanYu: Mapped[list[kHanYu]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kDaeJaweon: Mapped[list[kDaeJaweon]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kFenn: Mapped[list[kFenn]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kHanyuPinlu: Mapped[list[kHanyuPinlu]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kHDZRadBreak: Mapped[list[kHDZRadBreak]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kSBGY: Mapped[list[kSBGY]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kRSUnicode: Mapped[list[kRSUnicode]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_GSource: Mapped[list[kIRG_GSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_HSource: Mapped[list[kIRG_HSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_JSource: Mapped[list[kIRG_JSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_KPSource: Mapped[list[kIRG_KPSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_KSource: Mapped[list[kIRG_KSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_MSource: Mapped[list[kIRG_MSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_SSource: Mapped[list[kIRG_SSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_TSource: Mapped[list[kIRG_TSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_USource: Mapped[list[kIRG_USource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_UKSource: Mapped[list[kIRG_UKSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kIRG_VSource: Mapped[list[kIRG_VSource]] = relationship(
+        cascade="all, delete-orphan",
+    )
+    kGSR: Mapped[list[kGSR]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
+    kFennIndex: Mapped[list[kFennIndex]] = relationship(
+        cascade="all, delete-orphan",
+    )
     kCheungBauerIndex: Mapped[list[kCheungBauerIndex]] = relationship(
-        "kCheungBauerIndex",
+        cascade="all, delete-orphan",
     )
-    kCCCII: Mapped[list[kCCCII]] = relationship("kCCCII")
+    kCCCII: Mapped[list[kCCCII]] = relationship(
+        back_populates="unhn",
+        cascade="all, delete-orphan",
+    )
 
 
 class kCCCII(Base):
@@ -101,6 +176,7 @@ class kCCCII(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     hex: Mapped[str] = mapped_column(String(6))
+    unhn: Mapped[Unhn] = relationship(back_populates="kCCCII")
 
 
 class GenericIRG(Base):
@@ -219,6 +295,7 @@ class kDefinition(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     definition: Mapped[str] = mapped_column(String(296))
+    unhn: Mapped[Unhn] = relationship(back_populates="kDefinition")
 
 
 class kCantonese(Base):
@@ -228,6 +305,7 @@ class kCantonese(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     definition: Mapped[str] = mapped_column(String(128))
+    unhn: Mapped[Unhn] = relationship(back_populates="kCantonese")
 
 
 class kMandarin(Base):
@@ -238,6 +316,7 @@ class kMandarin(Base):
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     hans: Mapped[str] = mapped_column(String(10))
     hant: Mapped[str] = mapped_column(String(10))
+    unhn: Mapped[Unhn] = relationship(back_populates="kMandarin")
 
 
 class kTotalStrokes(Base):
@@ -248,6 +327,7 @@ class kTotalStrokes(Base):
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     hans: Mapped[int] = mapped_column()
     hant: Mapped[int] = mapped_column()
+    unhn: Mapped[Unhn] = relationship(back_populates="kTotalStrokes")
 
 
 class GenericReading(Base):
@@ -261,8 +341,15 @@ class GenericReading(Base):
         index=True,
     )
     type: Mapped[str] = mapped_column(String(50))
-    locations: Mapped[list[UnhnLocation]] = relationship("UnhnLocation")
-    readings: Mapped[list[UnhnReading]] = relationship("UnhnReading")
+    locations: Mapped[list[UnhnLocation]] = relationship(
+        "UnhnLocation",
+        foreign_keys="[UnhnLocation.generic_reading_id]",
+        cascade="all, delete-orphan",
+    )
+    readings: Mapped[list[UnhnReading]] = relationship(
+        "UnhnReading",
+        cascade="all, delete-orphan",
+    )
 
     __mapper_args__ = {  # noqa: RUF012
         "polymorphic_identity": "generic_reading",
@@ -314,6 +401,7 @@ class kRSAdobe_Japan1_6(Base):
     radical: Mapped[int] = mapped_column()
     strokes: Mapped[int] = mapped_column()
     strokes_residue: Mapped[int] = mapped_column()
+    unhn: Mapped[Unhn] = relationship(back_populates="kRSAdobe_Japan1_6")
 
 
 class kHanyuPinyin(GenericReading):
@@ -369,7 +457,11 @@ class GenericIndice(Base):
         index=True,
     )
     type: Mapped[str] = mapped_column(String(50))
-    locations: Mapped[list[UnhnLocation]] = relationship("UnhnLocation")
+    locations: Mapped[list[UnhnLocation]] = relationship(
+        "UnhnLocation",
+        foreign_keys="[UnhnLocation.generic_indice_id]",
+        cascade="all, delete-orphan",
+    )
 
     __mapper_args__ = {  # noqa: RUF012
         "polymorphic_identity": "generic_indice",
@@ -423,6 +515,7 @@ class kCihaiT(Base):
     page: Mapped[int] = mapped_column()
     row: Mapped[int] = mapped_column()
     character: Mapped[int] = mapped_column()
+    unhn: Mapped[Unhn] = relationship(back_populates="kCihaiT")
 
 
 class kIICoreSource(Base):
@@ -432,6 +525,7 @@ class kIICoreSource(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     source_id: Mapped[int] = mapped_column(ForeignKey("kIICore.id"), index=True)
     source: Mapped[str] = mapped_column(String(1))
+    iicore: Mapped[kIICore] = relationship(back_populates="sources")
 
 
 class kIICore(Base):
@@ -441,7 +535,11 @@ class kIICore(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     priority: Mapped[str] = mapped_column(String(1))
-    sources: Mapped[list[kIICoreSource]] = relationship("kIICoreSource")
+    sources: Mapped[list[kIICoreSource]] = relationship(
+        back_populates="iicore",
+        cascade="all, delete-orphan",
+    )
+    unhn: Mapped[Unhn] = relationship(back_populates="kIICore")
 
 
 class UnhnLocationkXHC1983(Base):
@@ -510,6 +608,7 @@ class kFenn(Base):
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     phonetic: Mapped[str] = mapped_column(String(10))
     frequency: Mapped[str] = mapped_column(String(10))
+    unhn: Mapped[Unhn] = relationship(back_populates="kFenn")
 
 
 class kHanyuPinlu(Base):
@@ -520,6 +619,7 @@ class kHanyuPinlu(Base):
     char_id: Mapped[str] = mapped_column(String(1), ForeignKey("Unhn.char"), index=True)
     phonetic: Mapped[str] = mapped_column(String(10))
     frequency: Mapped[str] = mapped_column(String(10))
+    unhn: Mapped[Unhn] = relationship(back_populates="kHanyuPinlu")
 
 
 class kGSR(Base):
@@ -531,6 +631,7 @@ class kGSR(Base):
     set: Mapped[int] = mapped_column()
     letter: Mapped[str] = mapped_column(String(1))
     apostrophe: Mapped[bool] = mapped_column(Boolean)
+    unhn: Mapped[Unhn] = relationship(back_populates="kGSR")
 
 
 class kHDZRadBreak(GenericIndice):

@@ -241,9 +241,9 @@ def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
             related_obj = getattr(obj, name)
             if related_obj is not None:
                 if relation.uselist:
-                    result[name] = [to_dict(child, found) for child in related_obj]
+                    result[name] = [to_dict(child, found_) for child in related_obj]
                 else:
-                    result[name] = to_dict(related_obj, found)
+                    result[name] = to_dict(related_obj, found_)
     return result
 
 
