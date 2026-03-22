@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import logging
-import sys
 import typing as t
 
 import sqlalchemy
@@ -47,9 +46,6 @@ def setup_logger(
 
         logger.setLevel(level)
         logger.addHandler(channel)
-
-
-setup_logger()
 
 
 UNIHAN_FILES = (
@@ -167,31 +163,39 @@ def bootstrap_unihan(
     if session.query(Unhn).count() == 0:
         data = bootstrap_data(options_)
         assert data is not None
-        log.info("bootstrap Unhn table")
-        log.info("bootstrap Unhn table finished")
-        count = 0
+        log.info("bootstrap Unhn table started")
         total_count = len(data)
         items = []
 
-        for char in data:
+        for count, char in enumerate(data, 1):
             assert isinstance(char, dict)
             c = Unhn(char=char["char"], ucn=char["ucn"])
             importer.import_char(c, char)
             items.append(c)
 
             if log.isEnabledFor(logging.INFO):
-                count += 1
-                sys.stdout.write(
-                    f"\rProcessing {char['char']} ({count} of {total_count})",
+                log.info(
+                    "processing %s (%d of %d)",
+                    char["char"],
+                    count,
+                    total_count,
+                    extra={
+                        "unihan_record_count": count,
+                    },
                 )
-                sys.stdout.flush()
 
-        log.info("Adding rows to database, this could take a minute.")
+        log.info(
+            "adding rows to database",
+            extra={"unihan_db_rows": total_count},
+        )
         session.add_all(items)
         # This takes a bit of time and doesn't provide progress, but it's by
         # far the fastest way to insert as of SQLAlchemy 1.11.
         session.commit()
-        log.info("Done adding rows.")
+        log.info(
+            "bootstrap completed",
+            extra={"unihan_db_rows": total_count},
+        )
 
 
 def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
