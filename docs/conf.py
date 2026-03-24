@@ -38,11 +38,13 @@ extensions = [
     "sphinx.ext.linkcode",
     "sphinx_inline_tabs",
     "sphinx_copybutton",
+    "sphinx_design",
     "sphinxext.opengraph",
     "sphinxext.rediraffe",
     "myst_parser",
     "linkify_issues",
 ]
+myst_heading_anchors = 4
 myst_enable_extensions = [
     "colon_fence",
     "substitution",
