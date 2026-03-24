@@ -65,6 +65,7 @@ dev = [
   "sphinxext-opengraph",
   "sphinx-copybutton",
   "sphinxext-rediraffe",
+  "sphinx-design",  # https://sphinx-design.readthedocs.io/
   "myst-parser",
   "linkify-it-py",
   # Testing
@@ -94,6 +95,7 @@ docs = [
   "sphinxext-opengraph",
   "sphinx-copybutton",
   "sphinxext-rediraffe",
+  "sphinx-design",  # https://sphinx-design.readthedocs.io/
   "myst-parser",
   "linkify-it-py",
 ]
