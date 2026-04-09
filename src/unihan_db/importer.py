@@ -30,7 +30,9 @@ from unihan_db.tables import (
     kIRG_KPSource,
     kIRG_KSource,
     kIRG_MSource,
+    kIRG_SSource,
     kIRG_TSource,
+    kIRG_UKSource,
     kIRG_USource,
     kIRG_VSource,
     kIRGDaeJaweon,
@@ -305,7 +307,9 @@ def import_char(
         ("kIRG_KPSource", kIRG_KPSource, c.kIRG_KPSource),
         ("kIRG_KSource", kIRG_KSource, c.kIRG_KSource),
         ("kIRG_MSource", kIRG_MSource, c.kIRG_MSource),
+        ("kIRG_SSource", kIRG_SSource, c.kIRG_SSource),
         ("kIRG_TSource", kIRG_TSource, c.kIRG_TSource),
+        ("kIRG_UKSource", kIRG_UKSource, c.kIRG_UKSource),
         ("kIRG_USource", kIRG_USource, c.kIRG_USource),
         ("kIRG_VSource", kIRG_VSource, c.kIRG_VSource),
     )
@@ -314,7 +318,7 @@ def import_char(
         if f_irg in char:
             irg = char[f_irg]
             assert isinstance(irg, dict)
-            column.append(IRGModel(source=irg["source"], location=irg["location"]))
+            column.append(IRGModel(source=irg["source"], location=irg["location"]))  # type: ignore[arg-type]
 
     if "kGSR" in char:
         for _kgsr in char["kGSR"]:
@@ -348,9 +352,11 @@ def import_char(
         assert isinstance(kFennIndex_["location"], dict)
         c.kFennIndex.append(
             kFennIndex(
-                locations=UnhnLocation(
-                    page=kFennIndex_["location"]["page"],
-                    character=kFennIndex_["location"]["character"],
-                ),
+                locations=[
+                    UnhnLocation(
+                        page=kFennIndex_["location"]["page"],
+                        character=kFennIndex_["location"]["character"],
+                    ),
+                ],
             ),
         )
