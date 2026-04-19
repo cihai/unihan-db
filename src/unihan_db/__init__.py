@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-from .__about__ import __version__
-
 from appdirs import AppDirs as BaseAppDirs
-
 from unihan_etl._internal.app_dirs import AppDirs
+
+from .__about__ import __version__
 
 #: XDG App directory locations
 dirs = AppDirs(_app_dirs=BaseAppDirs("unihan_db", "cihai team"))
