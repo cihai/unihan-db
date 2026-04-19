@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .__about__ import __version__
+
 from appdirs import AppDirs as BaseAppDirs
 
 from unihan_etl._internal.app_dirs import AppDirs
