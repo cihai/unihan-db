@@ -72,4 +72,5 @@ quickstart
 api/index
 project/index
 history
+GitHub <https://github.com/cihai/unihan-db>
 ```
