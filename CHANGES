@@ -43,6 +43,30 @@ pipeline. Runtime data loading remains centered on {func}`~unihan_db.bootstrap.b
 and {class}`~unihan_db.tables.Unhn`; the upstream `unihan-etl` dependency moves
 to the current 0.41 line.
 
+### Breaking changes
+
+#### `unihan-etl` CLI requires explicit subcommands (#358)
+
+Users who run the `unihan-etl` command directly from unihan-db's dependency set
+must use the explicit upstream subcommand syntax introduced in `unihan-etl`
+0.40.
+
+Before:
+
+```console
+$ unihan-etl
+```
+
+After:
+
+```console
+$ unihan-etl export
+```
+
+Python callers using {func}`~unihan_db.bootstrap.bootstrap_data` or
+{func}`~unihan_db.bootstrap.bootstrap_unihan` continue to use the same
+unihan-db bootstrap APIs.
+
 ### Dependencies
 
 #### Current `unihan-etl` import pipeline (#358)
@@ -50,11 +74,6 @@ to the current 0.41 line.
 Minimum `unihan-etl~=0.41.0` (was `~=0.39.1`). The bump keeps
 {func}`~unihan_db.bootstrap.bootstrap_data` aligned with the maintained ETL
 package while preserving the import-facing modules used by unihan-db.
-
-The main upstream user-visible change is in the standalone `unihan-etl` CLI:
-direct CLI users now run explicit subcommands such as `unihan-etl export`.
-unihan-db users who call the Python bootstrap helpers continue to use the same
-bootstrap surface.
 
 ### What's new
 
