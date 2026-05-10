@@ -447,7 +447,7 @@ warnings.
 
 #### Current `unihan-etl` 0.24 line (#314)
 
-Minimum `unihan-etl~=0.24.0` (was `~=0.20.0`). The upstream path includes
+Minimum `unihan-etl~=0.24.0` (was `~=0.19.1`). The upstream path includes
 configurable application directories for tests, dataclass-based configuration,
 Python 3.7 removal, normalized typing imports, and the `zhon` 2.0 dependency
 update.
