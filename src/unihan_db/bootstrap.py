@@ -3,14 +3,13 @@
 from __future__ import annotations
 
 import logging
-import sys
 import typing as t
-from datetime import datetime
+from collections.abc import Generator
+from contextlib import contextmanager
 
 import sqlalchemy
-from sqlalchemy import create_engine, event
-from sqlalchemy.orm import Mapper, Session, class_mapper, scoped_session, sessionmaker
-from sqlalchemy.orm.decl_api import registry
+from sqlalchemy import create_engine, func, select
+from sqlalchemy.orm import Session, scoped_session, selectinload, sessionmaker
 
 from unihan_etl import core as unihan
 from unihan_etl.util import merge_dict
@@ -19,8 +18,6 @@ from . import dirs, importer
 from .tables import Base, Unhn
 
 log = logging.getLogger(__name__)
-
-mapper_reg = registry()
 
 if t.TYPE_CHECKING:
     from sqlalchemy.orm.scoping import ScopedSession
@@ -51,9 +48,6 @@ def setup_logger(
 
         logger.setLevel(level)
         logger.addHandler(channel)
-
-
-setup_logger()
 
 
 UNIHAN_FILES = (
@@ -167,47 +161,48 @@ def bootstrap_unihan(
     """Bootstrap UNIHAN to database."""
     options_ = options if options is not None else {}
 
-    """Download, extract and import unihan to database."""
-    if session.query(Unhn).count() == 0:
+    if session.scalar(select(func.count()).select_from(Unhn)) == 0:
         data = bootstrap_data(options_)
         assert data is not None
-        log.info("bootstrap Unhn table")
-        log.info("bootstrap Unhn table finished")
-        count = 0
+        log.info("bootstrap Unhn table started")
         total_count = len(data)
         items = []
 
-        for char in data:
+        for count, char in enumerate(data, 1):
             assert isinstance(char, dict)
             c = Unhn(char=char["char"], ucn=char["ucn"])
             importer.import_char(c, char)
             items.append(c)
 
             if log.isEnabledFor(logging.INFO):
-                count += 1
-                sys.stdout.write(
-                    f"\rProcessing {char['char']} ({count} of {total_count})",
+                log.info(
+                    "processing %s (%d of %d)",
+                    char["char"],
+                    count,
+                    total_count,
+                    extra={
+                        "unihan_record_count": count,
+                    },
                 )
-                sys.stdout.flush()
 
-        log.info("Adding rows to database, this could take a minute.")
+        log.info(
+            "adding rows to database",
+            extra={"unihan_db_rows": total_count},
+        )
         session.add_all(items)
         # This takes a bit of time and doesn't provide progress, but it's by
         # far the fastest way to insert as of SQLAlchemy 1.11.
         session.commit()
-        log.info("Done adding rows.")
-
-
-@event.listens_for(Unhn, "before_mapper_configured", once=True)
-def setup_orm_mappings(mapper: Mapper[Base], class_: Base) -> None:
-    """Add special methods to Base declarative model used in Unihan DB."""
-    add_to_dict(class_)  # Add .to_dict() to rows returned
+        log.info(
+            "bootstrap completed",
+            extra={"unihan_db_rows": total_count},
+        )
 
 
 def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
     """Return dictionary of an SQLAlchemy Query result.
 
-    Supports recursive relationships.
+    Delegates to :meth:`Base.to_dict`. Kept for backward compatibility.
 
     Parameters
     ----------
@@ -221,42 +216,8 @@ def to_dict(obj: t.Any, found: set[t.Any] | None = None) -> dict[str, object]:
     dict :
         dictionary representation of a SQLAlchemy query
     """
-
-    def _get_key_value(c: str) -> t.Any:
-        if isinstance(getattr(obj, c), datetime):
-            return (c, getattr(obj, c).isoformat())
-        return (c, getattr(obj, c))
-
-    found_: set[t.Any]
-
-    found_ = set() if found is None else found
-
-    mapper = class_mapper(obj.__class__)
-    columns = [column.key for column in mapper.columns]
-
-    result = dict(map(_get_key_value, columns))
-    for name, relation in mapper.relationships.items():
-        if relation not in found_:
-            found_.add(relation)
-            related_obj = getattr(obj, name)
-            if related_obj is not None:
-                if relation.uselist:
-                    result[name] = [to_dict(child, found) for child in related_obj]
-                else:
-                    result[name] = to_dict(related_obj, found)
+    result: dict[str, object] = obj.to_dict(found)
     return result
-
-
-def add_to_dict(b: t.Any) -> t.Any:
-    """Add :func:`.to_dict` method to SQLAlchemy Base object.
-
-    Parameters
-    ----------
-    b : :func:`~sqlalchemy:sqlalchemy.ext.declarative.declarative_base`
-        SQLAlchemy Base class
-    """
-    b.to_dict = to_dict
-    return b
 
 
 def get_session(
@@ -280,3 +241,128 @@ def get_session(
     Base.metadata.create_all(bind=engine)
     session_factory = sessionmaker(bind=engine)
     return scoped_session(session_factory)
+
+
+@contextmanager
+def get_session_context(
+    engine_url: str = "sqlite:///{user_data_dir}/unihan_db.db",
+) -> Generator[Session, None, None]:
+    """Return a context-managed SQLAlchemy session.
+
+    Usage::
+
+        with get_session_context() as session:
+            bootstrap_unihan(session)
+            result = session.execute(select(Unhn)).scalars().all()
+
+    Parameters
+    ----------
+    engine_url : str
+        SQLAlchemy engine string
+    """
+    engine_url = engine_url.format(user_data_dir=dirs.user_data_dir)
+    engine = create_engine(engine_url)
+    Base.metadata.create_all(bind=engine)
+
+    with Session(engine) as session:
+        yield session
+
+
+def lookup_char(
+    session: Session | ScopedSession[t.Any],
+    char: str,
+) -> Unhn | None:
+    """Look up a character with common fields eagerly loaded.
+
+    Loads kDefinition, kMandarin, kCantonese, and kTotalStrokes via
+    selectinload to prevent N+1 queries for common lookup patterns.
+
+    Parameters
+    ----------
+    session : :class:`~sqlalchemy.orm.Session`
+        SQLAlchemy session
+    char : str
+        Single Unicode character to look up
+
+    Returns
+    -------
+    :class:`Unhn` or None
+        The character row with eagerly loaded fields, or None if not found.
+    """
+    stmt = (
+        select(Unhn)
+        .where(Unhn.char == char)
+        .options(
+            selectinload(Unhn.kDefinition),
+            selectinload(Unhn.kMandarin),
+            selectinload(Unhn.kCantonese),
+            selectinload(Unhn.kTotalStrokes),
+        )
+    )
+    return session.scalar(stmt)
+
+
+def lookup_char_full(
+    session: Session | ScopedSession[t.Any],
+    char: str,
+) -> Unhn | None:
+    """Look up a character with all fields eagerly loaded.
+
+    Loads all relationships via selectinload for comprehensive character
+    data. Use :func:`lookup_char` for lightweight lookups that only need
+    definitions and readings.
+
+    Parameters
+    ----------
+    session : :class:`~sqlalchemy.orm.Session`
+        SQLAlchemy session
+    char : str
+        Single Unicode character to look up
+
+    Returns
+    -------
+    :class:`Unhn` or None
+        The character row with all relationships eagerly loaded, or None.
+    """
+    stmt = (
+        select(Unhn)
+        .where(Unhn.char == char)
+        .options(
+            selectinload(Unhn.kDefinition),
+            selectinload(Unhn.kMandarin),
+            selectinload(Unhn.kCantonese),
+            selectinload(Unhn.kTotalStrokes),
+            selectinload(Unhn.kHanyuPinyin),
+            selectinload(Unhn.kXHC1983),
+            selectinload(Unhn.kCheungBauer),
+            selectinload(Unhn.kRSUnicode),
+            selectinload(Unhn.kRSAdobe_Japan1_6),
+            selectinload(Unhn.kIICore),
+            selectinload(Unhn.kHanYu),
+            selectinload(Unhn.kDaeJaweon),
+            selectinload(Unhn.kIRGHanyuDaZidian),
+            selectinload(Unhn.kIRGDaeJaweon),
+            selectinload(Unhn.kIRGKangXi),
+            selectinload(Unhn.kHDZRadBreak),
+            selectinload(Unhn.kSBGY),
+            selectinload(Unhn.kFenn),
+            selectinload(Unhn.kHanyuPinlu),
+            selectinload(Unhn.kGSR),
+            selectinload(Unhn.kCihaiT),
+            selectinload(Unhn.kCCCII),
+            selectinload(Unhn.kFennIndex),
+            selectinload(Unhn.kCheungBauerIndex),
+            selectinload(Unhn.kIRG_GSource),
+            selectinload(Unhn.kIRG_HSource),
+            selectinload(Unhn.kIRG_JSource),
+            selectinload(Unhn.kIRG_KPSource),
+            selectinload(Unhn.kIRG_KSource),
+            selectinload(Unhn.kIRG_MSource),
+            selectinload(Unhn.kIRG_SSource),
+            selectinload(Unhn.kIRG_TSource),
+            selectinload(Unhn.kIRG_USource),
+            selectinload(Unhn.kIRG_UKSource),
+            selectinload(Unhn.kIRG_VSource),
+        )
+    )
+    return session.scalar(stmt)

@@ -6,7 +6,7 @@ from __future__ import annotations
 import logging
 import pprint
 
-from sqlalchemy.sql.expression import func
+from sqlalchemy import func, select
 
 from unihan_db import bootstrap
 from unihan_db.tables import Unhn
@@ -21,17 +21,15 @@ def run(unihan_options: dict[str, object] | None = None) -> None:
 
     bootstrap.bootstrap_unihan(session)
 
-    random_row_query = session.query(Unhn).order_by(func.random()).limit(1)
-
-    assert random_row_query is not None
-
-    random_row = random_row_query.first()
-
-    log.info(pprint.pformat(bootstrap.to_dict(random_row)))
+    random_row = session.execute(
+        select(Unhn).order_by(func.random()).limit(1),
+    ).scalar_one_or_none()
 
     assert random_row is not None
 
-    log.info(pprint.pformat(random_row.to_dict()))  # type:ignore
+    log.info(pprint.pformat(bootstrap.to_dict(random_row)))
+
+    log.info(pprint.pformat(random_row.to_dict()))
 
 
 if __name__ == "__main__":
