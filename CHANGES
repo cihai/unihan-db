@@ -30,11 +30,21 @@ $ uv add unihan-db --prerelease allow
 $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstrap as bootstrap; print(bootstrap.TABLE_NAME)"
 ```
 
-## unihan-db 0.22.x (unreleased)
+## unihan-db 0.23.x (unreleased)
 
 <!-- KEEP THIS PLACEHOLDER - DO NOT REMOVE OR MODIFY THIS LINE -->
 _Notes on the upcoming release will go here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
+
+## unihan-db 0.22.0 (2026-06-28)
+
+unihan-db 0.22.0 tracks the upstream `unihan-etl` 0.43.0 release. It raises the
+dependency floor to `unihan-etl~=0.43.0`, which hardens UNIHAN download
+caching — a corrupt or truncated archive is re-fetched instead of crashing
+extraction — and makes the bundled `unihan-etl` pytest plugin safe to run under
+`pytest-xdist`. There are no unihan-db API or schema changes;
+{func}`~unihan_db.bootstrap.bootstrap_unihan` and {class}`~unihan_db.tables.Unhn`
+workflows are unchanged.
 
 ### Dependencies
 
