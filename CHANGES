@@ -36,6 +36,16 @@ $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstra
 _Notes on the upcoming release will go here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Dependencies
+
+#### `unihan-etl` 0.43.0 cache and fixture hardening
+
+Minimum `unihan-etl~=0.43.0` (was `~=0.42.0`). The 0.43.0 line reuses a cached
+UNIHAN archive only when it is a valid zip — a corrupt or truncated cache is
+re-downloaded instead of crashing extraction — and makes the bundled
+`unihan-etl` pytest plugin that loads during unihan-db's tests safe to run under
+`pytest-xdist`. No unihan-db API changes.
+
 ## unihan-db 0.21.0 (2026-06-28)
 
 unihan-db 0.21.0 is the June 2026 documentation and dependency refresh. It
