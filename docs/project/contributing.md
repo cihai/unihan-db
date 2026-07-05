@@ -16,8 +16,10 @@ Run the tests:
 $ uv run pytest
 ```
 
-## cihai contributing guide
+## Organization guide
 
-unihan-db follows the cihai organization's contributing conventions.
-See the [cihai contributing guide](https://cihai.git-pull.com/project/contributing/) for
-full details on submitting patches, writing tests, and code review workflow.
+unihan-db follows the [cihai contributing guide] for organization-wide
+conventions. See that guide for full details on submitting patches, writing
+tests, and code review workflow.
+
+[cihai contributing guide]: https://cihai.git-pull.com/project/contributing/

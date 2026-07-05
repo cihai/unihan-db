@@ -42,10 +42,10 @@ _Notes on the upcoming release will go here._
 
 The quickstart, homepage, and API reference now guide readers through the main
 unihan-db workflow: create or reuse a SQLAlchemy session, load UNIHAN data once,
-and query local `Unhn` rows. The docs also link the bootstrap helpers, importer
-internals, and ORM table classes at their first mention, so readers can move
-from overview prose to the exact API reference without hunting through the
-navigation.
+and query local {class}`~unihan_db.tables.Unhn` rows. The docs also link the
+bootstrap helpers, importer internals, and ORM table classes at their first
+mention, so readers can move from overview prose to the exact API reference
+without hunting through the navigation.
 
 ## unihan-db 0.22.0 (2026-06-28)
 
