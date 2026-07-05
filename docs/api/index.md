@@ -2,15 +2,17 @@
 
 # API Reference
 
-```{module} unihan_db
-
-```
-
 :::{warning}
 Be careful with these! APIs are **not** covered considered stable pre-1.0. They can break or be removed between minor versions!
 
 If you need an internal API stabilized please [file an issue](https://github.com/cihai/unihan-db/issues).
 :::
+
+Most projects only need the bootstrap path: create a
+[SQLAlchemy](https://www.sqlalchemy.org/) session, run
+{func}`unihan_db.bootstrap.bootstrap_unihan`, and query
+{class}`unihan_db.tables.Unhn`. The reference pages below split the API by the
+same pipeline: load data, turn records into rows, then query the mapped tables.
 
 ::::{grid} 1 2 3 3
 :gutter: 2 2 3 3
