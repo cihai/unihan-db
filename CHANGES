@@ -360,10 +360,10 @@ workflows.
 
 ### Fixes
 
-#### `as_dict()` works on model rows again (#325)
+#### `to_dict()` works on model rows again (#325)
 
 The SQLAlchemy mapper event wiring for {func}`~unihan_db.bootstrap.add_to_dict`
-was fixed, restoring `row.as_dict()` on {class}`~unihan_db.tables.Unhn` rows.
+was fixed, restoring `row.to_dict()` on {class}`~unihan_db.tables.Unhn` rows.
 This makes the object-to-dictionary helper path usable again after the mapper
 callback regression.
 

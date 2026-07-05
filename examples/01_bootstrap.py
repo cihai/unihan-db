@@ -19,7 +19,7 @@ def run(unihan_options: dict[str, object] | None = None) -> None:
     """Initialize Unihan DB via ``bootstrap_unihan()``."""
     session = bootstrap.get_session()
 
-    bootstrap.bootstrap_unihan(session)
+    bootstrap.bootstrap_unihan(session, unihan_options)
 
     random_row_query = session.query(Unhn).order_by(func.random()).limit(1)
 

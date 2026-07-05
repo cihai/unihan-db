@@ -63,19 +63,20 @@ comprehension tax for the advanced one.
 
 ## Examples that run
 
-Doctests under `docs/` execute: `testpaths` includes `docs`, and
-pytest-doctest-docutils (from gp-libs) collects every `>>>` block in a
-Markdown page. `ELLIPSIS` and `NORMALIZE_WHITESPACE` are on globally,
-so variable output can be elided without a per-line flag.
+Doctests under `docs/` execute through Sphinx: `just build-docs` runs
+both the HTML builder and the Sphinx doctest builder. Use MyST
+```` ```{doctest} ```` blocks for Python sessions that must execute.
+`ELLIPSIS` and `NORMALIZE_WHITESPACE` are on globally, so variable
+output can be elided without a per-line flag.
 
-- The root `conftest.py` puts `tmp_path` in the `doctest_namespace`
-  and redirects `HOME` and the working directory to temporary paths,
-  so a doctest can create a throwaway SQLite file safely.
+- `docs/conf.py` puts `tmp_path` in the Sphinx doctest namespace and
+  redirects `HOME` and the working directory to temporary paths, so a
+  doctest can create a throwaway SQLite file safely.
 - Tests run offline. `bootstrap_unihan` against real UNIHAN data
   downloads from unicode.org — keep it out of doctests. Show schema
   creation, in-memory engines, and ORM objects instead, the way
   `tests/` does with its zipped fixtures.
-- Fence a `>>>` session as a ```` ```python ```` block; use a
+- Fence an executable `>>>` session as a ```` ```{doctest} ```` block; use a
   ```` ```console ```` block for shell commands at a `$` prompt.
 
 ## What stays precise

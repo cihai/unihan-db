@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import doctest
 import pathlib
 import sys
 
@@ -30,10 +31,10 @@ conf = merge_sphinx_config(
     source_branch="master",
     light_logo="img/cihai.svg",
     dark_logo="img/cihai.svg",
-    extra_extensions=["sphinx_autodoc_api_style"],
+    extra_extensions=["sphinx.ext.doctest", "sphinx_autodoc_api_style"],
     intersphinx_mapping={
-        "python": ("http://docs.python.org/3/", None),
-        "sqlalchemy": ("http://docs.sqlalchemy.org/en/latest/", None),
+        "python": ("https://docs.python.org/3/", None),
+        "sqlalchemy": ("https://docs.sqlalchemy.org/en/21/", None),
     },
     linkcode_resolve=make_linkcode_resolve(unihan_db, about["__github__"]),
     html_favicon="_static/favicon.ico",
@@ -44,3 +45,25 @@ conf = merge_sphinx_config(
     exclude_patterns=["_build", "AGENTS.md", "CLAUDE.md"],
 )
 globals().update(conf)
+
+doctest_default_flags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
+doctest_global_setup = """
+import os
+import pathlib
+import tempfile
+
+_doctest_tmpdir = tempfile.TemporaryDirectory()
+tmp_path = pathlib.Path(_doctest_tmpdir.name)
+_doctest_old_home = os.environ.get("HOME")
+_doctest_old_cwd = pathlib.Path.cwd()
+os.environ["HOME"] = str(tmp_path)
+os.chdir(tmp_path)
+"""
+doctest_global_cleanup = """
+os.chdir(_doctest_old_cwd)
+if _doctest_old_home is None:
+    os.environ.pop("HOME", None)
+else:
+    os.environ["HOME"] = _doctest_old_home
+_doctest_tmpdir.cleanup()
+"""

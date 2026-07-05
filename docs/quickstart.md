@@ -2,12 +2,12 @@
 
 # Quickstart
 
-unihan-db turns UNIHAN into local [SQLAlchemy](https://www.sqlalchemy.org/)
+unihan-db turns [UNIHAN] into local [SQLAlchemy](https://www.sqlalchemy.org/)
 tables. For the common path, create a session with
 {func}`unihan_db.bootstrap.get_session`, load the data once with
 {func}`unihan_db.bootstrap.bootstrap_unihan`, and query
 {class}`unihan_db.tables.Unhn` or its related tables. The first bootstrap
-downloads and imports the archive; after that, your queries use local SQLite.
+downloads and imports the archive; after that, your queries use local [SQLite].
 
 ## Installation
 
@@ -50,18 +50,12 @@ $ pip install --upgrade unihan-db
 The example creates a session, runs the bootstrap, queries a random
 {class}`~unihan_db.tables.Unhn` row, and shows both
 {func}`unihan_db.bootstrap.to_dict` and the row's injected `to_dict()` helper.
+For the API details behind those helpers, see
+{ref}`unihan-db's API documentation <api>`.
 
 ```{literalinclude} ../examples/01_bootstrap.py
 :language: python
 ```
-
-## Pythonics
-
-:::{seealso}
-
-{ref}`unihan-db's API documentation <api>`.
-
-:::
 
 (developmental-releases)=
 
@@ -123,6 +117,8 @@ can change before the next release:
 [pipx]: https://pypa.github.io/pipx/docs/
 [PyPI]: https://pypi.org/
 [Python]: https://www.python.org/
+[SQLite]: https://www.sqlite.org/
+[UNIHAN]: https://www.unicode.org/charts/unihan.html
 [unihan-etl]: https://unihan-etl.git-pull.com/
 [uv]: https://docs.astral.sh/uv/
 [uvx]: https://docs.astral.sh/uv/guides/tools/

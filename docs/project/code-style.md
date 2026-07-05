@@ -30,5 +30,5 @@ $ uv run mypy src tests
 
 - `from __future__ import annotations` in every module.
 - Namespace imports for stdlib: `import typing as t`.
-- NumPy-style docstrings.
+- [NumPy-style docstrings](https://numpydoc.readthedocs.io/en/latest/format.html).
 - See `[tool.ruff]` in `pyproject.toml` for the full rule set.
