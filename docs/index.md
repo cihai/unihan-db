@@ -2,8 +2,12 @@
 
 # unihan-db
 
-SQLAlchemy models for the [UNIHAN](https://www.unicode.org/charts/unihan.html) CJK character database.
+[SQLAlchemy](https://www.sqlalchemy.org/) models for the [UNIHAN](https://www.unicode.org/charts/unihan.html) CJK character database.
 unihan-db provides the schema and ORM layer. For the ETL pipeline, see [unihan-etl](https://unihan-etl.git-pull.com/). For end-user character lookups, see [cihai](https://cihai.git-pull.com/).
+
+Most projects use {func}`unihan_db.bootstrap.get_session` or their own SQLAlchemy
+engine, load the data once with {func}`unihan_db.bootstrap.bootstrap_unihan`, and
+then query {class}`unihan_db.tables.Unhn` and the tables that hang off it.
 
 ::::{grid} 1 2 3 3
 :gutter: 2 2 3 3
@@ -17,7 +21,7 @@ Install and load UNIHAN data in 5 minutes.
 :::{grid-item-card} Models & Bootstrap
 :link: api/index
 :link-type: doc
-Table models, bootstrap loader, and data importer.
+Table models, bootstrap helpers, and importer internals.
 :::
 
 :::{grid-item-card} Contributing
@@ -62,7 +66,7 @@ with Session(engine) as session:
         print(char.char, char.ucn)
 ```
 
-See [Quickstart](quickstart.md) for the full setup, including bootstrapping
+See {doc}`quickstart` for the full setup, including bootstrapping
 data from the Unicode consortium.
 
 ```{toctree}

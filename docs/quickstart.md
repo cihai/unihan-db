@@ -2,9 +2,16 @@
 
 # Quickstart
 
+unihan-db turns UNIHAN into local [SQLAlchemy](https://www.sqlalchemy.org/)
+tables. For the common path, create a session with
+{func}`unihan_db.bootstrap.get_session`, load the data once with
+{func}`unihan_db.bootstrap.bootstrap_unihan`, and query
+{class}`unihan_db.tables.Unhn` or its related tables. The first bootstrap
+downloads and imports the archive; after that, your queries use local SQLite.
+
 ## Installation
 
-Assure you have at least python **>= 3.7**.
+Use [Python] **>=3.10,<4.0**.
 
 Using [pip]:
 
@@ -24,11 +31,13 @@ Run code without installing by using [uvx]:
 $ uvx --from unihan-db python -c "import unihan_db.bootstrap as bootstrap; print(bootstrap.TABLE_NAME)"
 ```
 
-Install into an isolated environment with [pipx] (exposes the `unihan-etl` CLI from dependencies):
+Install into an isolated environment with [pipx]:
 
 ```console
 $ pipx install 'unihan-db' --include-deps
 ```
+
+The dependency set includes the [unihan-etl] CLI.
 
 You can upgrade to the latest release with:
 
@@ -36,11 +45,29 @@ You can upgrade to the latest release with:
 $ pip install --upgrade unihan-db
 ```
 
+## Usage
+
+The example creates a session, runs the bootstrap, queries a random
+{class}`~unihan_db.tables.Unhn` row, and shows both
+{func}`unihan_db.bootstrap.to_dict` and the row's injected `to_dict()` helper.
+
+```{literalinclude} ../examples/01_bootstrap.py
+:language: python
+```
+
+## Pythonics
+
+:::{seealso}
+
+{ref}`unihan-db's API documentation <api>`.
+
+:::
+
 (developmental-releases)=
 
-### Developmental releases
+## Developmental releases
 
-New versions of unihan-db are published to PyPI as alpha, beta, or release candidates. In their
+New versions of unihan-db are published to [PyPI] as alpha, beta, or release candidates. In their
 versions you will see notification like `a1`, `b1`, and `rc1`, respectively. `1.10.0b4` would mean
 the 4th beta release of `1.10.0` before general availability.
 
@@ -54,8 +81,9 @@ the 4th beta release of `1.10.0` before general availability.
 
   ```console
   $ pipx install --suffix=@next 'unihan-db' --pip-args '\--pre' --include-deps --force
-  // Provides the unihan-etl CLI from the dependency set.
   ```
+
+  This also installs the [unihan-etl] CLI from the dependency set.
 
 - [uv]:
 
@@ -91,17 +119,8 @@ via trunk (can break easily):
 
 [pip]: https://pip.pypa.io/en/stable/
 [pipx]: https://pypa.github.io/pipx/docs/
+[PyPI]: https://pypi.org/
+[Python]: https://www.python.org/
+[unihan-etl]: https://unihan-etl.git-pull.com/
 [uv]: https://docs.astral.sh/uv/
 [uvx]: https://docs.astral.sh/uv/guides/tools/
-
-## Usage
-
-```{literalinclude} ../examples/01_bootstrap.py
-:language: python
-```
-
-## Pythonics
-
-:::{seealso}
-
-{ref}`unihan-db's API documentation <api>`.

@@ -26,6 +26,7 @@ unihan-db is pre-1.0. APIs may change between minor versions.
 
 ## Publishing
 
-Releases are published to PyPI via GitHub Actions using
+Releases are published to [PyPI](https://pypi.org/) via
+[GitHub Actions](https://docs.github.com/actions) using
 [trusted publishing (OIDC)](https://docs.pypi.org/trusted-publishers/).
 Pushing a version tag triggers the publish workflow automatically.

@@ -16,7 +16,7 @@ Development setup and how to get involved.
 :::{grid-item-card} Code Style
 :link: code-style
 :link-type: doc
-Ruff, mypy, and import conventions.
+[Ruff](https://github.com/astral-sh/ruff), [mypy](https://github.com/python/mypy), and import conventions.
 :::
 
 :::{grid-item-card} Releasing
