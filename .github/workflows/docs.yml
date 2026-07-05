@@ -71,7 +71,7 @@ jobs:
       - name: Build documentation
         if: env.PUBLISH == 'true'
         run: |
-          cd docs && just html
+          cd docs && just html && just doctest
 
       - name: Configure AWS Credentials
         if: env.PUBLISH == 'true'

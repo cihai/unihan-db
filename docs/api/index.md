@@ -28,7 +28,7 @@ Data download, session helpers, and ETL options.
 :::{grid-item-card} Importer
 :link: importer
 :link-type: doc
-Transform normalized UNIHAN records into ORM objects.
+Transform normalized [UNIHAN] records into ORM objects.
 :::
 
 :::{grid-item-card} Tables
@@ -38,6 +38,8 @@ SQLAlchemy ORM models for UNIHAN data.
 :::
 
 ::::
+
+[UNIHAN]: https://www.unicode.org/charts/unihan.html
 
 ```{toctree}
 :caption: API

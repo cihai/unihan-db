@@ -37,6 +37,7 @@ watch-test:
 [group: 'docs']
 build-docs:
     just -f docs/justfile html
+    just -f docs/justfile doctest
 
 # Watch files and rebuild docs on change
 [group: 'docs']

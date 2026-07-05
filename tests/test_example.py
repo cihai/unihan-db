@@ -47,4 +47,4 @@ def test_01_bootstrap(
 ) -> None:
     """Test example dataset."""
     example = load_script("01_bootstrap", project_root=project_root)
-    example.run()
+    example.run(unihan_options)
