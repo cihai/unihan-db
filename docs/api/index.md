@@ -3,10 +3,11 @@
 # API Reference
 
 :::{warning}
-Be careful with these! APIs are **not** considered stable before 1.0 and may
-change or be removed between minor versions.
+APIs are **not** considered stable before 1.0 and may change or be removed
+between minor versions.
 
-If you need an internal API stabilized please [file an issue](https://github.com/cihai/unihan-db/issues).
+If you need an internal API stabilized please
+[file an issue](https://github.com/cihai/unihan-db/issues).
 :::
 
 Most projects only need the bootstrap path: create a

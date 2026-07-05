@@ -67,9 +67,9 @@ The example creates a session, runs the bootstrap, queries a random
 
 ## Developmental releases
 
-New versions of unihan-db are published to [PyPI] as alpha, beta, or release candidates. In their
-versions you will see notification like `a1`, `b1`, and `rc1`, respectively. `1.10.0b4` would mean
-the 4th beta release of `1.10.0` before general availability.
+New versions of unihan-db are published to [PyPI] as alpha, beta, or release
+candidates. Version suffixes such as `a1`, `b1`, and `rc1` mark those
+pre-release stages; `1.10.0b4` is the fourth beta before general availability.
 
 - [pip]\:
 
@@ -97,7 +97,9 @@ the 4th beta release of `1.10.0` before general availability.
   $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstrap as bootstrap; print(bootstrap.TABLE_NAME)"
   ```
 
-via trunk (can break easily):
+Install from unreleased `master` only when you need a change that is not on
+[PyPI] yet. This follows the current development branch, so APIs and behavior
+can change before the next release:
 
 - [pip]\:
 
