@@ -146,6 +146,25 @@ def test_can_round_trip_char(session, engine):
 - Use Ruff for style/formatting; keep docstrings in NumPy/reST sections (`Parameters`, `Returns`).
 - Align with existing patterns: SQLAlchemy ORM models, scoped sessions, and helper functions in `bootstrap.py`.
 
+**Classes with fields** — `NamedTuple`, dataclasses — document every field in
+an `Attributes` section:
+
+```python
+class DocsContentCase(t.NamedTuple):
+    """Expected source-level contract for one docs page.
+
+    Attributes
+    ----------
+    path : pathlib.Path
+        Docs page to check, relative to the project root.
+    """
+```
+
+Autodoc renders every field whether or not you describe it, so an
+undocumented `NamedTuple` field ships to the API docs as "Alias for field
+number 0" and a dataclass field ships bare. Document all of them — a class
+with three fields and two documented still ships a stub for the third.
+
 ## Logging Standards
 
 These rules guide future logging changes; existing code may not yet conform.
