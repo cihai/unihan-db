@@ -43,7 +43,7 @@ Run:
 
 Output:
 
-```python
+```text
 {'char': '鎷',
 'kCantonese': [{'char_id': '鎷', 'definition': 'maa5', 'id': 24035}],
 'kDefinition': [],
