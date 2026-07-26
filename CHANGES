@@ -47,6 +47,15 @@ bootstrap helpers, importer internals, and ORM table classes at their first
 mention, so readers can move from overview prose to the exact API reference
 without hunting through the navigation.
 
+### Development
+
+#### CI actions updated to current majors
+
+Workflow actions moved to their current major releases: `actions/checkout` v7,
+`actions/cache` v6, `astral-sh/setup-uv` v9.0.0, `codecov/codecov-action` v7,
+and `dorny/paths-filter` v4. Workflow behavior is unchanged, though setup-uv no
+longer prunes the uv cache, so the first run after this repopulates it.
+
 ## unihan-db 0.22.0 (2026-06-28)
 
 unihan-db 0.22.0 tracks the upstream `unihan-etl` 0.43.0 release. It raises the
