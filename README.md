@@ -15,6 +15,7 @@ can specify a custom database destination by passing a database url into
 ```python
 #!/usr/bin/env python
 """Example for bootstrapping UNIHAN DB and print out a row."""
+
 import pprint
 
 from sqlalchemy.sql.expression import func
@@ -43,7 +44,7 @@ Run:
 
 Output:
 
-```python
+```text
 {'char': '鎷',
 'kCantonese': [{'char_id': '鎷', 'definition': 'maa5', 'id': 24035}],
 'kDefinition': [],
