@@ -56,6 +56,12 @@ Workflow actions moved to their current major releases: `actions/checkout` v7,
 and `dorny/paths-filter` v4. Workflow behavior is unchanged, though setup-uv no
 longer prunes the uv cache, so the first run after this repopulates it.
 
+#### ruff 0.16.0 (#368)
+
+Minimum `ruff>=0.16.0` (was unpinned). The 0.16 line formats Python code blocks
+inside Markdown, so `just ruff-format` and the CI format check now cover
+documentation examples alongside source.
+
 ## unihan-db 0.22.0 (2026-06-28)
 
 unihan-db 0.22.0 tracks the upstream `unihan-etl` 0.43.0 release. It raises the
