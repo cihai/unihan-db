@@ -194,6 +194,12 @@ convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
+"docs/conf.py" = [
+  # Sphinx reads version metadata by exec'ing the package's `__about__.py`.
+  # The input is a checked-in file in this repository, never user data, so
+  # there is no arbitrary code execution for flake8-bandit to warn about.
+  "S102",
+]
 
 [tool.coverage.run]
 branch = true
