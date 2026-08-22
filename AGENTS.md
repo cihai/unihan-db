@@ -34,12 +34,12 @@ stated twice, the file listed above is the one that governs.
 
 ## Keep this file lean
 
-This router is read on every task, so prune it like code. Move multi-step
-procedures into skills, path-specific rules into nested `AGENTS.md` files,
-and hard limits into hooks or CI. Keep only non-obvious, broadly applicable
-defaults here — delete anything a reader can infer from the code, a
-manifest, or a linter, or that is already stated in
-[.github/WRITING.md](.github/WRITING.md) or
+This router is read on every task, so prune it like code. A multi-step
+procedure or a path-specific rule belongs in a nested `AGENTS.md`, not a
+growing root one; a hard limit belongs in hooks or CI. Keep only
+non-obvious, broadly applicable defaults here — delete anything a reader
+can infer from the code, a manifest, or a linter, or that is already
+stated in [.github/WRITING.md](.github/WRITING.md) or
 [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## Change discipline
