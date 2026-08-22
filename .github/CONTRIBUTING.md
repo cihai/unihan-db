@@ -81,7 +81,8 @@ downloads from unicode.org; the suite instead zips the fixture files under
 `tests/fixtures/` and points `unihan_options` at the zip, so the importer
 sees the same shape of data offline.
 
-Prefer the fixtures in `tests/conftest.py` over ad-hoc setup:
+Prefer these fixtures over ad-hoc setup — all in `tests/conftest.py`
+except `project_root`, which is in the root `conftest.py`:
 
 | Fixture          | Provides                                        |
 | ---------------- | ------------------------------------------------ |
