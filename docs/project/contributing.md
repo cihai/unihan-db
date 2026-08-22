@@ -2,24 +2,9 @@
 
 # Contributing
 
-## Development setup
-
-Install the package in editable mode with dev dependencies:
-
-```console
-$ uv pip install --editable . -G dev
-```
-
-Run the tests:
-
-```console
-$ uv run pytest
-```
-
-## Organization guide
-
-unihan-db follows the [cihai contributing guide] for organization-wide
-conventions. See that guide for full details on submitting patches, writing
-tests, and code review workflow.
-
-[cihai contributing guide]: https://cihai.git-pull.com/project/contributing/
+Development setup, the test and lint gates, and the pull request workflow
+now live in
+[`.github/CONTRIBUTING.md`](https://github.com/cihai/unihan-db/blob/master/.github/CONTRIBUTING.md),
+alongside [`.github/WRITING.md`](https://github.com/cihai/unihan-db/blob/master/.github/WRITING.md)
+for how the project writes prose. Read those; this page only keeps the URL
+below working.
