@@ -8,14 +8,32 @@ project. Powered by [unihan-etl](https://unihan-etl.git-pull.com). See also:
 By default, unihan-db creates a SQLite database in an
 [XDG data directory](https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html). You
 can specify a custom database destination by passing a database url into
-[get_session](http://unihan-db.git-pull.com/api.html#unihan_db.bootstrap.get_session).
+[get_session](https://unihan-db.git-pull.com/api/bootstrap.html#unihan_db.bootstrap.get_session).
+
+## Install
+
+Use [Python](https://www.python.org/) 3.10 or newer, below 4.0.
+
+```console
+$ pip install unihan-db
+```
+
+```console
+$ uv add unihan-db
+```
 
 ## Example usage
 
+This is `examples/01_bootstrap.py`, included in the source tree — running it
+as shown needs a clone (see [Developing](#developing)).
+
 ```python
 #!/usr/bin/env python
-"""Example for bootstrapping UNIHAN DB and print out a row."""
+"""Example for bootstrapping UNIHAN DB."""
 
+from __future__ import annotations
+
+import logging
 import pprint
 
 from sqlalchemy.sql.expression import func
@@ -23,26 +41,38 @@ from sqlalchemy.sql.expression import func
 from unihan_db import bootstrap
 from unihan_db.tables import Unhn
 
-session = bootstrap.get_session()
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-bootstrap.bootstrap_unihan(session)
 
-random_row_query = session.query(Unhn).order_by(func.random()).limit(1)
+def run(unihan_options: dict[str, object] | None = None) -> None:
+    """Initialize Unihan DB via ``bootstrap_unihan()``."""
+    session = bootstrap.get_session()
 
-assert random_row_query is not None
+    bootstrap.bootstrap_unihan(session, unihan_options)
 
-random_row = random_row_query.first()
+    random_row_query = session.query(Unhn).order_by(func.random()).limit(1)
 
-pprint.pprint(bootstrap.to_dict(random_row))
+    assert random_row_query is not None
 
-pprint.pprint(random_row.to_dict())  # type:ignore
+    random_row = random_row_query.first()
+
+    log.info(pprint.pformat(bootstrap.to_dict(random_row)))
+
+    assert random_row is not None
+
+    log.info(pprint.pformat(random_row.to_dict()))  # type:ignore
+
+
+if __name__ == "__main__":
+    run()
 ```
 
 Run:
 
     $ ./examples/01_bootstrap.py
 
-Output:
+Output (one random character; yours will differ):
 
 ```text
 {'char': '鎷',
@@ -78,16 +108,23 @@ Output:
 ## Developing
 
 ```console
-$ git clone https://github.com/cihai/unihan-etl.git
+$ git clone https://github.com/cihai/unihan-db.git
 ```
 
 ```console
-$ cd unihan-etl
+$ cd unihan-db
 ```
 
-[Bootstrap your environment and learn more about contributing](https://cihai.git-pull.com/contributing/). We use the same conventions / tools across all cihai projects: `pytest`, `sphinx`, `mypy`, `ruff`, `tmuxp`, and file watcher helpers (e.g. `entr(1)`).
+See [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) for the gates and
+commands. unihan-db follows the
+[cihai contributing guide](https://cihai.git-pull.com/project/contributing/)
+for conventions shared across the cihai family: `pytest`, `sphinx`, `mypy`,
+`ruff`, `tmuxp`, and file watcher helpers such as `entr(1)`.
 
 ## Python versions
+
+Requires Python 3.10 or newer, below 4.0 (see [Install](#install)). Older
+releases supported earlier interpreters:
 
 - 0.8.0:
   - Last Python 3.7 release
