@@ -11,7 +11,7 @@ downloads and imports the archive; after that, your queries use local [SQLite].
 
 ## Installation
 
-Use [Python] **>=3.10,<4.0**.
+Use [Python] **>=3.11,<4.0**.
 
 Using [pip]:
 

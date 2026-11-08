@@ -12,7 +12,7 @@ can specify a custom database destination by passing a database url into
 
 ## Install
 
-Use [Python](https://www.python.org/) 3.10 or newer, below 4.0.
+Use [Python](https://www.python.org/) 3.11 or newer, below 4.0.
 
 ```console
 $ pip install unihan-db
@@ -123,7 +123,7 @@ for conventions shared across the cihai family: `pytest`, `sphinx`, `mypy`,
 
 ## Python versions
 
-Requires Python 3.10 or newer, below 4.0 (see [Install](#install)). Older
+Requires Python 3.11 or newer, below 4.0 (see [Install](#install)). Older
 releases supported earlier interpreters:
 
 - 0.8.0:

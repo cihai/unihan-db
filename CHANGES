@@ -36,6 +36,12 @@ $ uvx --from 'unihan-db' --prerelease allow python -c "import unihan_db.bootstra
 _Notes on the upcoming release will go here._
 <!-- END PLACEHOLDER - ADD NEW CHANGELOG ENTRIES BELOW THIS LINE -->
 
+### Breaking changes
+
+#### Python 3.11 is now the minimum
+
+unihan-db now requires Python 3.11 or newer. Python 3.10 reached end of life in October 2026, and the test matrix now covers Python 3.11 and 3.15.
+
 ### Documentation
 
 #### Linked bootstrap and table documentation (#366)

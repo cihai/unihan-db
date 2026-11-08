@@ -63,7 +63,7 @@ never been red is an assumption.
 
 CI (`.github/workflows/tests.yml`) runs `ruff check .`, `ruff format .
 --check`, `mypy .`, and `pytest --cov=./ --cov-report=xml` against Python
-3.10 and 3.15 on every push and pull request. It is the order of record —
+3.11 and 3.15 on every push and pull request. It is the order of record —
 match it exactly before you call a change done.
 
 ### Import conventions
