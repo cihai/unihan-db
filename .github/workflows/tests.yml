@@ -21,6 +21,15 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
 
+      - name: Test runtime dependencies
+        run: |
+          uv run --no-dev -p python${{ matrix.python-version }} -- python -c '
+          from unihan_db import bootstrap, importer, tables, __about__, __version__
+          from unihan_etl import __version__ as __unihan_etl_version__
+          print("unihan_db version:", __version__)
+          print("unihan_etl version:", __unihan_etl_version__)
+          '
+
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
