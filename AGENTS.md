@@ -32,6 +32,16 @@ was asked for.
 Each of those is the single home for its subject. Where a rule seems to be
 stated twice, the file listed above is the one that governs.
 
+## Keep this file lean
+
+This router is read on every task, so prune it like code. A multi-step
+procedure or a path-specific rule belongs in a nested `AGENTS.md`, not a
+growing root one; a hard limit belongs in hooks or CI. Keep only
+non-obvious, broadly applicable defaults here — delete anything a reader
+can infer from the code, a manifest, or a linter, or that is already
+stated in [.github/WRITING.md](.github/WRITING.md) or
+[.github/CONTRIBUTING.md](.github/CONTRIBUTING.md).
+
 ## Change discipline
 
 - Make the smallest coherent change that solves the verified problem; keep
